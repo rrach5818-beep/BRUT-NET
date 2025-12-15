@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulateur TJM & Charges Auto-Entrepreneur 2025 | PaieNet</title>
+  <meta name="description" content="Calculez votre Net, vos charges et votre TJM idéal en auto-entreprise. Simulateur inversé gratuit : Combien facturer pour gagner 3000€ net ?">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+  
+  <!-- SECURITÉ : Content Security Policy (CSP) -->
+  <!-- Autorise uniquement les scripts et styles de confiance (Google, Tailwind, Fonts) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://paienet.fr https://api.qrserver.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com;">
+  
+  <!-- SECURITÉ : Politique de Référent -->
+  <!-- Ne transmet pas d'infos privées aux sites vers lesquels vous faites des liens -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://paienet.fr/freelance.html">
+  
+  <meta property="og:title" content="Quel TJM pour votre salaire cible ? Simulateur Freelance 2025">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://paienet.fr/freelance.html">
+  <meta property="og:image" content="https://paienet.fr/share-freelance.jpg">
+
+  <!-- SCHEMA.ORG -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Simulateur TJM Auto-Entrepreneur",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+    }
+  ]
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-053E5TJ1PX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-053E5TJ1PX');
+  </script>
+
+  <!-- Tailwind CSS (Version Verrouillée 3.4.1 pour la stabilité) -->
+  <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            slate: { 850: '#1e293b', 900: '#0f172a' },
+            emerald: { 450: '#10b981' } 
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    
+    .toggle-checkbox:checked { right: 0; border-color: #10b981; }
+    .toggle-checkbox:checked + .toggle-label { background-color: #10b981; }
+    
+    .input-field { transition: all 0.2s; }
+    .input-field:focus { border-color: #10b981; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2); outline: none; }
+    
+    .input-result { background: transparent; border: 1px dashed transparent; width: 100%; transition: all 0.2s; }
+    .input-result:hover, .input-result:focus { border-color: #10b981; outline: none; border-radius: 4px; background: rgba(16, 185, 129, 0.05); }
+
+    .pie-chart { width: 100px; height: 100px; border-radius: 50%; position: relative; background: #e2e8f0; transition: background 0.3s; }
+    .pie-chart::after { content: ""; position: absolute; inset: 12px; background: #f8fafc; border-radius: 50%; transition: background 0.3s; }
+    .dark .pie-chart::after { background: #1e293b; }
+
+    .tab-active { border-bottom: 2px solid #10b981; color: #10b981; font-weight: 700; }
+    .tab-inactive { border-bottom: 2px solid transparent; color: #64748b; }
+    .tab-inactive:hover { color: #334155; }
+    .dark .tab-inactive { color: #94a3b8; }
+    .dark .tab-inactive:hover { color: #cbd5e1; }
+
+    .modal-scroll::-webkit-scrollbar { width: 8px; }
+    .modal-scroll::-webkit-scrollbar-track { background: transparent; }
+    .modal-scroll::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 20px; }
+    .dark .modal-scroll::-webkit-scrollbar-thumb { background-color: #475569; }
+
+    .pay-slip-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #e2e8f0; font-size: 0.875rem; }
+    .dark .pay-slip-row { border-bottom-color: #334155; }
+    .pay-slip-row:last-child { border-bottom: none; }
+    
+    /* Tooltip */
+    .tooltip { position: relative; display: inline-block; }
+    .tooltip .tooltip-text { visibility: hidden; width: 200px; background-color: #334155; color: #fff; text-align: center; border-radius: 6px; padding: 8px; position: absolute; z-index: 1; bottom: 125%; left: 50%; margin-left: -100px; opacity: 0; transition: opacity 0.3s; font-size: 10px; font-weight: normal; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+    .tooltip .tooltip-text::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: #334155 transparent transparent transparent; }
+    
+    /* Range Slider Custom Fix */
+    input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; background: #10b981; cursor: pointer; margin-top: -6px; border: 2px solid #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+    input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #cbd5e1; border-radius: 2px; } 
+    input[type=range]::-moz-range-thumb { height: 16px; width: 16px; border-radius: 50%; background: #10b981; cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+    input[type=range]::-moz-range-track { width: 100%; height: 4px; cursor: pointer; background: #cbd5e1; border-radius: 2px; }
+    .dark input[type=range]::-webkit-slider-runnable-track { background: #475569; }
+    .dark input[type=range]::-moz-range-track { background: #475569; }
+
+    /* --- STYLE IMPRESSION PRO (PDF) --- */
+    #print-document { display: none; } 
+
+    @media print {
+      body > *:not(#print-document) { display: none !important; }
+      body { background: white !important; color: #1e293b !important; font-family: 'Inter', sans-serif; font-size: 11px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      #print-document { display: block !important; position: relative; width: 100%; height: 100%; padding: 40px; box-sizing: border-box; }
+      .pdf-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 120px; font-weight: 900; color: #f1f5f9; z-index: -1; pointer-events: none; opacity: 0.5; }
+      .pdf-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; border-bottom: 2px solid #10b981; padding-bottom: 20px; }
+      .pdf-logo-text { font-size: 24px; font-weight: 800; color: #0f172a; letter-spacing: -1px; }
+      .pdf-logo-accent { color: #10b981; }
+      .pdf-meta { text-align: right; }
+      .pdf-title { font-size: 16px; font-weight: bold; text-transform: uppercase; color: #10b981; margin-bottom: 5px; }
+      .pdf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 30px; }
+      .pdf-box { background: #f8fafc !important; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0; }
+      .pdf-box-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; margin-bottom: 5px; font-weight: 600; }
+      .pdf-box-value { font-size: 12px; font-weight: 700; color: #0f172a; }
+      .pdf-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+      .pdf-table th { text-align: left; padding: 10px; background-color: #0f172a !important; color: white !important; font-weight: 600; font-size: 10px; text-transform: uppercase; border-radius: 4px 4px 0 0; }
+      .pdf-table td { padding: 12px 10px; border-bottom: 1px solid #e2e8f0; font-size: 11px; }
+      .pdf-table tr:last-child td { border-bottom: none; }
+      .pdf-table .col-right { text-align: right; }
+      .pdf-total-box { width: 250px; background: #ecfdf5 !important; border: 1px solid #10b981; border-radius: 6px; padding: 15px; }
+      .pdf-total-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 11px; }
+      .pdf-total-row.final { border-top: 1px dashed #10b981; padding-top: 8px; margin-top: 8px; font-weight: 900; font-size: 16px; color: #047857; }
+      .pdf-footer-section { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 15px; margin-top: auto; }
+      .pdf-legal { font-size: 8px; color: #94a3b8; max-width: 70%; line-height: 1.4; }
+      .pdf-qr { width: 60px; height: 60px; background: #fff; border: 1px solid #ddd; padding: 2px; }
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen transition-colors duration-300 dark:bg-slate-900 dark:text-slate-100">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-20 shadow-sm no-print dark:bg-slate-800 dark:border-slate-700">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-2 group">
+        <!-- Logo Style "Emerald" -->
+        <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-xl shadow-lg flex items-center justify-center transform group-hover:rotate-3 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        </div>
+        <div class="flex flex-col justify-center">
+          <span class="text-xl font-bold text-slate-900 tracking-tight leading-none dark:text-white">
+            Paie<span class="text-emerald-500">Net</span>
+          </span>
+          <span class="block text-[10px] font-semibold text-slate-400 uppercase tracking-widest mt-0.5">
+            Freelance & Indép.
+          </span>
+        </div>
+      </a>
+      
+      <div class="flex items-center gap-3">
+        <button id="themeToggle" onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition text-slate-500">
+          <svg id="iconSun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          <svg id="iconMoon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-8 md:py-10 flex-grow">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- CALCULATEUR -->
+      <div class="lg:col-span-8 space-y-6">
+        <div class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 md:p-8 dark:bg-slate-800 dark:border-slate-700">
+          
+          <div class="flex justify-between items-start mb-4 no-print">
+            <h1 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">Calculateur <span class="text-emerald-500">Micro-Entreprise</span></h1>
+            <div class="flex flex-col items-end gap-1">
+               <span id="shareMsg" class="hidden text-xs text-green-600 font-medium bg-green-50 dark:bg-green-900/30 dark:text-green-400 px-2 py-1 rounded">Lien copié !</span>
+            </div>
+          </div>
+
+          <!-- TABS -->
+          <div class="flex border-b border-slate-200 mb-6 no-print dark:border-slate-700">
+            <button onclick="switchTab('mensuel')" id="tab-mensuel" class="tab-active py-2 px-4 text-sm focus:outline-none transition-colors">Revenus Mensuels</button>
+            <button onclick="switchTab('projet')" id="tab-projet" class="tab-inactive py-2 px-4 text-sm focus:outline-none transition-colors flex items-center gap-2">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+              Rentabilité Projet
+            </button>
+          </div>
+
+          <!-- CONTENT TAB 1 -->
+          <div id="content-mensuel" class="fade-in">
+            <div class="bg-emerald-50 rounded-xl p-4 border border-emerald-100 mb-6 dark:bg-emerald-900/20 dark:border-emerald-800/50 no-print">
+              <h2 class="text-xs font-bold text-emerald-700 uppercase tracking-wide mb-3 flex items-center gap-2 dark:text-emerald-400">Définir par TJM & Jours</h2>
+              <div class="grid grid-cols-2 gap-4">
+                 <div>
+                    <label class="block text-xs font-semibold text-emerald-800 mb-1 dark:text-emerald-300">TJM (€/jour)</label>
+                    <input type="number" id="tjmInput" placeholder="Ex: 350" class="w-full p-2 rounded border border-emerald-200 focus:ring-2 focus:ring-emerald-500 focus:outline-none dark:bg-slate-700 dark:border-slate-600 dark:text-white font-bold text-center">
+                 </div>
+                 <div>
+                    <label class="block text-xs font-semibold text-emerald-800 mb-1 dark:text-emerald-300">Jours / mois</label>
+                    <input type="number" id="joursInput" value="18" class="w-full p-2 rounded border border-emerald-200 focus:ring-2 focus:ring-emerald-500 focus:outline-none dark:bg-slate-700 dark:border-slate-600 dark:text-white font-bold text-center">
+                 </div>
+              </div>
+              
+              <!-- SLIDER CORRIGÉ -->
+              <div class="mt-4 pt-3 border-t border-emerald-100 dark:border-emerald-800/30">
+                 <div class="flex justify-between text-xs mb-1 text-emerald-800 dark:text-emerald-300">
+                    <span class="font-semibold">Congés annuels (non facturés)</span>
+                    <span class="font-bold" id="weeksOffDisplay">5 sem</span>
+                 </div>
+                 <input type="range" id="weeksOffInput" min="0" max="10" value="5" step="1" class="w-full h-2 rounded-lg appearance-none cursor-pointer">
+                 <p class="text-[9px] text-emerald-600/70 mt-1 dark:text-emerald-400/70 text-right">Lisse votre revenu mensuel sur l'année.</p>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase mb-2 dark:text-slate-400">Type d'activité (Taux 2025)</label>
+                <select id="activityType" class="input-field w-full p-3 rounded-lg border border-slate-300 bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white font-medium cursor-pointer">
+                  <option value="service_bnc" selected>Prestation de Service BNC (Consultant, Dev...) - 24.6%</option>
+                  <option value="service_bic">Prestation de Service BIC (Artisan...) - 21.2%</option>
+                  <option value="vente">Achat / Revente - 12.3%</option>
+                  <option value="liberal">Profession Libérale (CIPAV) - 23.2%</option>
+                </select>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-xs font-bold text-slate-500 uppercase mb-2 dark:text-slate-400">CA Mensuel (Lissé)</label>
+                  <div class="relative">
+                    <input type="number" id="caMensuel" placeholder="Calcul auto" class="input-field w-full pl-4 pr-10 py-3 rounded-lg border border-slate-300 focus:outline-none dark:bg-slate-700 dark:border-slate-600 dark:text-white text-lg font-bold">
+                    <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 font-medium">€</span>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-500 uppercase mb-2 dark:text-slate-400">CA Annuel (Réel)</label>
+                  <div class="relative">
+                    <input type="number" id="caAnnuel" placeholder="Calcul auto" class="input-field w-full pl-4 pr-10 py-3 rounded-lg border border-slate-300 focus:outline-none dark:bg-slate-700 dark:border-slate-600 dark:text-white text-lg font-bold">
+                    <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 font-medium">€</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTENT TAB 2 -->
+          <div id="content-projet" class="hidden fade-in">
+             <div class="bg-blue-50 rounded-xl p-6 border border-blue-100 mb-6 dark:bg-blue-900/20 dark:border-blue-800">
+               <h2 class="text-sm font-bold text-blue-700 uppercase tracking-wide mb-4 dark:text-blue-400">Rentabilité d'une mission</h2>
+               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 <div>
+                    <label class="block text-xs font-semibold text-blue-800 mb-2 dark:text-blue-300">Prix Facturé (Total)</label>
+                    <div class="relative">
+                       <input type="number" id="projPrix" placeholder="Ex: 2000" class="w-full p-3 rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-slate-700 dark:border-slate-600 dark:text-white font-bold text-lg">
+                       <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 font-medium">€</span>
+                    </div>
+                 </div>
+                 <div>
+                    <label class="block text-xs font-semibold text-blue-800 mb-2 dark:text-blue-300">Temps passé (Jours)</label>
+                    <input type="number" id="projJours" placeholder="Ex: 5" class="w-full p-3 rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-slate-700 dark:border-slate-600 dark:text-white font-bold text-lg">
+                 </div>
+               </div>
+               
+               <div id="projResult" class="mt-6 pt-4 border-t border-blue-200 dark:border-blue-800 hidden">
+                  <div class="grid grid-cols-2 gap-4">
+                     <div class="text-center">
+                        <span class="block text-xs text-blue-600 dark:text-blue-400 uppercase">TJM Réel (Brut)</span>
+                        <span class="text-xl font-bold text-slate-800 dark:text-white" id="projTjmBrut">0 €</span>
+                     </div>
+                     <div class="text-center">
+                        <span class="block text-xs text-emerald-600 dark:text-emerald-400 uppercase font-bold">Net / Jour (Poche)</span>
+                        <span class="text-xl font-bold text-emerald-600 dark:text-emerald-400" id="projNetJour">0 €</span>
+                     </div>
+                  </div>
+                  <p class="text-[10px] text-center mt-3 text-slate-400">Après déduction de vos charges et impôts estimés.</p>
+               </div>
+             </div>
+          </div>
+
+          <!-- COMMON: FRAIS & OPTIONS -->
+          <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-700">
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase mb-2 dark:text-slate-400 flex items-center gap-1">
+                  Frais Pro / mois
+                  <div class="tooltip">
+                    <svg class="w-3 h-3 text-slate-400 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span class="tooltip-text">Dépenses non déductibles fiscalement mais réelles (banque, internet, assurance...).</span>
+                  </div>
+                </label>
+                <div class="relative">
+                  <input type="number" id="fraisPro" placeholder="Ex: 150" class="input-field w-full pl-4 pr-10 py-3 rounded-lg border border-slate-300 focus:outline-none dark:bg-slate-700 dark:border-slate-600 dark:text-white text-sm font-bold">
+                  <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 font-medium">€</span>
+                </div>
+                <div class="mt-3 flex items-center gap-2">
+                   <input type="checkbox" id="optCfe" class="toggle-checkbox w-4 h-4 text-emerald-600 rounded border-gray-300 focus:ring-emerald-500 dark:bg-slate-700 dark:border-slate-600">
+                   <label for="optCfe" class="text-xs text-slate-500 dark:text-slate-400 cursor-pointer">Intégrer CFE (~500€/an)</label>
+                </div>
+              </div>
+              <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 dark:bg-slate-700/50 dark:border-slate-600 no-print flex flex-col justify-center gap-2">
+                <div class="flex items-center justify-between">
+                  <div><span class="text-sm font-bold text-slate-700 dark:text-white block" id="labelImpots">Impôt Libératoire</span><span class="text-[9px] text-slate-400" id="subLabelImpots">Paiement forfaitaire</span></div>
+                  <div class="relative inline-block w-10 align-middle"><input type="checkbox" name="toggle" id="optLiberatoire" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-slate-300 left-0"/><label for="optLiberatoire" class="toggle-label block overflow-hidden h-5 rounded-full bg-slate-300 cursor-pointer"></label></div>
+                </div>
+                <div class="flex items-center justify-between">
+                  <div><span class="text-sm font-bold text-slate-700 dark:text-white block">ACRE (1ère année)</span></div>
+                  <div class="relative inline-block w-10 align-middle"><input type="checkbox" name="toggle" id="optAcre" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-slate-300 left-0"/><label for="optAcre" class="toggle-label block overflow-hidden h-5 rounded-full bg-slate-300 cursor-pointer"></label></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RESULTATS -->
+          <div id="result" class="hidden mt-8 pt-8 border-t border-slate-200 dark:border-slate-700 fade-in no-print">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="space-y-6">
+                <div>
+                  <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider dark:text-emerald-400 flex items-center gap-1">Net dans votre poche</span>
+                  <div class="relative flex items-center">
+                    <input type="number" id="resNetMensuel" class="input-result text-4xl font-extrabold text-slate-900 dark:text-white w-full p-0 pr-24" placeholder="0">
+                    <span class="absolute right-0 top-1/2 -translate-y-1/2 text-lg text-slate-500 font-medium pointer-events-none">€ / mois</span>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-3 mt-2">
+                     <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300" id="ratioBadge">💰 Ratio: --%</span>
+                     <div class="text-xs text-slate-400">Soit <span id="resNetJournalier" class="font-bold text-emerald-600 dark:text-emerald-400">0</span> € Net / jour</div>
+                  </div>
+                  <div class="flex justify-between items-center mt-2">
+                    <div class="relative w-32">
+                        <span class="absolute left-0 top-1/2 -translate-y-1/2 text-xs text-slate-400 pointer-events-none">Annuel : </span>
+                        <span id="resNetAnnuel" class="font-bold text-slate-600 dark:text-slate-300 text-sm pl-12">0</span>
+                        <span class="text-xs text-slate-400 ml-1">€</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-red-50 rounded-lg p-3 border border-red-100 dark:bg-red-900/20 dark:border-red-800">
+                  <div class="flex justify-between items-center text-sm">
+                    <span class="text-red-700 font-medium dark:text-red-300">Total Charges + Impôts</span>
+                    <span class="font-bold text-red-700 dark:text-red-300">- <span id="resTotalCharges">0</span> €</span>
+                  </div>
+                  <p class="text-[9px] text-red-400 mt-1 text-right" id="detailImpotsText">Dont impôts : 0 €</p>
+                </div>
+                
+                <div id="tvaAlert" class="hidden bg-orange-50 rounded-lg p-3 border border-orange-100 text-orange-800 text-xs flex items-start gap-2 dark:bg-orange-900/20 dark:border-orange-800 dark:text-orange-200"><span>Attention : Vous dépassez le seuil de franchise TVA.</span></div>
+              </div>
+
+              <div class="flex flex-col items-center justify-center bg-slate-50 rounded-xl p-4 dark:bg-slate-700/30">
+                <div id="chartPie" class="pie-chart shadow-sm"></div>
+                <div class="mt-4 w-full space-y-2">
+                  <div class="flex justify-between text-xs">
+                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span><span class="text-slate-600 dark:text-slate-300">Net</span></span>
+                    <span class="font-bold text-slate-700 dark:text-slate-200" id="percentNet">--%</span>
+                  </div>
+                  <div class="flex justify-between text-xs">
+                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600"></span><span class="text-slate-600 dark:text-slate-300">Charges</span></span>
+                    <span class="font-bold text-slate-700 dark:text-slate-200" id="percentCharges">--%</span>
+                  </div>
+                </div>
+                <div class="w-full mt-6 pt-4 border-t border-slate-200 dark:border-slate-600">
+                    <div class="flex justify-between items-center mb-1">
+                      <span class="text-[10px] font-bold text-slate-500 uppercase">Retraite</span>
+                      <span class="text-[10px] font-bold text-slate-700 dark:text-white" id="retraiteCount">0 / 4</span>
+                   </div>
+                   <div class="w-full bg-slate-200 rounded-full h-1.5 dark:bg-slate-600">
+                      <div id="retraiteBar" class="bg-indigo-500 h-1.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                   </div>
+                </div>
+              </div>
+              <div class="hidden"><span id="resMarge"></span><svg><circle id="gaugeCircle"></circle></svg></div>
+            </div>
+            
+            <div class="flex justify-end gap-2 mt-6 no-print">
+               <button onclick="shareAction()" class="flex items-center gap-2 text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-lg transition dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-900/50 shadow-sm">Partager</button>
+            </div>
+            
+            <details id="detailsCotisations" class="group border-t border-slate-200 bg-white mt-6 dark:bg-slate-800 dark:border-slate-700">
+               <summary class="flex justify-between items-center p-4 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50 transition no-print">
+                 <span class="font-semibold text-sm text-slate-700 flex items-center gap-2 dark:text-slate-300">Voir le détail (Simulation Fiche)</span>
+                 <svg class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+               </summary>
+               <div class="p-6 pt-2">
+                 <h4 class="text-xs font-bold text-slate-400 uppercase mb-4 print-only">Détail des Cotisations</h4>
+                 <div class="space-y-0">
+                    <div class="pay-slip-row bg-slate-50/50 dark:bg-slate-700/30"><span class="pay-slip-label">Chiffre d'Affaires</span><span class="pay-slip-value text-slate-900 dark:text-white" id="fpBrut">0 €</span></div>
+                    <div class="pay-slip-row"><span class="pay-slip-label pl-4 text-xs dark:text-slate-400">Cotisations Sociales</span><span class="pay-slip-value text-red-500 text-xs" id="fpSocial">- 0 €</span></div>
+                    <div class="pay-slip-row"><span class="pay-slip-label pl-4 text-xs dark:text-slate-400">Contribution Formation</span><span class="pay-slip-value text-red-500 text-xs" id="fpCfp">- 0 €</span></div>
+                    <div class="pay-slip-row"><span class="pay-slip-label pl-4 text-xs dark:text-slate-400">Impôts (IR / Libératoire)</span><span class="pay-slip-value text-red-500 text-xs" id="fpFiscal">- 0 €</span></div>
+                    <div class="pay-slip-row"><span class="pay-slip-label pl-4 text-xs dark:text-slate-400">Frais Pro & CFE</span><span class="pay-slip-value text-slate-500 text-xs" id="fpFraisPro">- 0 €</span></div>
+                    <div class="pay-slip-row bg-emerald-50/30 border-t-2 border-slate-100 mt-2 pt-2 dark:bg-emerald-900/20 dark:border-slate-700"><span class="pay-slip-label font-bold text-emerald-900 dark:text-emerald-300">Net Poche</span><span class="pay-slip-value text-emerald-600 text-lg dark:text-emerald-400" id="fpNet">0 €</span></div>
+                 </div>
+                 <div class="mt-4 pt-2 text-center no-print">
+                   <button onclick="window.print()" class="text-xs font-bold text-slate-500 hover:text-emerald-600 flex items-center justify-center gap-2 mx-auto transition">📄 Télécharger la Fiche (PDF)</button>
+                 </div>
+               </div>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="lg:col-span-4 space-y-6 no-print">
+        
+        <!-- WIDGET CALENDRIER FISCAL -->
+        <div class="bg-white rounded-xl shadow-sm border border-emerald-100 p-5 dark:bg-slate-800 dark:border-slate-700" id="fiscalCalendar">
+           <h3 class="font-bold text-emerald-900 mb-3 text-sm flex items-center gap-2 dark:text-emerald-400">
+             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+             Calendrier Fiscal
+           </h3>
+           <div class="bg-emerald-50 rounded-lg p-3 text-xs text-emerald-800 dark:bg-emerald-900/20 dark:text-emerald-300">
+              <span class="block font-bold" id="calNextTitle">Prochaine Déclaration</span>
+              <span class="block mt-1" id="calNextDate">...</span>
+           </div>
+           <p class="text-[9px] text-slate-400 mt-2 italic text-right">Basé sur la date du jour.</p>
+        </div>
+        
+        <!-- WIDGET TVA -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5 dark:bg-slate-800 dark:border-slate-700">
+           <h3 class="font-bold text-slate-900 mb-3 text-sm flex items-center gap-2 dark:text-white">Calculatrice TVA Rapide</h3>
+           <div class="flex gap-2 mb-2">
+             <button onclick="setTva(20)" class="flex-1 py-1 text-xs bg-indigo-50 text-indigo-600 rounded hover:bg-indigo-100 dark:bg-slate-700 dark:text-indigo-300">20%</button>
+             <button onclick="setTva(10)" class="flex-1 py-1 text-xs bg-slate-50 text-slate-600 rounded hover:bg-slate-100 dark:bg-slate-700 dark:text-slate-300">10%</button>
+             <button onclick="setTva(5.5)" class="flex-1 py-1 text-xs bg-slate-50 text-slate-600 rounded hover:bg-slate-100 dark:bg-slate-700 dark:text-slate-300">5.5%</button>
+           </div>
+           <div class="grid grid-cols-2 gap-3">
+             <div><label class="text-[10px] text-slate-400 font-bold uppercase">Montant HT</label><input type="number" id="tvaHT" class="w-full border-b border-slate-200 text-sm font-bold py-1 bg-transparent focus:outline-none dark:border-slate-600 dark:text-white" placeholder="0"></div>
+             <div><label class="text-[10px] text-slate-400 font-bold uppercase">Montant TTC</label><input type="number" id="tvaTTC" class="w-full border-b border-slate-200 text-sm font-bold py-1 bg-transparent focus:outline-none dark:border-slate-600 dark:text-white" placeholder="0"></div>
+           </div>
+           <p class="text-[10px] text-slate-400 mt-2 text-right">TVA : <span id="tvaMontant">0</span> €</p>
+        </div>
+
+        <!-- PUB 1 (PRO) -->
+        <div class="relative overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700">
+           <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500"></div>
+           <div class="p-6">
+             <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wide flex items-center gap-2 mb-4 dark:text-white">Indispensables Pro</h3>
+             <div class="space-y-3">
+               <a href="#" target="_blank" class="group block p-3 rounded-xl border border-slate-100 bg-slate-50 hover:bg-emerald-50 hover:border-emerald-200 transition dark:bg-slate-700/50 dark:border-slate-600"><div class="flex items-center gap-3"><div class="bg-white p-2 rounded-lg text-emerald-600 shadow-sm">🏦</div><div><div class="font-bold text-slate-800 text-sm dark:text-white">Compte Pro Gratuit</div><div class="text-xs text-slate-500 dark:text-slate-400">Revenus séparés.</div></div></div></a>
+               <a href="#" target="_blank" class="group block p-3 rounded-xl border border-slate-100 bg-slate-50 hover:bg-blue-50 hover:border-blue-200 transition dark:bg-slate-700/50 dark:border-slate-600"><div class="flex items-center gap-3"><div class="bg-white p-2 rounded-lg text-blue-600 shadow-sm">🛡️</div><div><div class="font-bold text-slate-800 text-sm dark:text-white">RC Pro Freelance</div><div class="text-xs text-slate-500 dark:text-slate-400">Dès 15€/mois.</div></div></div></a>
+             </div>
+           </div>
+        </div>
+        
+        <!-- FAQ (11 Questions) -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5 dark:bg-slate-800 dark:border-slate-700">
+           <h3 class="font-bold text-slate-900 mb-4 text-sm dark:text-white">Questions Fréquentes</h3>
+           <details class="group text-sm mb-2"><summary class="cursor-pointer font-medium hover:text-emerald-600">Impôt libératoire ?</summary><p class="text-slate-500 mt-2 text-xs">Prélèvement forfaitaire unique.</p></details>
+           <hr class="border-slate-100 dark:border-slate-700 mb-2">
+           <details class="group text-sm mb-2"><summary class="cursor-pointer font-medium hover:text-emerald-600">Quand déclarer ?</summary><p class="text-slate-500 mt-2 text-xs">Mois ou trimestre (URSSAF).</p></details>
+           <hr class="border-slate-100 dark:border-slate-700 mb-2">
+           <details class="group text-sm mb-2"><summary class="cursor-pointer font-medium hover:text-emerald-600">Seuil TVA ?</summary><p class="text-slate-500 mt-2 text-xs">37.5k€ (Service) / 91.9k€ (Vente).</p></details>
+           <hr class="border-slate-100 dark:border-slate-700 mb-2">
+           <details class="group text-sm mb-2"><summary class="cursor-pointer font-medium hover:text-emerald-600">Plafond CA ?</summary><p class="text-slate-500 mt-2 text-xs">77.7k€ (Service) / 188.7k€ (Vente).</p></details>
+           <hr class="border-slate-100 dark:border-slate-700 mb-2">
+           <details class="group text-sm mb-2"><summary class="cursor-pointer font-medium hover:text-emerald-600">Cumul salarié ?</summary><p class="text-slate-500 mt-2 text-xs">Oui, autorisé.</p></details>
+           <hr class="border-slate-100 dark:border-slate-700 mb-2">
+           <details class="group text-sm mb-2"><summary class="cursor-pointer font-medium hover:text-emerald-600">Compte bancaire ?</summary><p class="text-slate-500 mt-2 text-xs">Recommandé, obligatoire > 10k€.</p></details>
+           <hr class="border-slate-100 dark:border-slate-700 mb-2">
+           <details class="group text-sm mb-2"><summary class="cursor-pointer font-medium hover:text-emerald-600">CFE ?</summary><p class="text-slate-500 mt-2 text-xs">Exonération 1ère année.</p></details>
+           <hr class="border-slate-100 dark:border-slate-700 mb-2">
+           <details class="group text-sm mb-2"><summary class="cursor-pointer font-medium hover:text-emerald-600">CA nul ?</summary><p class="text-slate-500 mt-2 text-xs">0€ charges, mais déclaration requise.</p></details>
+           <hr class="border-slate-100 dark:border-slate-700 mb-2">
+           <details class="group text-sm mb-2"><summary class="cursor-pointer font-medium hover:text-emerald-600">Santé ?</summary><p class="text-slate-500 mt-2 text-xs">Régime général CPAM.</p></details>
+           <hr class="border-slate-100 dark:border-slate-700 mb-2">
+           <details class="group text-sm mb-2"><summary class="cursor-pointer font-medium hover:text-emerald-600">ACRE ?</summary><p class="text-slate-500 mt-2 text-xs">-50% charges année 1.</p></details>
+           <hr class="border-slate-100 dark:border-slate-700 mb-2">
+           <details class="group text-sm"><summary class="cursor-pointer font-medium hover:text-emerald-600">Frais réels ?</summary><p class="text-slate-500 mt-2 text-xs">Non déductibles.</p></details>
+        </div>
+
+        <!-- PUB 2 (Outils) -->
+        <div class="relative overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 mt-6">
+           <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500"></div>
+           <div class="p-6">
+             <div class="flex items-center justify-between mb-4"><h3 class="text-sm font-bold text-slate-900 uppercase tracking-wide flex items-center gap-2 dark:text-white">Outils & Facturation</h3></div>
+             <div class="space-y-3">
+               <a href="#" target="_blank" class="group block relative p-4 rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-amber-50 hover:to-white hover:border-amber-200 transition-all duration-300 shadow-sm hover:shadow-md dark:from-slate-700 dark:to-slate-800 dark:border-slate-600 dark:hover:border-amber-500/50">
+                 <div class="absolute top-3 right-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300">Gratuit</span></div>
+                 <div class="flex items-start gap-3"><div class="bg-amber-100 p-2 rounded-lg text-amber-600 dark:bg-slate-600 dark:text-amber-300">⚡</div><div><div class="font-bold text-slate-800 text-sm dark:text-slate-100">Facturez en 2 min</div><div class="text-xs text-slate-500 mt-1">Logiciel certifié.</div></div></div>
+               </a>
+               <a href="#" target="_blank" class="group block relative p-4 rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-orange-50 hover:to-white hover:border-orange-200 transition-all duration-300 shadow-sm hover:shadow-md dark:from-slate-700 dark:to-slate-800 dark:border-slate-600 dark:hover:border-orange-500/50">
+                 <div class="absolute top-3 right-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-300">Boost</span></div>
+                 <div class="flex items-start gap-3"><div class="bg-orange-100 p-2 rounded-lg text-orange-600 dark:bg-slate-600 dark:text-orange-300">🚀</div><div><div class="font-bold text-slate-800 text-sm dark:text-slate-100">Trouver des clients</div><div class="text-xs text-slate-500 mt-1">Formation courte.</div></div></div>
+               </a>
+             </div>
+           </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- CONTENEUR PDF CACHÉ -->
+  <div id="print-document">
+    <div class="pdf-watermark">PaieNet</div>
+    <div class="pdf-header">
+      <div><div class="pdf-title">SIMULATION REVENUS 2025</div><div class="pdf-subtitle">Régime Micro-Entrepreneur</div></div>
+      <div class="pdf-meta"><div class="pdf-logo-text">Paie<span class="pdf-logo-accent">Net</span></div><div style="font-size:10px; color:#94a3b8; margin-top:5px;">Réf: <span id="pdfRef">SIM-2025</span></div><div style="font-size:10px; color:#94a3b8;" id="pdfDate"></div></div>
+    </div>
+    <div class="pdf-grid">
+       <div class="pdf-box"><div class="pdf-box-label">VOTRE PROFIL</div><div class="pdf-box-value">Auto-Entrepreneur</div><div style="font-size:11px; color:#64748b; margin-top:2px;" id="pdfType">Prestation de Service</div></div>
+       <div class="pdf-box" style="text-align:right;"><div class="pdf-box-label">CHIFFRE D'AFFAIRES MENSUEL</div><div class="pdf-box-value" style="font-size:18px; color:#0f172a;" id="pdfCa">0 €</div></div>
+    </div>
+    <table class="pdf-table">
+       <thead><tr><th>Détail des Cotisations</th><th class="col-right">Assiette</th><th class="col-right">Taux</th><th class="col-right">Montant</th></tr></thead>
+       <tbody>
+          <tr><td>Charges Sociales (Maladie, Retraite, Alloc.)</td><td class="col-right" id="pdfBaseSocial">0 €</td><td class="col-right" id="pdfTauxSocial">24.6%</td><td class="col-right" id="pdfMontantSocial">0 €</td></tr>
+          <tr><td>Contribution Formation (CFP)</td><td class="col-right">-</td><td class="col-right" id="pdfTauxCfp">0.2%</td><td class="col-right" id="pdfMontantCfp">0 €</td></tr>
+          <tr><td>Prélèvement Fiscal (Libératoire ou IR estimé)</td><td class="col-right" id="pdfBaseFiscal">0 €</td><td class="col-right" id="pdfTauxFiscal">2.2%</td><td class="col-right" id="pdfMontantFiscal">0 €</td></tr>
+          <tr><td>Frais de Fonctionnement & CFE (Non Déductibles)</td><td class="col-right">-</td><td class="col-right">-</td><td class="col-right" id="pdfFraisPro">- 0 €</td></tr>
+       </tbody>
+    </table>
+    <div class="pdf-summary">
+       <div class="pdf-total-box">
+          <div class="pdf-total-row"><span>Total Charges Déduites</span><span style="color:#ef4444;" id="pdfTotalCharges">- 0 €</span></div>
+          <div class="pdf-total-row"><span>Taux Effectif Global</span><span id="pdfTauxEffectif">0%</span></div>
+          <div class="pdf-total-row final"><span>NET À PAYER (Poche)</span><span id="pdfNet">0 €</span></div>
+       </div>
+    </div>
+    <div class="pdf-footer-section">
+       <div class="pdf-legal">Document généré à titre indicatif sur PaieNet.fr. Ce document n'a pas de valeur légale.</div>
+       <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://paienet.fr/freelance.html" class="pdf-qr" alt="QR PaieNet" />
+    </div>
+  </div>
+
+  <!-- LOGIC JS -->
+  <script>
+    const DATA = {
+      vente: { label: "Vente Marchandises", social: 0.123, fiscal_lib: 0.01, abattement: 0.71, cfp: 0.001 },
+      service_bic: { label: "Prestation Service BIC", social: 0.212, fiscal_lib: 0.017, abattement: 0.50, cfp: 0.003 },
+      service_bnc: { label: "Prestation Service BNC", social: 0.246, fiscal_lib: 0.022, abattement: 0.34, cfp: 0.002 }, 
+      liberal: { label: "Profession Libérale", social: 0.232, fiscal_lib: 0.022, abattement: 0.34, cfp: 0.002 }
+    };
+    
+    const IR_TRANCHES = [ { max: 11294, rate: 0 }, { max: 28797, rate: 0.11 }, { max: 82341, rate: 0.30 }, { max: 177106, rate: 0.41 }, { max: 999999999, rate: 0.45 } ];
+    const RETRAITE_THRESHOLDS = { vente: 22800, service_bic: 12500, service_bnc: 9800, liberal: 9800 };
+
+    let el = {};
+    let currentTvaRate = 20;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const d = new Date();
+      if(document.getElementById('pdfDate')) document.getElementById('pdfDate').textContent = d.toLocaleDateString('fr-FR');
+      if(document.getElementById('pdfRef')) document.getElementById('pdfRef').textContent = "SIM-2025-" + Math.floor(1000 + Math.random() * 9000);
+
+      // Calendar Logic
+      const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+      const currentMonthIndex = d.getMonth();
+      if(document.getElementById('calNextDate')) document.getElementById('calNextDate').textContent = `30 ${monthNames[currentMonthIndex]} (Mensuel)`;
+      if(document.getElementById('calNextTitle')) document.getElementById('calNextTitle').textContent = "Prochaine Déclaration";
+
+      // Restore data
+      if(localStorage.getItem('freelanceData')) {
+        const saved = JSON.parse(localStorage.getItem('freelanceData'));
+        if(document.getElementById('caMensuel')) document.getElementById('caMensuel').value = saved.caMensuel || '';
+        if(document.getElementById('activityType')) document.getElementById('activityType').value = saved.activityType || 'service_bnc';
+        if(document.getElementById('optLiberatoire')) document.getElementById('optLiberatoire').checked = saved.optLiberatoire || false;
+        if(document.getElementById('optAcre')) document.getElementById('optAcre').checked = saved.optAcre || false;
+      }
+
+      if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        toggleIcons(true);
+      }
+
+      el = {
+        // TABS
+        tabMensuel: document.getElementById('tab-mensuel'), tabProjet: document.getElementById('tab-projet'),
+        contentMensuel: document.getElementById('content-mensuel'), contentProjet: document.getElementById('content-projet'),
+        // INPUTS
+        tjmInput: document.getElementById('tjmInput'), joursInput: document.getElementById('joursInput'),
+        caMensuel: document.getElementById('caMensuel'), caAnnuel: document.getElementById('caAnnuel'),
+        fraisPro: document.getElementById('fraisPro'),
+        activityType: document.getElementById('activityType'),
+        optLiberatoire: document.getElementById('optLiberatoire'), optAcre: document.getElementById('optAcre'), optCfe: document.getElementById('optCfe'),
+        weeksOffInput: document.getElementById('weeksOffInput'), weeksOffDisplay: document.getElementById('weeksOffDisplay'),
+        // PROJECT
+        projPrix: document.getElementById('projPrix'), projJours: document.getElementById('projJours'),
+        projResult: document.getElementById('projResult'), projTjmBrut: document.getElementById('projTjmBrut'), projNetJour: document.getElementById('projNetJour'),
+        // TVA
+        tvaHT: document.getElementById('tvaHT'), tvaTTC: document.getElementById('tvaTTC'), tvaMontant: document.getElementById('tvaMontant'),
+        tresoFacture: document.getElementById('tresoFacture'), tresoUrssaf: document.getElementById('tresoUrssaf'), tresoDispo: document.getElementById('tresoDispo'),
+        // RES
+        result: document.getElementById('result'), resNetMensuel: document.getElementById('resNetMensuel'), resNetAnnuel: document.getElementById('resNetAnnuel'),
+        resNetJournalier: document.getElementById('resNetJournalier'),
+        resTotalCharges: document.getElementById('resTotalCharges'), resMarge: document.getElementById('resMarge'),
+        gaugeCircle: document.getElementById('gaugeCircle'), chartPie: document.getElementById('chartPie'),
+        percentNet: document.getElementById('percentNet'), percentCharges: document.getElementById('percentCharges'),
+        tvaAlert: document.getElementById('tvaAlert'),
+        retraiteCount: document.getElementById('retraiteCount'), retraiteBar: document.getElementById('retraiteBar'),
+        // RATIO BADGE
+        ratioBadge: document.getElementById('ratioBadge'),
+        // TEXTS
+        labelImpots: document.getElementById('labelImpots'), subLabelImpots: document.getElementById('subLabelImpots'), detailImpotsText: document.getElementById('detailImpotsText'),
+        // PDF
+        pdfType: document.getElementById('pdfType'), pdfCa: document.getElementById('pdfCa'),
+        pdfBaseSocial: document.getElementById('pdfBaseSocial'), pdfTauxSocial: document.getElementById('pdfTauxSocial'), pdfMontantSocial: document.getElementById('pdfMontantSocial'),
+        pdfBaseFiscal: document.getElementById('pdfBaseFiscal'), pdfTauxFiscal: document.getElementById('pdfTauxFiscal'), pdfMontantFiscal: document.getElementById('pdfMontantFiscal'),
+        pdfFraisPro: document.getElementById('pdfFraisPro'), pdfNet: document.getElementById('pdfNet'),
+        pdfTotalCharges: document.getElementById('pdfTotalCharges'), pdfTauxEffectif: document.getElementById('pdfTauxEffectif'),
+        pdfTauxCfp: document.getElementById('pdfTauxCfp'), pdfMontantCfp: document.getElementById('pdfMontantCfp'),
+        // FICHE
+        fpBrut: document.getElementById('fpBrut'), fpSocial: document.getElementById('fpSocial'),
+        fpCfp: document.getElementById('fpCfp'), 
+        fpFiscal: document.getElementById('fpFiscal'), fpFraisPro: document.getElementById('fpFraisPro'), fpNet: document.getElementById('fpNet')
+      };
+
+      // EVENTS
+      const events = ['input', 'change'];
+      events.forEach(ev => {
+        el.tjmInput?.addEventListener(ev, () => compute('tjm'));
+        el.joursInput?.addEventListener(ev, () => compute('tjm'));
+        el.caMensuel?.addEventListener(ev, () => compute('mensuel'));
+        el.caAnnuel?.addEventListener(ev, () => compute('annuel'));
+        el.fraisPro?.addEventListener(ev, () => compute('update'));
+        el.optCfe?.addEventListener(ev, () => compute('update'));
+        el.resNetMensuel?.addEventListener(ev, () => compute('net'));
+        el.activityType?.addEventListener(ev, () => compute('update'));
+        el.optLiberatoire?.addEventListener(ev, () => { updateImpotsLabels(); compute('update'); });
+        el.optAcre?.addEventListener(ev, () => compute('update'));
+        el.weeksOffInput?.addEventListener(ev, () => { el.weeksOffDisplay.textContent = el.weeksOffInput.value + " sem"; compute('update'); });
+        
+        el.projPrix?.addEventListener(ev, computeProject);
+        el.projJours?.addEventListener(ev, computeProject);
+        el.tvaHT?.addEventListener(ev, () => calcTva('ht'));
+        el.tvaTTC?.addEventListener(ev, () => calcTva('ttc'));
+      });
+      
+      // Init
+      compute('mensuel');
+    });
+
+    // --- LOGIC TABS ---
+    window.switchTab = (tab) => {
+      if(tab === 'mensuel') {
+         el.contentMensuel.classList.remove('hidden'); el.contentProjet.classList.add('hidden');
+         el.tabMensuel.classList.replace('tab-inactive', 'tab-active'); el.tabProjet.classList.replace('tab-active', 'tab-inactive');
+         el.result.classList.remove('hidden');
+      } else {
+         el.contentMensuel.classList.add('hidden'); el.contentProjet.classList.remove('hidden');
+         el.tabMensuel.classList.replace('tab-active', 'tab-inactive'); el.tabProjet.classList.replace('tab-inactive', 'tab-active');
+         el.result.classList.add('hidden');
+      }
+    };
+
+    // --- LOGIC TVA TOOL ---
+    window.setTva = (rate) => { currentTvaRate = rate; calcTva('ht'); };
+    const calcTva = (source) => {
+      if(source === 'ht') {
+         const ht = parseFloat(el.tvaHT.value) || 0;
+         const tax = ht * (currentTvaRate/100);
+         el.tvaMontant.textContent = tax.toFixed(2);
+         el.tvaTTC.value = (ht + tax).toFixed(2);
+      } else {
+         const ttc = parseFloat(el.tvaTTC.value) || 0;
+         const ht = ttc / (1 + currentTvaRate/100);
+         el.tvaMontant.textContent = (ttc - ht).toFixed(2);
+         el.tvaHT.value = ht.toFixed(2);
+      }
+    };
+
+    // --- LOGIC IMPOTS IR ---
+    const calculateIR = (caAnnuel, type) => {
+       const abattement = DATA[type].abattement;
+       const revenuImposable = Math.max(0, caAnnuel * (1 - abattement)); 
+       let impot = 0; let prevMax = 0;
+       for (const tranche of IR_TRANCHES) {
+          if (revenuImposable > prevMax) {
+             const base = Math.min(revenuImposable, tranche.max) - prevMax;
+             impot += base * tranche.rate;
+             prevMax = tranche.max;
+          }
+       }
+       return impot;
+    };
+
+    const updateImpotsLabels = () => {
+       if(el.optLiberatoire.checked) { el.labelImpots.textContent = "Impôt Libératoire"; el.subLabelImpots.textContent = "Paiement forfaitaire"; } 
+       else { el.labelImpots.textContent = "Impôt sur le Revenu"; el.subLabelImpots.textContent = "Estimation barème classique"; }
+    };
+
+    // --- MAIN COMPUTE ---
+    const compute = (source) => {
+      if(!el.activityType) return;
+      let caM = 0;
+      let frais = parseFloat(el.fraisPro?.value) || 0;
+      if(el.optCfe?.checked) frais += (500/12);
+
+      const type = el.activityType.value;
+      const typeData = DATA[type];
+      let socialRate = typeData.social;
+      const cfpRate = typeData.cfp; 
+      
+      if (el.optAcre?.checked) socialRate = socialRate * 0.5;
+
+      const weeksOff = parseFloat(el.weeksOffInput?.value) || 5;
+      const activeWeeks = 52 - weeksOff;
+
+      // SYNC INPUTS (V12.5 Logic included)
+      if (source === 'tjm') {
+         const tjm = parseFloat(el.tjmInput?.value) || 0;
+         const jours = parseFloat(el.joursInput?.value) || 0;
+         
+         const monthsWorked = 12 - (weeksOff / 4.33);
+         const caA = tjm * jours * monthsWorked;
+         caM = caA / 12; // Lissé sur 12 mois
+
+         if(caM > 0) { el.caMensuel.value = Math.round(caM); el.caAnnuel.value = Math.round(caA); }
+      } 
+      else if (source === 'mensuel') {
+         caM = parseFloat(el.caMensuel?.value);
+         if(!isNaN(caM)) { el.caAnnuel.value = Math.round(caM * 12); }
+      } else if (source === 'annuel') {
+         const caA = parseFloat(el.caAnnuel?.value);
+         if(!isNaN(caA)) { caM = caA / 12; el.caMensuel.value = Math.round(caM); }
+      } else if (source === 'net') {
+         const net = parseFloat(el.resNetMensuel?.value);
+         if(!isNaN(net)) {
+            const totalRateEstim = socialRate + cfpRate + (el.optLiberatoire.checked ? typeData.fiscal_lib : 0.05);
+            caM = (net + frais) / (1 - totalRateEstim);
+            el.caMensuel.value = Math.round(caM); el.caAnnuel.value = Math.round(caM * 12);
+         }
+      } else {
+         caM = parseFloat(el.caMensuel?.value);
+      }
+      
+      const saveData = () => {
+         const data = { caMensuel: el.caMensuel?.value, activityType: el.activityType?.value, optLiberatoire: el.optLiberatoire?.checked, optAcre: el.optAcre?.checked };
+         localStorage.setItem('freelanceData', JSON.stringify(data));
+      };
+      saveData();
+
+      if (!caM || isNaN(caM)) {
+         if (source !== 'net' && el.result) el.result.classList.add('hidden');
+         return;
+      }
+
+      const socialAmount = caM * socialRate;
+      const cfpAmount = caM * cfpRate;
+      let fiscalAmount = 0;
+
+      if (el.optLiberatoire.checked) {
+         fiscalAmount = caM * typeData.fiscal_lib;
+      } else {
+         const impotAnnuel = calculateIR(caM * 12, type);
+         fiscalAmount = impotAnnuel / 12;
+      }
+
+      const totalCharges = socialAmount + fiscalAmount + cfpAmount;
+      const netMensuel = caM - totalCharges - frais;
+      const caA = caM * 12;
+      
+      // UI
+      const active = document.activeElement ? document.activeElement.id : null;
+      if(active !== 'resNetMensuel' && el.resNetMensuel) el.resNetMensuel.value = Math.round(netMensuel);
+      if(el.resNetAnnuel) el.resNetAnnuel.textContent = Math.round(netMensuel * 12).toLocaleString('fr-FR');
+      if(el.resTotalCharges) el.resTotalCharges.textContent = Math.round(totalCharges + frais).toLocaleString('fr-FR');
+      
+      if(el.detailImpotsText) {
+         el.detailImpotsText.textContent = `Dont impôts : ${Math.round(fiscalAmount)} €/mois`;
+      }
+      
+      // Net Journalier (re-calc based on inputs)
+      const joursTrav = parseFloat(el.joursInput?.value) || 18;
+      const netJournalier = joursTrav > 0 ? netMensuel / joursTrav : 0;
+      if(el.resNetJournalier) el.resNetJournalier.textContent = Math.round(netJournalier).toLocaleString('fr-FR');
+
+      // Ratio Badge
+      const ratio = caM > 0 ? (netMensuel / caM) * 100 : 0;
+      if(el.ratioBadge) {
+          el.ratioBadge.textContent = `💰 Ratio: ${Math.round(ratio)}%`;
+          if(ratio < 50) el.ratioBadge.className = "inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-300";
+          else el.ratioBadge.className = "inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300";
+      }
+
+      // ALERTS & GRAPHS
+      let tvaThreshold = 37500;
+      if (type === 'vente') tvaThreshold = 91900;
+      if(el.tvaAlert) el.tvaAlert.classList.toggle('hidden', (caM * 12) <= tvaThreshold);
+
+      const marginPct = ((netMensuel / caM) * 100);
+      if(el.resMarge) el.resMarge.textContent = marginPct.toFixed(0) + '%';
+      if(el.gaugeCircle) el.gaugeCircle.style.strokeDashoffset = 351 - (351 * marginPct / 100);
+      if(el.percentNet) el.percentNet.textContent = marginPct.toFixed(0) + '%';
+      if(el.percentCharges) el.percentCharges.textContent = (100 - marginPct).toFixed(0) + '%';
+      if(el.chartPie) el.chartPie.style.background = `conic-gradient(#10b981 0% ${marginPct}%, #e2e8f0 ${marginPct}% 100%)`;
+
+      // Retraite
+      if(el.retraiteCount && el.retraiteBar) {
+         const threshold4 = RETRAITE_THRESHOLDS[type] || 10000;
+         let quarters = Math.min(4, Math.floor((caM * 12) / (threshold4 / 4)));
+         let barPct = Math.min(100, ((caM * 12) / threshold4) * 100);
+         el.retraiteCount.textContent = `${quarters} / 4`;
+         el.retraiteBar.style.width = `${barPct}%`;
+         if(quarters === 4) el.retraiteBar.classList.replace('bg-indigo-600', 'bg-green-500');
+         else el.retraiteBar.classList.replace('bg-green-500', 'bg-indigo-600');
+      }
+
+      // PDF & FICHE ECRAN UPDATE
+      if(el.pdfType) el.pdfType.textContent = typeData.label;
+      if(el.pdfCa) el.pdfCa.textContent = Math.round(caM).toLocaleString('fr-FR') + ' €';
+      if(el.pdfBaseSocial) el.pdfBaseSocial.textContent = Math.round(caM).toLocaleString('fr-FR') + ' €';
+      if(el.pdfTauxSocial) el.pdfTauxSocial.textContent = (socialRate * 100).toFixed(1) + '%';
+      if(el.pdfMontantSocial) el.pdfMontantSocial.textContent = '-' + Math.round(socialAmount).toLocaleString('fr-FR') + ' €';
+      
+      // V13 CFP
+      if(el.pdfTauxCfp) el.pdfTauxCfp.textContent = (cfpRate * 100).toFixed(1) + '%';
+      if(el.pdfMontantCfp) el.pdfMontantCfp.textContent = '-' + Math.round(cfpAmount).toLocaleString('fr-FR') + ' €';
+
+      if(el.pdfBaseFiscal) el.pdfBaseFiscal.textContent = Math.round(caM).toLocaleString('fr-FR') + ' €';
+      if(el.pdfTauxFiscal) el.pdfTauxFiscal.textContent = el.optLiberatoire.checked ? (typeData.fiscal_lib * 100).toFixed(1) + '%' : 'Barème IR';
+      if(el.pdfMontantFiscal) el.pdfMontantFiscal.textContent = '-' + Math.round(fiscalAmount).toLocaleString('fr-FR') + ' €';
+      if(el.pdfFraisPro) el.pdfFraisPro.textContent = '-' + Math.round(frais).toLocaleString('fr-FR') + ' €';
+      if(el.pdfTotalCharges) el.pdfTotalCharges.textContent = '-' + Math.round(totalCharges + frais).toLocaleString('fr-FR') + ' €';
+      if(el.pdfNet) el.pdfNet.textContent = Math.round(netMensuel).toLocaleString('fr-FR') + ' €';
+      if(el.pdfTauxEffectif) el.pdfTauxEffectif.textContent = (((totalCharges + frais) / caM) * 100).toFixed(1) + '%';
+
+      // FICHE ECRAN
+      if(el.fpBrut) el.fpBrut.textContent = Math.round(caM).toLocaleString('fr-FR') + ' €';
+      if(el.fpSocial) el.fpSocial.textContent = '-' + Math.round(socialAmount).toLocaleString('fr-FR') + ' €';
+      if(el.fpCfp) el.fpCfp.textContent = '-' + Math.round(cfpAmount).toLocaleString('fr-FR') + ' €';
+      if(el.fpFiscal) el.fpFiscal.textContent = '-' + Math.round(fiscalAmount).toLocaleString('fr-FR') + ' €';
+      if(el.fpFraisPro) el.fpFraisPro.textContent = '-' + Math.round(frais).toLocaleString('fr-FR') + ' €';
+      if(el.fpNet) el.fpNet.textContent = Math.round(netMensuel).toLocaleString('fr-FR') + ' €';
+
+      if(el.result) el.result.classList.remove('hidden');
+    };
+
+    // --- LOGIC PROJECT MODE (NEW) ---
+    const computeProject = () => {
+       const prix = parseFloat(el.projPrix.value) || 0;
+       const jours = parseFloat(el.projJours.value) || 0;
+       if(prix > 0 && jours > 0) {
+          const tjmBrut = prix / jours;
+          el.projTjmBrut.textContent = Math.round(tjmBrut).toLocaleString('fr-FR') + ' €';
+          const type = el.activityType.value;
+          const socialRate = DATA[type].social;
+          const net = tjmBrut * (1 - socialRate - 0.02); // -2% fiscal approx
+          el.projNetJour.textContent = Math.round(net).toLocaleString('fr-FR') + ' €';
+          
+          el.projResult.classList.remove('hidden');
+       } else {
+          el.projResult.classList.add('hidden');
+       }
+    };
+
+    // ... (Helpers copy, theme, print same as before) ...
+    window.toggleTheme = () => { if (document.documentElement.classList.contains('dark')) { document.documentElement.classList.remove('dark'); localStorage.setItem('color-theme', 'light'); toggleIcons(false); } else { document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark'); toggleIcons(true); } };
+    function toggleIcons(isDark) { document.getElementById('iconSun').classList.toggle('hidden', !isDark); document.getElementById('iconMoon').classList.toggle('hidden', isDark); }
+    window.copyLink = () => copyTextToClipboard(window.location.href, () => showMsg('shareMsg'));
+    const showMsg = (id) => { const msg = document.getElementById(id); msg?.classList.remove('hidden'); setTimeout(() => msg?.classList.add('hidden'), 2000); };
+    const copyTextToClipboard = (text, cb) => { const ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); if(cb) cb(); } catch(e){} document.body.removeChild(ta); };
+  </script>
+</body>
+</html>
