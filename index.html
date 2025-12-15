@@ -2,16 +2,13 @@
 <html lang="fr" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <!-- Titre optimisé avec ta marque -->
   <title>PaieNet.fr – Calculateur Salaire Brut en Net 2025 (Gratuit)</title>
   <meta name="description" content="Le convertisseur de salaire de référence. Calculez votre Net à Payer, Net Imposable et Coût Employeur en temps réel. Simple, précis et gratuit.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="index, follow">
   
-  <!-- SEO : Canonical -->
   <link rel="canonical" href="https://paienet.fr/">
-
-  <!-- SEO : Open Graph -->
+  
   <meta property="og:site_name" content="PaieNet.fr">
   <meta property="og:title" content="Combien allez-vous vraiment toucher ? - Simulateur PaieNet">
   <meta property="og:description" content="Convertissez votre brut en net instantanément. Outil gratuit pour le secteur privé, cadre et fonction publique.">
@@ -25,11 +22,10 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-053E5TJ1PX');
   </script>
 
-  <!-- Tailwind CSS + Config Dark Mode -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -56,29 +52,18 @@
     input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     input[type=number] { -moz-appearance: textfield; }
 
-    /* Variables CSS pour le Graphique */
-    :root {
-      --chart-fill: #2563eb;   /* Bleu (Net) */
-      --chart-empty: #e2e8f0;  /* Gris clair (Charges) */
-      --chart-hole: #f8fafc;   /* Couleur du centre */
-    }
-    .dark {
-      --chart-fill: #3b82f6;
-      --chart-empty: #334155;
-      --chart-hole: #151e32;
-    }
-
     .toggle-checkbox:checked { right: 0; border-color: #2563eb; }
     .toggle-checkbox:checked + .toggle-label { background-color: #2563eb; }
 
     .pie-chart {
       width: 100px; height: 100px; border-radius: 50%; position: relative; 
-      background: var(--chart-empty); transition: background 0.3s;
+      background: #e2e8f0; transition: background 0.3s;
     }
     .pie-chart::after {
-      content: ""; position: absolute; inset: 12px; background: var(--chart-hole); 
+      content: ""; position: absolute; inset: 12px; background: #f8fafc; 
       border-radius: 50%; transition: background 0.3s;
     }
+    .dark .pie-chart::after { background: #1e293b; }
 
     .input-result {
       background: transparent; border: 1px dashed transparent; width: 100%; transition: all 0.2s;
@@ -90,45 +75,76 @@
     .dark .pay-slip-row { border-bottom-color: #334155; }
     .pay-slip-row:last-child { border-bottom: none; }
 
-    .seo-table th, .seo-table td { padding: 10px; text-align: left; font-size: 0.875rem; border-bottom: 1px solid #f1f5f9; }
-    .dark .seo-table th { background: #1e293b; color: #cbd5e1; border-bottom-color: #334155; }
-    .dark .seo-table td { border-bottom-color: #334155; color: #cbd5e1; }
-    .dark .seo-table tr:hover { background: #1e293b; }
+    /* --- STYLE IMPRESSION PRO (PDF A4) --- */
+    #print-document { display: none; } 
 
-    .modal-scroll::-webkit-scrollbar { width: 8px; }
-    .modal-scroll::-webkit-scrollbar-track { background: transparent; }
-    .modal-scroll::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 20px; }
-    .dark .modal-scroll::-webkit-scrollbar-thumb { background-color: #475569; }
-
-    /* Print */
-    .print-only { display: none; }
     @media print {
-      header, footer, .no-print, .ad-space, button, #shareMsg, #copyTextMsg, #themeToggle, #legalModal { display: none !important; }
-      body { background: white !important; color: black !important; }
-      .dark body { background: white !important; color: black !important; }
-      #main-container { box-shadow: none !important; border: none !important; width: 100% !important; }
-      .print-only { display: block !important; margin-bottom: 20px; text-align: center; }
-      .input-result, input { border: none !important; background: transparent !important; color: black !important; font-weight: bold; padding: 0; text-align: right; }
-      #detailsCotisations { display: block !important; }
-      summary { display: none; }
-      #seoGrid { display: none; }
-      .pie-chart::after { background: white !important; }
+      @page { margin: 0; size: A4; } /* Force le format A4 */
+      
+      /* Cacher TOUT le site normal */
+      body > *:not(#print-document) { display: none !important; }
+      
+      /* Reset Body */
+      body { 
+        background: white !important; 
+        color: #1e293b !important; 
+        font-family: 'Inter', sans-serif;
+        font-size: 11px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        margin: 0; padding: 0;
+      }
+      
+      /* Afficher la fiche PDF */
+      #print-document { 
+        display: block !important; 
+        position: absolute; 
+        top: 0; left: 0; width: 210mm; min-height: 297mm;
+        padding: 15mm;
+        box-sizing: border-box;
+        background: white;
+      }
+      
+      .pdf-watermark {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+        font-size: 120px;
+        font-weight: 900;
+        color: #f1f5f9;
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0.5;
+      }
+
+      /* Styles PDF */
+      .pdf-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; border-bottom: 2px solid #2563eb; padding-bottom: 20px; }
+      .pdf-logo-text { font-size: 24px; font-weight: 800; color: #0f172a; letter-spacing: -1px; }
+      .pdf-logo-accent { color: #2563eb; }
+      .pdf-meta { text-align: right; }
+      .pdf-title { font-size: 16px; font-weight: bold; text-transform: uppercase; color: #2563eb; margin-bottom: 5px; }
+      
+      .pdf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 30px; }
+      .pdf-box { background: #f8fafc !important; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0; }
+      .pdf-box-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; margin-bottom: 5px; font-weight: 600; }
+      .pdf-box-value { font-size: 12px; font-weight: 700; color: #0f172a; }
+
+      .pdf-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+      .pdf-table th { text-align: left; padding: 10px; background-color: #0f172a !important; color: white !important; font-weight: 600; font-size: 10px; text-transform: uppercase; border-radius: 4px 4px 0 0; }
+      .pdf-table td { padding: 12px 10px; border-bottom: 1px solid #e2e8f0; font-size: 11px; }
+      .pdf-table tr:last-child td { border-bottom: none; }
+      .col-right { text-align: right; }
+      
+      .pdf-summary { display: flex; justify-content: flex-end; margin-bottom: 40px; }
+      .pdf-total-box { width: 250px; background: #eff6ff !important; border: 1px solid #2563eb; border-radius: 6px; padding: 15px; float: right; }
+      .pdf-total-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 11px; }
+      .pdf-total-row.final { border-top: 1px dashed #2563eb; padding-top: 8px; margin-top: 8px; font-weight: 900; font-size: 16px; color: #1e3a8a; }
+
+      .pdf-footer-section { clear: both; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 15px; margin-top: 60px; }
+      .pdf-legal { font-size: 8px; color: #94a3b8; max-width: 70%; line-height: 1.4; }
+      .pdf-qr { width: 60px; height: 60px; background: #fff; border: 1px solid #ddd; padding: 2px; }
     }
   </style>
-
-  <!-- Schema.org mis à jour avec le domaine -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "PaieNet - Calculateur Salaire France",
-    "url": "https://paienet.fr",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Web",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-    "featureList": "Brut Net, Dark Mode, Coût Employeur, Comparateur salaire médian"
-  }
-  </script>
 </head>
 
 <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen transition-colors duration-300 dark:bg-slate-900 dark:text-slate-100">
@@ -137,20 +153,12 @@
   <header class="bg-white border-b border-slate-200 sticky top-0 z-20 shadow-sm no-print dark:bg-slate-800 dark:border-slate-700 transition-colors duration-300">
     <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
       <a href="index.html" class="flex items-center gap-2 group">
-        <!-- LOGO V3 : Style "App Bancaire Premium" -->
-        <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-xl shadow-lg shadow-blue-200 dark:shadow-none flex items-center justify-center transform group-hover:rotate-3 transition-transform duration-300">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-            </svg>
+        <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-xl shadow-lg flex items-center justify-center transform group-hover:rotate-3 transition-transform duration-300">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
         </div>
-        <!-- TEXTE LOGO -->
         <div class="flex flex-col justify-center">
-          <span class="text-xl font-bold text-slate-900 tracking-tight leading-none dark:text-white">
-            Paie<span class="text-blue-600">Net</span>
-          </span>
-          <span class="block text-[10px] font-semibold text-slate-400 uppercase tracking-widest mt-0.5 group-hover:text-blue-500 transition-colors">
-            Salaire &amp; Impôts
-          </span>
+          <span class="text-xl font-bold text-slate-900 tracking-tight leading-none dark:text-white">Paie<span class="text-blue-600">Net</span></span>
+          <span class="block text-[10px] font-semibold text-slate-400 uppercase tracking-widest mt-0.5 group-hover:text-blue-500 transition-colors">Salaire & Impôts</span>
         </div>
       </a>
       <div class="flex items-center gap-3">
@@ -158,59 +166,41 @@
           <svg id="iconSun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
           <svg id="iconMoon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
         </button>
-        <button onclick="window.print()" class="hidden md:flex items-center gap-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition shadow-sm">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-          PDF
-        </button>
       </div>
     </div>
   </header>
 
   <main class="max-w-6xl mx-auto px-4 py-8 md:py-10 flex-grow">
-
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
       
       <!-- CALCULATEUR -->
       <div class="lg:col-span-8 space-y-6">
-        
         <div id="main-container" class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 md:p-8 dark:bg-slate-800 dark:border-slate-700 transition-colors">
           
-          <!-- En-tête PDF -->
-          <div class="print-only">
-            <div class="print-header-title">Simulation Salaire 2025 - PaieNet.fr</div>
-            <div class="print-date">Document généré le <span id="printDate"></span></div>
-            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
-          </div>
-
           <div class="flex justify-between items-start mb-2 no-print">
-            <h1 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">Simulateur <span class="text-blue-600">PaieNet 2025</span></h1>
+            <h1 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">Convertisseur Brut <span class="text-blue-600">↔</span> Net</h1>
             <div class="flex flex-col items-end gap-1">
                <span id="shareMsg" class="hidden text-xs text-green-600 font-medium bg-green-50 dark:bg-green-900/30 dark:text-green-400 px-2 py-1 rounded">Lien copié !</span>
                <span id="copyTextMsg" class="hidden text-xs text-blue-600 font-medium bg-blue-50 dark:bg-blue-900/30 dark:text-blue-400 px-2 py-1 rounded">Résumé copié !</span>
             </div>
           </div>
-          <p class="text-slate-500 mb-6 text-sm md:text-base no-print dark:text-slate-400">Brut en Net, Coût Employeur, Impôts : l'outil de référence.</p>
+          <p class="text-slate-500 mb-6 text-sm md:text-base no-print dark:text-slate-400">Estimez le salaire Net, les cotisations et le Coût Employeur.</p>
 
           <!-- OPTIONS -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 bg-slate-50 p-4 rounded-xl border border-slate-200 no-print dark:bg-slate-700/50 dark:border-slate-600">
-            <!-- Statut -->
             <div>
               <label class="block text-xs font-semibold text-slate-500 uppercase mb-1.5 dark:text-slate-400">Votre Statut</label>
-              <select id="statut" class="w-full text-sm border-slate-300 rounded-lg p-2.5 bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all cursor-pointer border shadow-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white">
+              <select id="statut" class="w-full text-sm border-slate-300 rounded-lg p-2.5 bg-white focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer border shadow-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white">
                 <option value="non_cadre" selected>👤 Salarié Non-Cadre</option>
                 <option value="cadre">👔 Salarié Cadre</option>
                 <option value="public">🏛️ Fonction Publique</option>
                 <option value="liberal">💻 Profession Libérale</option>
               </select>
             </div>
-            <!-- Options -->
             <div class="flex flex-col justify-between gap-3">
               <div class="flex items-center justify-between">
                 <label class="text-sm font-medium text-slate-700 dark:text-slate-300">13ème mois ?</label>
-                <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                  <input type="checkbox" name="toggle" id="mois13" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-slate-300 left-0"/>
-                  <label for="mois13" class="toggle-label block overflow-hidden h-5 rounded-full bg-slate-300 cursor-pointer"></label>
-                </div>
+                <div class="relative inline-block w-10 mr-2 align-middle"><input type="checkbox" name="toggle" id="mois13" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-slate-300 left-0"/><label for="mois13" class="toggle-label block overflow-hidden h-5 rounded-full bg-slate-300 cursor-pointer"></label></div>
               </div>
               <div class="flex items-center gap-2">
                 <label for="tauxImpot" class="text-sm font-medium text-slate-700 whitespace-nowrap dark:text-slate-300">Taux PAS (%) :</label>
@@ -219,19 +209,19 @@
             </div>
           </div>
 
-          <!-- INPUTS BRUT -->
+          <!-- INPUTS -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div class="relative group">
               <label class="block text-xs font-bold text-slate-500 uppercase mb-2 dark:text-slate-400">Brut Mensuel</label>
               <div class="relative">
-                <input type="number" id="brutMensuel" placeholder="Ex: 2500" class="w-full pl-4 pr-10 py-3 rounded-lg border-2 border-slate-200 focus:border-blue-500 focus:ring-0 outline-none transition-all text-xl font-bold text-slate-800 placeholder-slate-300 shadow-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white dark:placeholder-slate-600">
+                <input type="number" id="brutMensuel" placeholder="Ex: 2500" class="w-full pl-4 pr-10 py-3 rounded-lg border-2 border-slate-200 focus:border-blue-500 outline-none transition-all text-xl font-bold text-slate-800 placeholder-slate-300 shadow-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white">
                 <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 font-medium">€</span>
               </div>
             </div>
             <div class="relative group">
               <label class="block text-xs font-bold text-slate-500 uppercase mb-2 dark:text-slate-400">Brut Annuel</label>
               <div class="relative">
-                <input type="number" id="brutAnnuel" placeholder="Ex: 30000" class="w-full pl-4 pr-10 py-3 rounded-lg border-2 border-slate-200 focus:border-blue-500 focus:ring-0 outline-none transition-all text-xl font-bold text-slate-800 placeholder-slate-300 shadow-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white dark:placeholder-slate-600">
+                <input type="number" id="brutAnnuel" placeholder="Ex: 30000" class="w-full pl-4 pr-10 py-3 rounded-lg border-2 border-slate-200 focus:border-blue-500 outline-none transition-all text-xl font-bold text-slate-800 placeholder-slate-300 shadow-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white">
                 <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 font-medium">€</span>
               </div>
             </div>
@@ -239,375 +229,177 @@
 
           <!-- RÉSULTATS -->
           <div id="result" class="hidden bg-slate-50 rounded-xl border border-slate-200 overflow-hidden shadow-inner relative dark:bg-slate-900/50 dark:border-slate-700">
-            
             <div class="bg-slate-100 px-6 py-2 border-b border-slate-200 flex justify-between items-center dark:bg-slate-800 dark:border-slate-700">
               <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
                 <span class="no-print">Champs Net modifiables</span>
-                <span class="print-only">Résultats</span>
+                <span class="print-only">Synthèse Mensuelle</span>
               </span>
               <span id="badgeStatut" class="px-2 py-0.5 rounded text-[10px] font-bold bg-white border border-slate-300 text-slate-500 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-300">NON CADRE</span>
             </div>
 
             <div class="p-6 grid grid-cols-1 md:grid-cols-12 gap-6">
-              
-              <!-- Chiffres Clés -->
               <div class="md:col-span-8 space-y-6">
-                
-                <!-- Net Mensuel -->
                 <div class="flex items-end justify-between border-b border-slate-200 pb-4 border-dashed dark:border-slate-700 relative">
                   <div class="w-full">
                     <span class="block text-blue-600 text-xs font-bold uppercase mb-1 dark:text-blue-400">Net à payer (Avant Impôt)</span>
                     <div class="relative flex items-center">
-                      <input type="number" id="netMensuel" class="input-result text-4xl font-extrabold text-blue-600 tracking-tight placeholder-blue-200 w-full dark:text-blue-400 dark:placeholder-blue-900" placeholder="0">
+                      <input type="number" id="netMensuel" class="input-result text-4xl font-extrabold text-blue-600 tracking-tight placeholder-blue-200 w-full dark:text-blue-400 dark:placeholder-blue-900 p-0 pr-16" placeholder="0">
                       <span class="absolute right-0 top-1/2 -translate-y-1/2 text-sm text-slate-400 pointer-events-none font-medium">€ / mois</span>
                     </div>
                   </div>
                 </div>
+                <!-- SMIC Meter -->
+                <div id="smicTag" class="hidden inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900/50 dark:text-indigo-300">🚀 <span id="smicMultiple" class="ml-1 font-bold"></span> x SMIC</div>
 
-                <!-- Comparateur Médian (BENCHMARK) -->
-                <div id="benchmarkBox" class="hidden p-3 rounded-lg bg-indigo-50 border border-indigo-100 text-xs text-indigo-800 dark:bg-indigo-900/30 dark:border-indigo-800 dark:text-indigo-300">
-                   📊 Votre salaire est <span class="font-bold" id="benchmarkDiff"></span> par rapport au salaire médian français (~2150€ net).
-                </div>
-
-                <!-- Détails Grille 2x2 -->
-                <div class="grid grid-cols-2 gap-x-4 gap-y-6 mt-2">
+                <div class="grid grid-cols-2 gap-x-4 gap-y-6 mt-4">
                    <div>
                      <span class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Net Annuel</span>
-                     <div class="relative">
-                        <input type="number" id="netAnnuel" class="input-result text-lg font-bold text-slate-700 w-full p-0 border-0 focus:ring-0 dark:text-slate-200" placeholder="0">
-                        <span class="absolute right-0 top-0 text-xs text-slate-400 pointer-events-none">€</span>
-                     </div>
+                     <div class="relative"><input type="number" id="netAnnuel" class="input-result text-lg font-bold text-slate-700 w-full p-0 border-0 focus:ring-0 dark:text-slate-200" placeholder="0"><span class="absolute right-0 top-0 text-xs text-slate-400 pointer-events-none">€</span></div>
                    </div>
-                   <div>
-                     <span class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Net Imposable</span>
-                     <span class="text-lg font-bold text-slate-700 block leading-none dark:text-slate-200"><span id="netImposable">0</span> €</span>
-                   </div>
-                   <div>
-                     <span class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Charges Salariales</span>
-                     <span class="text-lg font-bold text-red-400 block leading-none">- <span id="coutCharges">0</span> €</span>
-                   </div>
-                   <div>
-                     <span class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Coût Employeur</span>
-                     <span class="text-lg font-bold text-slate-600 block leading-none dark:text-slate-400"><span id="coutEmployeur">0</span> €</span>
-                   </div>
+                   <div><span class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Net Imposable</span><span class="text-lg font-bold text-slate-700 block leading-none dark:text-slate-200"><span id="netImposable">0</span> €</span></div>
+                   <div><span class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Charges Salariales</span><span class="text-lg font-bold text-red-400 block leading-none">- <span id="coutCharges">0</span> €</span></div>
+                   <div><span class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Coût Employeur</span><span class="text-lg font-bold text-slate-600 block leading-none dark:text-slate-400"><span id="coutEmployeur">0</span> €</span></div>
                 </div>
 
-                <!-- Net Après Impôt -->
                 <div id="blocImpot" class="flex items-center justify-between bg-white p-3 rounded-lg border border-blue-100 shadow-sm hidden mt-4 dark:bg-slate-800 dark:border-slate-700">
-                  <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse no-print"></span>
-                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Net APRÈS Impôt</span>
-                  </div>
+                  <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse no-print"></span><span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Net APRÈS Impôt</span></div>
                   <span class="text-xl font-bold text-green-600 dark:text-green-400"><span id="netApresImpot">0</span> €</span>
                 </div>
-
               </div>
 
-              <!-- Graphique -->
               <div class="md:col-span-4 flex flex-col items-center justify-center border-l border-slate-200 pl-0 md:pl-6 pt-6 md:pt-0 border-t md:border-t-0 border-dashed dark:border-slate-700">
                 <div id="chartPie" class="pie-chart shadow-sm"></div>
                 <div class="mt-4 w-full space-y-2">
-                  <div class="flex justify-between text-xs">
-                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-600"></span><span class="text-slate-600 dark:text-slate-300">Net</span></span>
-                    <span class="font-bold text-slate-700 dark:text-slate-200" id="percentNet">--%</span>
-                  </div>
-                  <div class="flex justify-between text-xs">
-                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600"></span><span class="text-slate-600 dark:text-slate-300">Charges</span></span>
-                    <span class="font-bold text-slate-700 dark:text-slate-200" id="percentCharges">--%</span>
-                  </div>
+                  <div class="flex justify-between text-xs"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-600"></span><span class="text-slate-600 dark:text-slate-300">Net</span></span><span class="font-bold text-slate-700 dark:text-slate-200" id="percentNet">--%</span></div>
+                  <div class="flex justify-between text-xs"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600"></span><span class="text-slate-600 dark:text-slate-300">Charges</span></span><span class="font-bold text-slate-700 dark:text-slate-200" id="percentCharges">--%</span></div>
                 </div>
               </div>
-
             </div>
 
-            <!-- FICHE DE PAIE DÉTAILLÉE -->
             <details id="detailsCotisations" class="group border-t border-slate-200 bg-white dark:bg-slate-800 dark:border-slate-700">
                <summary class="flex justify-between items-center p-4 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50 transition no-print">
-                 <span class="font-semibold text-sm text-slate-700 flex items-center gap-2 dark:text-slate-300">
-                   <svg class="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                   Voir la fiche de paie détaillée
-                 </span>
+                 <span class="font-semibold text-sm text-slate-700 flex items-center gap-2 dark:text-slate-300">Voir le détail (Simulation Fiche)</span>
                  <svg class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                </summary>
-               
                <div class="p-6 pt-2">
-                 <h4 class="text-xs font-bold text-slate-400 uppercase mb-4 print-only">Détail des Cotisations</h4>
-                 
+                 <h4 class="text-xs font-bold text-slate-400 uppercase mb-4 print-only">Détail des Cotisations (Estimation)</h4>
                  <div class="space-y-0">
-                    <div class="pay-slip-row bg-slate-50/50 dark:bg-slate-700/30">
-                      <span class="pay-slip-label">Salaire Brut Mensuel</span>
-                      <span class="pay-slip-value text-slate-900 dark:text-white" id="fpBrut">0 €</span>
-                    </div>
-                    
-                    <div class="pay-slip-row">
-                      <span class="pay-slip-label pl-4 text-xs dark:text-slate-400">Total Charges Salariales</span>
-                      <span class="pay-slip-value text-red-500 text-xs" id="fpTotalCharges">- 0 €</span>
-                    </div>
-                    
-                    <div class="pay-slip-row bg-blue-50/30 border-t-2 border-slate-100 mt-2 pt-2 dark:bg-blue-900/20 dark:border-slate-700">
-                      <span class="pay-slip-label font-bold text-blue-900 dark:text-blue-300">Net à Payer</span>
-                      <span class="pay-slip-value text-blue-600 text-lg dark:text-blue-400" id="fpNet">0 €</span>
-                    </div>
-
-                    <div class="pay-slip-row pt-1">
-                      <span class="pay-slip-label text-xs">Dont CSG/CRDS non déductible</span>
-                      <span class="pay-slip-value text-xs text-slate-400" id="fpCsgNonDed">0 €</span>
-                    </div>
-
-                    <div class="pay-slip-row bg-slate-100/50 pt-2 pb-2 mt-2 dark:bg-slate-700/50">
-                      <span class="pay-slip-label font-semibold text-slate-700 dark:text-slate-300">Net Imposable</span>
-                      <span class="pay-slip-value text-slate-700 dark:text-slate-200" id="fpNetImposable">0 €</span>
-                    </div>
-                    
-                    <div class="pay-slip-row mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-                      <span class="pay-slip-label font-medium dark:text-slate-400">Coût Total Employeur</span>
-                      <span class="pay-slip-value dark:text-slate-300" id="fpCoutEmployeur">0 €</span>
-                    </div>
+                    <div class="pay-slip-row bg-slate-50/50 dark:bg-slate-700/30"><span class="pay-slip-label">Salaire Brut Mensuel</span><span class="pay-slip-value text-slate-900 dark:text-white" id="fpBrut">0 €</span></div>
+                    <div class="pay-slip-row"><span class="pay-slip-label pl-4 text-xs dark:text-slate-400">Total Charges Salariales</span><span class="pay-slip-value text-red-500 text-xs" id="fpTotalCharges">- 0 €</span></div>
+                    <div class="pay-slip-row bg-blue-50/30 border-t-2 border-slate-100 mt-2 pt-2 dark:bg-blue-900/20 dark:border-slate-700"><span class="pay-slip-label font-bold text-blue-900 dark:text-blue-300">Net à Payer</span><span class="pay-slip-value text-blue-600 text-lg dark:text-blue-400" id="fpNet">0 €</span></div>
+                    <div class="pay-slip-row pt-1"><span class="pay-slip-label text-xs dark:text-slate-400">Dont CSG/CRDS non déductible</span><span class="pay-slip-value text-xs text-slate-400" id="fpCsgNonDed">0 €</span></div>
+                    <div class="pay-slip-row bg-slate-100/50 pt-2 pb-2 mt-2 dark:bg-slate-700/50"><span class="pay-slip-label font-semibold text-slate-700 dark:text-slate-300">Net Imposable</span><span class="pay-slip-value text-slate-700 dark:text-slate-200" id="fpNetImposable">0 €</span></div>
+                    <div class="pay-slip-row mt-4 pt-4 border-t border-slate-200 dark:border-slate-700"><span class="pay-slip-label font-medium dark:text-slate-400">Coût Total Employeur</span><span class="pay-slip-value dark:text-slate-300" id="fpCoutEmployeur">0 €</span></div>
+                 </div>
+                 
+                 <!-- BOUTON PDF INTÉGRÉ ICI -->
+                 <div class="mt-4 pt-2 text-center no-print">
+                   <button onclick="window.print()" class="text-xs font-bold text-slate-500 hover:text-blue-600 flex items-center justify-center gap-2 mx-auto transition">
+                      📄 Télécharger la Fiche (PDF)
+                   </button>
                  </div>
                </div>
             </details>
             
-            <!-- Tools -->
             <div class="absolute top-4 right-4 flex gap-1 no-print">
-              <button onclick="resetCalc()" class="p-2 text-slate-400 hover:text-red-500 transition bg-white/50 hover:bg-white rounded-lg dark:bg-slate-700 dark:hover:bg-slate-600" title="Réinitialiser">
-                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
-              </button>
-              <button onclick="copySummary()" class="p-2 text-slate-400 hover:text-blue-600 transition bg-white/50 hover:bg-white rounded-lg dark:bg-slate-700 dark:hover:bg-slate-600" title="Copier le résumé">
-                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
-              </button>
-              <button onclick="copyLink()" class="p-2 text-slate-400 hover:text-blue-600 transition bg-white/50 hover:bg-white rounded-lg dark:bg-slate-700 dark:hover:bg-slate-600" title="Copier le lien">
-                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
-              </button>
+              <button onclick="resetCalc()" class="p-2 text-slate-400 hover:text-red-500 transition bg-white/50 hover:bg-white rounded-lg dark:bg-slate-700 dark:hover:bg-slate-600" title="Réinitialiser"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg></button>
+              <button onclick="copySummary()" class="p-2 text-slate-400 hover:text-blue-600 transition bg-white/50 hover:bg-white rounded-lg dark:bg-slate-700 dark:hover:bg-slate-600" title="Copier"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg></button>
+              <button onclick="copyLink()" class="p-2 text-slate-400 hover:text-blue-600 transition bg-white/50 hover:bg-white rounded-lg dark:bg-slate-700 dark:hover:bg-slate-600" title="Lien"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg></button>
             </div>
           </div>
-          
-          <p class="text-[10px] text-slate-400 mt-4 text-center no-print">
-            *Chiffres modifiables directement (Brut ou Net).
-          </p>
-
+          <p class="text-[10px] text-slate-400 mt-4 text-center no-print">*Chiffres modifiables directement (Brut ou Net).</p>
         </div>
 
-        <!-- GRILLE DE SALAIRES -->
         <div id="seoGrid" class="mt-8 bg-white rounded-xl border border-slate-200 p-6 no-print dark:bg-slate-800 dark:border-slate-700">
           <h3 class="text-lg font-bold text-slate-900 mb-4 dark:text-white">Grille de conversion rapide (<span id="gridStatut">Non Cadre</span>)</h3>
           <div class="overflow-x-auto">
             <table class="w-full seo-table">
-              <thead>
-                <tr>
-                  <th>Brut Annuel</th>
-                  <th>Brut Mensuel</th>
-                  <th>Net Mensuel</th>
-                  <th>Imposable (est.)</th>
-                </tr>
-              </thead>
+              <thead><tr><th>Brut Annuel</th><th>Brut Mensuel</th><th>Net Mensuel</th><th>Imposable (est.)</th></tr></thead>
               <tbody id="salaryTableBody"></tbody>
             </table>
           </div>
         </div>
 
-        <!-- SEO Content -->
         <article class="prose prose-sm prose-slate max-w-none bg-white p-6 rounded-2xl shadow-sm border border-slate-100 no-print mt-6 dark:bg-slate-800 dark:border-slate-700 dark:prose-invert">
           <h3>💡 Net à Payer vs Net Imposable</h3>
-          <p>
-            Ne confondez pas ! Le <strong>Net à Payer</strong> est ce qui arrive sur votre compte. Le <strong>Net Imposable</strong> est souvent plus élevé (il inclut la CSG non déductible) et sert de base au calcul de l'impôt à la source.
-          </p>
+          <p>Ne confondez pas ! Le <strong>Net à Payer</strong> est ce qui arrive sur votre compte. Le <strong>Net Imposable</strong> est souvent plus élevé (il inclut la CSG non déductible) et sert de base au calcul de l'impôt à la source.</p>
           <h3>Comprendre le Coût Employeur</h3>
-          <p>
-            Le "Super Brut" représente le coût total pour l'entreprise (Salaire Brut + Charges Patronales).
-          </p>
+          <p>Le "Super Brut" représente le coût total pour l'entreprise (Salaire Brut + Charges Patronales).</p>
         </article>
       </div>
 
       <!-- SIDEBAR -->
       <div class="lg:col-span-4 space-y-6 no-print">
         
-        <!-- ZONE PUBLICITÉ PREMIUM (NATIVE AD) -->
+        <!-- ZONE PUBLICITÉ 1 (Haut) -->
         <div class="relative overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700">
-          <!-- Bandeau Décoratif -->
           <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
-          
           <div class="p-6">
-            <!-- En-tête -->
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wide flex items-center gap-2 dark:text-white">
                 <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                 Offres du moment
               </h3>
             </div>
-
-            <!-- Liste des Offres -->
             <div class="space-y-3">
-              
-              <!-- OFFRE 1 : BANQUE (Style "Carte Gold") -->
-              <!-- Lien placeholder -->
-              <a href="#" target="_blank" rel="noopener noreferrer" class="group block relative p-4 rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-blue-50 hover:to-white hover:border-blue-200 transition-all duration-300 shadow-sm hover:shadow-md dark:from-slate-700 dark:to-slate-800 dark:border-slate-600 dark:hover:border-blue-500/50">
-                <div class="absolute top-3 right-3">
-                  <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300">
-                    +150€ offerts
-                  </span>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="bg-blue-100 p-2 rounded-lg text-blue-600 dark:bg-slate-600 dark:text-blue-300">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
-                  </div>
-                  <div>
-                    <div class="font-bold text-slate-800 text-sm group-hover:text-blue-700 transition-colors dark:text-slate-100">Compte 0€ frais</div>
-                    <div class="text-xs text-slate-500 mt-1 leading-relaxed dark:text-slate-400">Arrêtez de payer pour votre banque. Carte Gold incluse.</div>
-                  </div>
-                </div>
+              <!-- Offre Banque -->
+              <a href="https://bour.so/p/RUhqIX1d2Cs" target="_blank" rel="noopener noreferrer" class="group block relative p-4 rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-blue-50 hover:to-white hover:border-blue-200 transition-all duration-300 shadow-sm hover:shadow-md dark:from-slate-700 dark:to-slate-800 dark:border-slate-600 dark:hover:border-blue-500/50">
+                <div class="absolute top-3 right-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300">+150€ offerts</span></div>
+                <div class="flex items-start gap-3"><div class="bg-blue-100 p-2 rounded-lg text-blue-600 dark:bg-slate-600 dark:text-blue-300"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg></div><div><div class="font-bold text-slate-800 text-sm group-hover:text-blue-700 transition-colors dark:text-slate-100">Compte 0€ frais</div><div class="text-xs text-slate-500 mt-1 leading-relaxed dark:text-slate-400">Arrêtez de payer pour votre banque. Carte Gold incluse.</div></div></div>
               </a>
-
-              <!-- OFFRE 2 : INVESTISSEMENT (Style "Tech") -->
-              <a href="#" target="_blank" rel="noopener noreferrer" class="group block relative p-4 rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-purple-50 hover:to-white hover:border-purple-200 transition-all duration-300 shadow-sm hover:shadow-md dark:from-slate-700 dark:to-slate-800 dark:border-slate-600 dark:hover:border-purple-500/50">
-                <div class="absolute top-3 right-3">
-                  <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-300">
-                    4% Garanti
-                  </span>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="bg-purple-100 p-2 rounded-lg text-purple-600 dark:bg-slate-600 dark:text-purple-300">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                  </div>
-                  <div>
-                    <div class="font-bold text-slate-800 text-sm group-hover:text-purple-700 transition-colors dark:text-slate-100">Fructifiez votre salaire</div>
-                    <div class="text-xs text-slate-500 mt-1 leading-relaxed dark:text-slate-400">Livret boosté ou plan d'investissement programmé.</div>
-                  </div>
-                </div>
+              <!-- Offre Invest -->
+              <a href="https://ton-lien-invest.com" target="_blank" rel="noopener noreferrer" class="group block relative p-4 rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-purple-50 hover:to-white hover:border-purple-200 transition-all duration-300 shadow-sm hover:shadow-md dark:from-slate-700 dark:to-slate-800 dark:border-slate-600 dark:hover:border-purple-500/50">
+                <div class="absolute top-3 right-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-300">4% Garanti</span></div>
+                <div class="flex items-start gap-3"><div class="bg-purple-100 p-2 rounded-lg text-purple-600 dark:bg-slate-600 dark:text-purple-300"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg></div><div><div class="font-bold text-slate-800 text-sm group-hover:text-purple-700 transition-colors dark:text-slate-100">Fructifiez votre salaire</div><div class="text-xs text-slate-500 mt-1 leading-relaxed dark:text-slate-400">Livret boosté ou plan d'investissement programmé.</div></div></div>
               </a>
-
             </div>
           </div>
         </div>
 
-        <!-- FAQ (10 Q) -->
+        <!-- FAQ -->
         <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5 dark:bg-slate-800 dark:border-slate-700">
           <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2 text-sm dark:text-white">Questions Fréquentes</h3>
           <div class="space-y-3 dark:text-slate-300">
-             <details class="group text-sm">
-              <summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">
-                C'est quoi le Super Brut ? <span class="group-open:rotate-180">▼</span>
-              </summary>
-              <p class="text-slate-500 mt-2 text-xs dark:text-slate-400">C'est le coût total pour l'entreprise (Salaire + charges patronales).</p>
-            </details>
-            <hr class="border-slate-100 dark:border-slate-700">
-            <details class="group text-sm">
-              <summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">
-                13ème mois : comment ça marche ? <span class="group-open:rotate-180">▼</span>
-              </summary>
-              <p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Brut annuel multiplié par 13, mais le mensuel de base reste le même.</p>
-            </details>
-            <hr class="border-slate-100 dark:border-slate-700">
-            <details class="group text-sm">
-              <summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">
-                Brut ou Net pour négocier ? <span class="group-open:rotate-180">▼</span>
-              </summary>
-              <p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Toujours négocier en Brut Annuel. C'est la valeur contractuelle.</p>
-            </details>
-            <hr class="border-slate-100 dark:border-slate-700">
-            <details class="group text-sm">
-              <summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">
-                Net Imposable vs Net à payer ? <span class="group-open:rotate-180">▼</span>
-              </summary>
-              <p class="text-slate-500 mt-2 text-xs dark:text-slate-400">L'imposable inclut la CSG non déductible et sert au calcul de l'impôt.</p>
-            </details>
-            <hr class="border-slate-100 dark:border-slate-700">
-            <details class="group text-sm">
-              <summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">
-                Mutuelle et Tickets Resto ? <span class="group-open:rotate-180">▼</span>
-              </summary>
-              <p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Non inclus, ils réduisent légèrement le net final selon l'entreprise.</p>
-            </details>
-            <hr class="border-slate-100 dark:border-slate-700">
-            <details class="group text-sm">
-              <summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">
-                Stage et Apprentissage ? <span class="group-open:rotate-180">▼</span>
-              </summary>
-              <p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Souvent exonérés de charges. Brut ≈ Net.</p>
-            </details>
-            <hr class="border-slate-100 dark:border-slate-700">
-            <details class="group text-sm">
-              <summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">
-                Qu'est-ce que le Net Social ? <span class="group-open:rotate-180">▼</span>
-              </summary>
-              <p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Montant à déclarer pour la CAF (Prime d'activité, RSA).</p>
-            </details>
-            <hr class="border-slate-100 dark:border-slate-700">
-            <details class="group text-sm">
-              <summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">
-                Les primes sont-elles chargées ? <span class="group-open:rotate-180">▼</span>
-              </summary>
-              <p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Oui, comme le salaire (sauf participation/intéressement).</p>
-            </details>
-            <hr class="border-slate-100 dark:border-slate-700">
-            <details class="group text-sm">
-              <summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">
-                Pourquoi mon net varie ? <span class="group-open:rotate-180">▼</span>
-              </summary>
-              <p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Taux PAS actualisé ou plafonds SS.</p>
-            </details>
-            <hr class="border-slate-100 dark:border-slate-700">
-            <details class="group text-sm">
-              <summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">
-                Où trouver mon taux PAS ? <span class="group-open:rotate-180">▼</span>
-              </summary>
-              <p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Sur impots.gouv.fr ou votre fiche de paie.</p>
-            </details>
+             <details class="group text-sm"><summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">C'est quoi le Super Brut ? <span class="group-open:rotate-180">▼</span></summary><p class="text-slate-500 mt-2 text-xs dark:text-slate-400">C'est le coût total pour l'entreprise (Salaire + charges patronales).</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">13ème mois : comment ça marche ? <span class="group-open:rotate-180">▼</span></summary><p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Brut annuel multiplié par 13, mais le mensuel de base reste le même.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">Brut ou Net pour négocier ? <span class="group-open:rotate-180">▼</span></summary><p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Toujours négocier en Brut Annuel. C'est la valeur contractuelle.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">Net Imposable vs Net à payer ? <span class="group-open:rotate-180">▼</span></summary><p class="text-slate-500 mt-2 text-xs dark:text-slate-400">L'imposable inclut la CSG non déductible et sert au calcul de l'impôt.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">Mutuelle et Tickets Resto ? <span class="group-open:rotate-180">▼</span></summary><p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Non inclus, ils réduisent légèrement le net final selon l'entreprise.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">Stage et Apprentissage ? <span class="group-open:rotate-180">▼</span></summary><p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Souvent exonérés de charges. Brut ≈ Net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">Qu'est-ce que le Net Social ? <span class="group-open:rotate-180">▼</span></summary><p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Montant à déclarer pour la CAF (Prime d'activité, RSA).</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">Les primes sont-elles chargées ? <span class="group-open:rotate-180">▼</span></summary><p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Oui, comme le salaire (sauf participation/intéressement).</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">Pourquoi mon net varie ? <span class="group-open:rotate-180">▼</span></summary><p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Taux PAS actualisé ou plafonds SS.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">Où trouver mon taux PAS ? <span class="group-open:rotate-180">▼</span></summary><p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Sur impots.gouv.fr ou votre fiche de paie.</p></details>
           </div>
         </div>
-        
-        <!-- SECONDE ZONE PUB PREMIUM (SOUS LA FAQ) -->
+
+        <!-- ZONE PUBLICITÉ 2 (Bas - Nouveau) -->
         <div class="relative overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 mt-6">
-          <!-- Bandeau Décoratif (Couleur différente pour distinguer) -->
-          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
-          
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500"></div>
           <div class="p-6">
-            <!-- En-tête -->
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wide flex items-center gap-2 dark:text-white">
-                <svg class="w-4 h-4 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
-                Carrière & Pro
+                <svg class="w-4 h-4 text-cyan-500" fill="currentColor" viewBox="0 0 20 20"><path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" /></svg>
+                Formation & Carrière
               </h3>
             </div>
-
-            <!-- Liste des Offres (2 MAX) -->
             <div class="space-y-3">
-              
-              <!-- OFFRE 1 : FORMATION (Style "Indigo") -->
-              <a href="#" target="_blank" rel="noopener noreferrer" class="group block relative p-4 rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-indigo-50 hover:to-white hover:border-indigo-200 transition-all duration-300 shadow-sm hover:shadow-md dark:from-slate-700 dark:to-slate-800 dark:border-slate-600 dark:hover:border-indigo-500/50">
-                <div class="absolute top-3 right-3">
-                  <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-100 text-indigo-800 dark:bg-indigo-900/50 dark:text-indigo-300">
-                    Boost
-                  </span>
-                </div>
+              <a href="#" target="_blank" rel="noopener noreferrer" class="group block relative p-4 rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-cyan-50 hover:to-white hover:border-cyan-200 transition-all duration-300 shadow-sm hover:shadow-md dark:from-slate-700 dark:to-slate-800 dark:border-slate-600 dark:hover:border-cyan-500/50">
+                <div class="absolute top-3 right-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-100 text-cyan-800 dark:bg-cyan-900/50 dark:text-cyan-300">Nouveau</span></div>
                 <div class="flex items-start gap-3">
-                  <div class="bg-indigo-100 p-2 rounded-lg text-indigo-600 dark:bg-slate-600 dark:text-indigo-300">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                  </div>
-                  <div>
-                    <div class="font-bold text-slate-800 text-sm group-hover:text-indigo-700 transition-colors dark:text-slate-100">Top Formations 2025</div>
-                    <div class="text-xs text-slate-500 mt-1 leading-relaxed dark:text-slate-400">Les compétences les plus recherchées pour négocier.</div>
-                  </div>
+                  <div class="bg-cyan-100 p-2 rounded-lg text-cyan-600 dark:bg-slate-600 dark:text-cyan-300"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg></div>
+                  <div><div class="font-bold text-slate-800 text-sm group-hover:text-cyan-700 transition-colors dark:text-slate-100">Bilan de Compétences</div><div class="text-xs text-slate-500 mt-1 leading-relaxed dark:text-slate-400">Faites le point sur votre carrière gratuitement.</div></div>
                 </div>
               </a>
-
-              <!-- OFFRE 2 : OUTILS PRO (Style "Pink") -->
-              <a href="#" target="_blank" rel="noopener noreferrer" class="group block relative p-4 rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-pink-50 hover:to-white hover:border-pink-200 transition-all duration-300 shadow-sm hover:shadow-md dark:from-slate-700 dark:to-slate-800 dark:border-slate-600 dark:hover:border-pink-500/50">
-                <div class="absolute top-3 right-3">
-                  <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-pink-100 text-pink-800 dark:bg-pink-900/50 dark:text-pink-300">
-                    -70% Promo
-                  </span>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="bg-pink-100 p-2 rounded-lg text-pink-600 dark:bg-slate-600 dark:text-pink-300">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                  </div>
-                  <div>
-                    <div class="font-bold text-slate-800 text-sm group-hover:text-pink-700 transition-colors dark:text-slate-100">Cyber-Sécurité & VPN</div>
-                    <div class="text-xs text-slate-500 mt-1 leading-relaxed dark:text-slate-400">Protégez votre activité pro à petit prix.</div>
-                  </div>
-                </div>
-              </a>
-
             </div>
           </div>
         </div>
@@ -616,65 +408,107 @@
     </div>
   </main>
 
-  <!-- Legal Modal -->
-  <div id="legalModal" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 print:hidden">
-    <div class="bg-white dark:bg-slate-800 rounded-xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col">
-      <!-- Modal Header -->
-      <div class="flex justify-between items-center p-6 border-b border-slate-200 dark:border-slate-700">
-        <h2 class="text-xl font-bold text-slate-900 dark:text-white">Mentions Légales</h2>
-        <button onclick="closeModal('legalModal')" class="text-slate-400 hover:text-red-500 transition">
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-        </button>
+  <!-- CONTENEUR PDF CACHÉ (MODELE BULLETIN DE SALAIRE) -->
+  <div id="print-document">
+    <div class="pdf-watermark">PaieNet</div>
+    <div class="pdf-header">
+      <div>
+         <div class="pdf-title">SIMULATION DE BULLETIN DE SALAIRE</div>
+         <div class="pdf-subtitle">Estimation Salarié Secteur Privé 2025</div>
       </div>
-      <!-- Modal Content (Scrollable) -->
-      <div class="p-6 overflow-y-auto modal-scroll prose prose-sm max-w-none dark:prose-invert">
-        <h3>1. Édition du site</h3>
-        <p>Le site <strong>PaieNet.fr</strong> est un outil indépendant d'estimation de revenus.<br>
-        <strong>Propriétaire :</strong> PaieNet.fr<br>
-        <strong>Contact :</strong> PAIE@NET.FR</p>
-
-        <h3>2. Hébergement</h3>
-        <p>Hébergé par : OVH</p>
-
-        <h3>3. Propriété Intellectuelle</h3>
-        <p>L'ensemble de ce site relève de la législation sur le droit d'auteur. Le code source est la propriété exclusive de l'éditeur.</p>
-
-        <h3>4. Limitations de responsabilité</h3>
-        <p>Les résultats sont des <strong>estimations indicatives</strong>. Ils ne remplacent pas une fiche de paie officielle. L'éditeur ne saurait être tenu responsable des erreurs.</p>
-
-        <h3>5. Cookies et Publicité</h3>
-        <p>Ce site peut utiliser des cookies (Google AdSense/Analytics) pour améliorer l'expérience. En naviguant, vous acceptez leur utilisation.</p>
+      <div class="pdf-meta">
+         <div class="pdf-logo-text">Paie<span class="pdf-logo-accent">Net</span></div>
+         <div style="font-size:10px; color:#94a3b8; margin-top:5px;">Réf: <span id="pdfRef">SAL-2025</span></div>
+         <div style="font-size:10px; color:#94a3b8;" id="pdfDate"></div>
       </div>
-      <!-- Modal Footer -->
-      <div class="p-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 rounded-b-xl flex justify-end">
-        <button onclick="closeModal('legalModal')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium text-sm transition">Fermer</button>
-      </div>
+    </div>
+
+    <div class="pdf-grid">
+       <div class="pdf-box">
+         <div class="pdf-box-label">VOTRE STATUT</div>
+         <div class="pdf-box-value" id="pdfStatut">Non Cadre</div>
+       </div>
+       <div class="pdf-box" style="text-align:right;">
+         <div class="pdf-box-label">SALAIRE BRUT MENSUEL</div>
+         <div class="pdf-box-value" style="font-size:18px; color:#0f172a;" id="pdfBrut">0 €</div>
+       </div>
+    </div>
+
+    <table class="pdf-table">
+       <thead>
+          <tr>
+             <th>Désignation</th>
+             <th class="col-right">Taux / Base</th>
+             <th class="col-right">Part Salariale</th>
+          </tr>
+       </thead>
+       <tbody>
+          <tr>
+             <td>Salaire Brut (Base)</td>
+             <td class="col-right">100%</td>
+             <td class="col-right" id="pdfBrutTable" style="font-weight:bold;">0 €</td>
+          </tr>
+          <tr>
+             <td>Charges Sociales (Retraite, Santé, Chômage)</td>
+             <td class="col-right">~23%</td>
+             <td class="col-right" id="pdfCharges">- 0 €</td>
+          </tr>
+          <tr>
+             <td>Net Imposable (Estimation)</td>
+             <td class="col-right">-</td>
+             <td class="col-right" id="pdfImposable">0 €</td>
+          </tr>
+          <tr>
+             <td>Net à Payer (Avant Impôt)</td>
+             <td class="col-right">-</td>
+             <td class="col-right" id="pdfNetAvant" style="font-weight:bold; color:#2563eb;">0 €</td>
+          </tr>
+          <tr>
+             <td>Prélèvement à la Source (PAS)</td>
+             <td class="col-right" id="pdfTauxPas">0%</td>
+             <td class="col-right" id="pdfMontantPas">- 0 €</td>
+          </tr>
+       </tbody>
+    </table>
+
+    <div class="pdf-summary">
+       <div class="pdf-total-box">
+          <div class="pdf-total-row">
+             <span>Coût Total Employeur</span>
+             <span id="pdfCoutPatronal">0 €</span>
+          </div>
+          <div class="pdf-total-row final">
+             <span>NET À PAYER</span>
+             <span id="pdfNetApres">0 €</span>
+          </div>
+       </div>
+    </div>
+    
+    <div class="pdf-footer-section">
+       <div class="pdf-legal">Document généré à titre indicatif sur PaieNet.fr. Ce document n'est pas un bulletin de paie officiel et ne peut être utilisé comme tel.</div>
+       <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://paienet.fr" class="pdf-qr" alt="QR PaieNet" />
     </div>
   </div>
 
-  <footer class="bg-white border-t border-slate-200 mt-auto py-6 no-print dark:bg-slate-800 dark:border-slate-700">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <p class="text-slate-400 text-xs mb-2">© 2025 PaieNet.fr. Outil d'estimation gratuit.</p>
-      <button onclick="openModal('legalModal')" class="text-xs text-blue-500 hover:underline">Mentions Légales</button>
-    </div>
+  <footer class="bg-white border-t border-slate-200 mt-auto py-6 no-print dark:bg-slate-800 dark:border-slate-700 text-center">
+    <p class="text-slate-400 text-xs mb-2">© 2025 PaieNet.fr. Outil d'estimation gratuit.</p>
+    <a href="mentions.html" class="text-xs text-blue-500 hover:underline">Mentions Légales</a>
   </footer>
 
-  <!-- ENGINE JS V8.1 -->
+  <!-- ENGINE JS V10 (PDF Salary) -->
   <script>
     const RATES = { non_cadre: 0.22, cadre: 0.25, public: 0.15, liberal: 0.45 };
     const EMPLOYER_RATES = { non_cadre: 0.42, cadre: 0.45, public: 0.45, liberal: 0 };
     const SMIC_NET_2025 = 1426; 
-    const MEDIAN_NET_2025 = 2150; 
     const CSG_NON_DED_RATE = 0.029; 
 
     let el = {};
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Date footer auto
       const d = new Date();
-      if(document.getElementById('printDate')) document.getElementById('printDate').textContent = d.toLocaleDateString('fr-FR');
+      if(document.getElementById('pdfDate')) document.getElementById('pdfDate').textContent = d.toLocaleDateString('fr-FR');
+      if(document.getElementById('pdfRef')) document.getElementById('pdfRef').textContent = "SAL-2025-" + Math.floor(1000 + Math.random() * 9000);
 
-      // Theme
       if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
         toggleIcons(true);
@@ -684,7 +518,7 @@
         brutMensuel: document.getElementById('brutMensuel'),
         brutAnnuel: document.getElementById('brutAnnuel'),
         netMensuel: document.getElementById('netMensuel'),
-        netAnnuel: document.getElementById('netAnnuel'),
+        netAnnuel: document.getElementById('netAnnuel'), // Restored
         statut: document.getElementById('statut'),
         mois13: document.getElementById('mois13'),
         tauxImpot: document.getElementById('tauxImpot'),
@@ -699,32 +533,47 @@
         chartPie: document.getElementById('chartPie'),
         percentNet: document.getElementById('percentNet'),
         percentCharges: document.getElementById('percentCharges'),
+        // Fiche Paie
         fpBrut: document.getElementById('fpBrut'),
         fpTotalCharges: document.getElementById('fpTotalCharges'),
         fpNet: document.getElementById('fpNet'),
         fpCsgNonDed: document.getElementById('fpCsgNonDed'),
         fpNetImposable: document.getElementById('fpNetImposable'),
+        smicTag: document.getElementById('smicTag'),
+        smicMultiple: document.getElementById('smicMultiple'),
+        // Grid
         salaryTableBody: document.getElementById('salaryTableBody'),
         gridStatut: document.getElementById('gridStatut'),
-        benchmarkBox: document.getElementById('benchmarkBox'),
-        benchmarkDiff: document.getElementById('benchmarkDiff')
+        // PDF Elements
+        pdfStatut: document.getElementById('pdfStatut'),
+        pdfBrut: document.getElementById('pdfBrut'),
+        pdfBrutTable: document.getElementById('pdfBrutTable'),
+        pdfCharges: document.getElementById('pdfCharges'),
+        pdfImposable: document.getElementById('pdfImposable'),
+        pdfNetAvant: document.getElementById('pdfNetAvant'),
+        pdfTauxPas: document.getElementById('pdfTauxPas'),
+        pdfMontantPas: document.getElementById('pdfMontantPas'),
+        pdfCoutPatronal: document.getElementById('pdfCoutPatronal'),
+        pdfNetApres: document.getElementById('pdfNetApres')
       };
 
-      // Safely attach events
+      // Safe event listeners
       el.brutMensuel?.addEventListener('input', () => compute('brutMensuel'));
       el.brutAnnuel?.addEventListener('input', () => compute('brutAnnuel'));
       el.netMensuel?.addEventListener('input', () => compute('netMensuel'));
       el.netAnnuel?.addEventListener('input', () => compute('netAnnuel'));
+      
       el.statut?.addEventListener('change', () => compute('option'));
       el.mois13?.addEventListener('change', () => compute('option'));
       el.tauxImpot?.addEventListener('input', () => compute('option'));
 
       loadFromUrl();
-      generateGrid();
+      generateGrid(); 
     });
 
     const compute = (source) => {
-      if(!el.statut) return;
+      if(!el.statut) return; 
+
       const nbMois = el.mois13?.checked ? 13 : 12;
       const tauxSal = RATES[el.statut.value] || 0.22;
       const tauxPat = EMPLOYER_RATES[el.statut.value] || 0;
@@ -732,6 +581,7 @@
 
       let monthlyGross = 0;
 
+      // Logic bidirectionnelle
       if (source === 'brutMensuel') monthlyGross = parseFloat(el.brutMensuel.value);
       else if (source === 'brutAnnuel') monthlyGross = parseFloat(el.brutAnnuel.value) / nbMois;
       else if (source === 'netMensuel') monthlyGross = parseFloat(el.netMensuel.value) / (1 - tauxSal);
@@ -740,18 +590,25 @@
 
       if (!monthlyGross || isNaN(monthlyGross)) {
         if(source !== 'option') updateUrl();
-        el.result?.classList.add('hidden');
         return; 
       }
 
+      // Calculs Principaux
       const monthlyNet = monthlyGross * (1 - tauxSal);
       const chargesSal = monthlyGross - monthlyNet;
       const coutTotal = monthlyGross * (1 + tauxPat); 
+      
+      // Calcul Net Imposable (Estimation CSG Non Déductible)
       const csgNonDed = monthlyGross * 0.9825 * CSG_NON_DED_RATE;
       const monthlyImposable = monthlyNet + csgNonDed;
-      const monthlyNetApresImpot = monthlyNet - (monthlyImposable * (impot / 100));
 
+      // Calcul Net Après Impôt (Basé sur le Net Imposable !)
+      const impotMontant = (monthlyImposable * (impot / 100));
+      const monthlyNetApresImpot = monthlyNet - impotMontant;
+
+      // UI Updates
       const activeId = document.activeElement ? document.activeElement.id : null;
+      
       if (el.brutMensuel && activeId !== 'brutMensuel') el.brutMensuel.value = monthlyGross.toFixed(0);
       if (el.brutAnnuel && activeId !== 'brutAnnuel') el.brutAnnuel.value = (monthlyGross * nbMois).toFixed(0);
       if (el.netMensuel && activeId !== 'netMensuel') el.netMensuel.value = monthlyNet.toFixed(0);
@@ -760,9 +617,21 @@
       if(el.coutCharges) el.coutCharges.textContent = Math.round(chargesSal).toLocaleString('fr-FR');
       if(el.netImposable) el.netImposable.textContent = Math.round(monthlyImposable).toLocaleString('fr-FR');
       if(el.coutEmployeur) el.coutEmployeur.textContent = Math.round(coutTotal).toLocaleString('fr-FR');
-      if(el.badgeStatut) el.badgeStatut.textContent = el.statut.options[el.statut.selectedIndex].text.split(' ')[1].toUpperCase();
+      
+      if(el.badgeStatut) {
+          const statutLabel = el.statut.options[el.statut.selectedIndex].text.split(' ')[1].toUpperCase();
+          el.badgeStatut.textContent = statutLabel;
+      }
       if(el.gridStatut) el.gridStatut.textContent = el.statut.options[el.statut.selectedIndex].text;
 
+      // SMIC Meter
+      if(el.smicTag && monthlyNet > 0) {
+        const multiple = (monthlyNet / SMIC_NET_2025).toFixed(1);
+        el.smicMultiple.textContent = multiple;
+        el.smicTag.classList.remove('hidden');
+      }
+
+      // Update Fiche de Paie
       if(el.fpBrut) el.fpBrut.textContent = Math.round(monthlyGross).toLocaleString('fr-FR') + ' €';
       if(el.fpTotalCharges) el.fpTotalCharges.textContent = '- ' + Math.round(chargesSal).toLocaleString('fr-FR') + ' €';
       if(el.fpNet) el.fpNet.textContent = Math.round(monthlyNet).toLocaleString('fr-FR') + ' €';
@@ -770,15 +639,18 @@
       if(el.fpNetImposable) el.fpNetImposable.textContent = Math.round(monthlyImposable).toLocaleString('fr-FR') + ' €';
       if(el.fpCoutEmployeur) el.fpCoutEmployeur.textContent = Math.round(coutTotal).toLocaleString('fr-FR') + ' €';
 
-      if(el.benchmarkBox) {
-        const diff = monthlyNet - MEDIAN_NET_2025;
-        const pct = (diff / MEDIAN_NET_2025) * 100;
-        const sign = diff > 0 ? '+' : '';
-        const color = diff >= 0 ? 'text-green-600' : 'text-orange-600';
-        el.benchmarkDiff.textContent = `${sign}${pct.toFixed(0)}%`;
-        el.benchmarkDiff.className = `font-bold ${color}`;
-        el.benchmarkBox.classList.remove('hidden');
-      }
+      // Update PDF Hidden Fields
+      if(el.pdfStatut) el.pdfStatut.textContent = el.statut.options[el.statut.selectedIndex].text;
+      if(el.pdfBrut) el.pdfBrut.textContent = Math.round(monthlyGross).toLocaleString('fr-FR') + ' €';
+      if(el.pdfBrutTable) el.pdfBrutTable.textContent = Math.round(monthlyGross).toLocaleString('fr-FR') + ' €';
+      if(el.pdfCharges) el.pdfCharges.textContent = '-' + Math.round(chargesSal).toLocaleString('fr-FR') + ' €';
+      if(el.pdfImposable) el.pdfImposable.textContent = Math.round(monthlyImposable).toLocaleString('fr-FR') + ' €';
+      if(el.pdfNetAvant) el.pdfNetAvant.textContent = Math.round(monthlyNet).toLocaleString('fr-FR') + ' €';
+      if(el.pdfTauxPas) el.pdfTauxPas.textContent = impot + '%';
+      if(el.pdfMontantPas) el.pdfMontantPas.textContent = '-' + Math.round(impotMontant).toLocaleString('fr-FR') + ' €';
+      if(el.pdfNetApres) el.pdfNetApres.textContent = Math.round(monthlyNetApresImpot).toLocaleString('fr-FR') + ' €';
+      if(el.pdfCoutPatronal) el.pdfCoutPatronal.textContent = Math.round(coutTotal).toLocaleString('fr-FR') + ' €';
+
 
       if (impot > 0) {
         el.blocImpot?.classList.remove('hidden');
@@ -790,16 +662,13 @@
       const netPct = ((1 - tauxSal) * 100).toFixed(0);
       if(el.percentNet) el.percentNet.textContent = `${netPct}%`;
       if(el.percentCharges) el.percentCharges.textContent = `${100 - netPct}%`;
-      
-      // Dynamic Gradient using CSS Variables
-      if(el.chartPie) {
-        el.chartPie.style.background = `conic-gradient(var(--chart-fill) 0% ${netPct}%, var(--chart-empty) ${netPct}% 100%)`;
-      }
+      if(el.chartPie) el.chartPie.style.background = `conic-gradient(#2563eb 0% ${netPct}%, #e2e8f0 ${netPct}% 100%)`;
 
       el.result?.classList.remove('hidden');
       el.result?.classList.add('fade-in');
 
       updateUrl(monthlyGross, el.statut.value, nbMois === 13, impot);
+      
       if(source === 'option') generateGrid();
     };
 
@@ -808,10 +677,12 @@
       const levels = [1801.8, 2000, 2500, 3000, 3500, 4000, 5000, 6000]; 
       const tauxSal = RATES[el.statut.value] || 0.22;
       let html = '';
+      
       levels.forEach(brut => {
         const net = brut * (1 - tauxSal);
         const imposable = net + (brut * 0.9825 * CSG_NON_DED_RATE);
         const ann = brut * 12;
+        
         html += `<tr>
           <td>${ann.toLocaleString('fr-FR')} €</td>
           <td>${brut.toLocaleString('fr-FR')} €</td>
@@ -820,50 +691,6 @@
         </tr>`;
       });
       el.salaryTableBody.innerHTML = html;
-    };
-
-    window.toggleTheme = () => {
-      if (document.documentElement.classList.contains('dark')) {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('color-theme', 'light');
-        toggleIcons(false);
-      } else {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('color-theme', 'dark');
-        toggleIcons(true);
-      }
-    };
-
-    function toggleIcons(isDark) {
-      document.getElementById('iconSun').classList.toggle('hidden', !isDark);
-      document.getElementById('iconMoon').classList.toggle('hidden', isDark);
-    }
-
-    // Modal Logic
-    window.openModal = (id) => {
-      document.getElementById(id).classList.remove('hidden');
-      document.body.style.overflow = 'hidden'; 
-    };
-
-    window.closeModal = (id) => {
-      document.getElementById(id).classList.add('hidden');
-      document.body.style.overflow = ''; 
-    };
-
-    window.onclick = (event) => {
-      const modal = document.getElementById('legalModal');
-      if (event.target == modal) {
-        closeModal('legalModal');
-      }
-    };
-
-    window.resetCalc = () => {
-      el.brutMensuel.value = '';
-      el.brutAnnuel.value = '';
-      el.netMensuel.value = '';
-      el.netAnnuel.value = '';
-      el.result.classList.add('hidden');
-      updateUrl();
     };
 
     const updateUrl = (gross, statut, is13, tax) => {
@@ -888,11 +715,12 @@
           if (params.get('m') === '13' && el.mois13) el.mois13.checked = true;
           if (params.get('t') && el.tauxImpot) el.tauxImpot.value = params.get('t');
           compute('option');
-        } else { generateGrid(); }
+        } else {
+          generateGrid();
+        }
       } catch (e) {}
     };
 
-    // Helper Copy Text Robuste
     const copyTextToClipboard = (text, successCallback) => {
       const textArea = document.createElement("textarea");
       textArea.value = text;
@@ -920,6 +748,41 @@
       msg?.classList.remove('hidden');
       setTimeout(() => msg?.classList.add('hidden'), 2000);
     };
+
+    // Modal Logic
+    window.openModal = (id) => {
+      document.getElementById(id).classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; 
+    };
+
+    window.closeModal = (id) => {
+      document.getElementById(id).classList.add('hidden');
+      document.body.style.overflow = ''; 
+    };
+
+    window.onclick = (event) => {
+      const modal = document.getElementById('legalModal');
+      if (event.target == modal) {
+        closeModal('legalModal');
+      }
+    };
+
+    window.toggleTheme = () => {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+        toggleIcons(false);
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+        toggleIcons(true);
+      }
+    };
+
+    function toggleIcons(isDark) {
+      document.getElementById('iconSun').classList.toggle('hidden', !isDark);
+      document.getElementById('iconMoon').classList.toggle('hidden', isDark);
+    }
   </script>
 </body>
 </html>
