@@ -9,6 +9,7 @@
   
   <link rel="canonical" href="https://paienet.fr/">
   
+  <!-- SEO -->
   <meta property="og:site_name" content="PaieNet.fr">
   <meta property="og:title" content="Combien allez-vous vraiment toucher ? - Simulateur PaieNet">
   <meta property="og:description" content="Convertissez votre brut en net instantanément. Outil gratuit pour le secteur privé, cadre et fonction publique.">
@@ -55,19 +56,11 @@
     .toggle-checkbox:checked { right: 0; border-color: #2563eb; }
     .toggle-checkbox:checked + .toggle-label { background-color: #2563eb; }
 
-    .pie-chart {
-      width: 100px; height: 100px; border-radius: 50%; position: relative; 
-      background: #e2e8f0; transition: background 0.3s;
-    }
-    .pie-chart::after {
-      content: ""; position: absolute; inset: 12px; background: #f8fafc; 
-      border-radius: 50%; transition: background 0.3s;
-    }
+    .pie-chart { width: 100px; height: 100px; border-radius: 50%; position: relative; background: #e2e8f0; transition: background 0.3s; }
+    .pie-chart::after { content: ""; position: absolute; inset: 12px; background: #f8fafc; border-radius: 50%; transition: background 0.3s; }
     .dark .pie-chart::after { background: #1e293b; }
 
-    .input-result {
-      background: transparent; border: 1px dashed transparent; width: 100%; transition: all 0.2s;
-    }
+    .input-result { background: transparent; border: 1px dashed transparent; width: 100%; transition: all 0.2s; }
     .input-result:hover, .input-result:focus { border-color: #93c5fd; outline: none; border-radius: 4px; }
     .dark .input-result:hover, .dark .input-result:focus { background: #1e293b; border-color: #3b82f6; }
 
@@ -75,16 +68,12 @@
     .dark .pay-slip-row { border-bottom-color: #334155; }
     .pay-slip-row:last-child { border-bottom: none; }
 
-    /* --- STYLE IMPRESSION PRO (PDF A4) --- */
+    /* --- STYLE IMPRESSION PDF PRO --- */
     #print-document { display: none; } 
 
     @media print {
-      @page { margin: 0; size: A4; } /* Force le format A4 */
-      
-      /* Cacher TOUT le site normal */
       body > *:not(#print-document) { display: none !important; }
       
-      /* Reset Body */
       body { 
         background: white !important; 
         color: #1e293b !important; 
@@ -95,29 +84,15 @@
         margin: 0; padding: 0;
       }
       
-      /* Afficher la fiche PDF */
       #print-document { 
         display: block !important; 
         position: absolute; 
-        top: 0; left: 0; width: 210mm; min-height: 297mm;
-        padding: 15mm;
-        box-sizing: border-box;
-        background: white;
+        top: 0; left: 0; width: 100%; 
+        padding: 40px; box-sizing: border-box;
       }
       
-      .pdf-watermark {
-        position: absolute;
-        top: 50%; left: 50%;
-        transform: translate(-50%, -50%) rotate(-45deg);
-        font-size: 120px;
-        font-weight: 900;
-        color: #f1f5f9;
-        z-index: -1;
-        pointer-events: none;
-        opacity: 0.5;
-      }
+      .pdf-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 120px; font-weight: 900; color: #f1f5f9; z-index: -1; pointer-events: none; opacity: 0.5; }
 
-      /* Styles PDF */
       .pdf-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; border-bottom: 2px solid #2563eb; padding-bottom: 20px; }
       .pdf-logo-text { font-size: 24px; font-weight: 800; color: #0f172a; letter-spacing: -1px; }
       .pdf-logo-accent { color: #2563eb; }
@@ -136,15 +111,29 @@
       .col-right { text-align: right; }
       
       .pdf-summary { display: flex; justify-content: flex-end; margin-bottom: 40px; }
-      .pdf-total-box { width: 250px; background: #eff6ff !important; border: 1px solid #2563eb; border-radius: 6px; padding: 15px; float: right; }
+      .pdf-total-box { width: 250px; background: #eff6ff !important; border: 1px solid #2563eb; border-radius: 6px; padding: 15px; }
       .pdf-total-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 11px; }
       .pdf-total-row.final { border-top: 1px dashed #2563eb; padding-top: 8px; margin-top: 8px; font-weight: 900; font-size: 16px; color: #1e3a8a; }
 
-      .pdf-footer-section { clear: both; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 15px; margin-top: 60px; }
+      .pdf-footer-section { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 15px; margin-top: 60px; }
       .pdf-legal { font-size: 8px; color: #94a3b8; max-width: 70%; line-height: 1.4; }
       .pdf-qr { width: 60px; height: 60px; background: #fff; border: 1px solid #ddd; padding: 2px; }
     }
   </style>
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PaieNet - Calculateur Salaire France",
+    "url": "https://paienet.fr",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+    "featureList": "Brut Net, Dark Mode, Coût Employeur, Comparateur salaire médian"
+  }
+  </script>
 </head>
 
 <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen transition-colors duration-300 dark:bg-slate-900 dark:text-slate-100">
@@ -331,7 +320,7 @@
       <!-- SIDEBAR -->
       <div class="lg:col-span-4 space-y-6 no-print">
         
-        <!-- ZONE PUBLICITÉ 1 (Haut) -->
+        <!-- ZONE PUBLICITÉ 1 (Haut - Finances) -->
         <div class="relative overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700">
           <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
           <div class="p-6">
@@ -398,6 +387,14 @@
                 <div class="flex items-start gap-3">
                   <div class="bg-cyan-100 p-2 rounded-lg text-cyan-600 dark:bg-slate-600 dark:text-cyan-300"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg></div>
                   <div><div class="font-bold text-slate-800 text-sm group-hover:text-cyan-700 transition-colors dark:text-slate-100">Bilan de Compétences</div><div class="text-xs text-slate-500 mt-1 leading-relaxed dark:text-slate-400">Faites le point sur votre carrière gratuitement.</div></div>
+                </div>
+              </a>
+              <!-- Ajout de la 2ème offre Carrière pour équilibrer -->
+              <a href="#" target="_blank" rel="noopener noreferrer" class="group block relative p-4 rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-blue-50 hover:to-white hover:border-blue-200 transition-all duration-300 shadow-sm hover:shadow-md dark:from-slate-700 dark:to-slate-800 dark:border-slate-600 dark:hover:border-blue-500/50">
+                <div class="absolute top-3 right-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300">Boost</span></div>
+                <div class="flex items-start gap-3">
+                  <div class="bg-blue-100 p-2 rounded-lg text-blue-600 dark:bg-slate-600 dark:text-blue-300"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
+                  <div><div class="font-bold text-slate-800 text-sm group-hover:text-blue-700 transition-colors dark:text-slate-100">Devenir Freelance</div><div class="text-xs text-slate-500 mt-1 leading-relaxed dark:text-slate-400">Testez vos revenus avec notre simulateur dédié.</div></div>
                 </div>
               </a>
             </div>
@@ -493,6 +490,8 @@
   <footer class="bg-white border-t border-slate-200 mt-auto py-6 no-print dark:bg-slate-800 dark:border-slate-700 text-center">
     <p class="text-slate-400 text-xs mb-2">© 2025 PaieNet.fr. Outil d'estimation gratuit.</p>
     <a href="mentions.html" class="text-xs text-blue-500 hover:underline">Mentions Légales</a>
+    <span class="mx-2 text-slate-300">|</span>
+    <a href="freelance.html" class="text-xs text-emerald-600 hover:text-emerald-500 font-bold">➜ Simulateur Auto-Entrepreneur</a>
   </footer>
 
   <!-- ENGINE JS V10 (PDF Salary) -->
