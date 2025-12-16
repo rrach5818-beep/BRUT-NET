@@ -8,11 +8,9 @@
   <meta name="robots" content="index, follow">
   
   <!-- SECURITÉ : Content Security Policy (CSP) -->
-  <!-- Autorise uniquement les scripts et styles de confiance (Google, Tailwind, Fonts) -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://paienet.fr https://api.qrserver.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com;">
   
   <!-- SECURITÉ : Politique de Référent -->
-  <!-- Ne transmet pas d'infos privées aux sites vers lesquels vous faites des liens -->
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
   <!-- SEO -->
@@ -46,7 +44,7 @@
     gtag('config', 'G-053E5TJ1PX');
   </script>
 
-  <!-- Tailwind CSS (Version Verrouillée 3.4.1 pour la stabilité) -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com/3.4.1"></script>
   <script>
     tailwind.config = {
@@ -105,22 +103,21 @@
     .tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
     .tooltip .tooltip-text::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: #334155 transparent transparent transparent; }
     
-    /* Range Slider Custom Fix */
+    /* Range Slider */
     input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
     input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; background: #10b981; cursor: pointer; margin-top: -6px; border: 2px solid #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-    input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #cbd5e1; border-radius: 2px; } 
+    input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #cbd5e1; border-radius: 2px; }
     input[type=range]::-moz-range-thumb { height: 16px; width: 16px; border-radius: 50%; background: #10b981; cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
     input[type=range]::-moz-range-track { width: 100%; height: 4px; cursor: pointer; background: #cbd5e1; border-radius: 2px; }
     .dark input[type=range]::-webkit-slider-runnable-track { background: #475569; }
     .dark input[type=range]::-moz-range-track { background: #475569; }
 
-    /* --- STYLE IMPRESSION PRO (PDF) --- */
+    /* Print Styles (PDF PRO) */
     #print-document { display: none; } 
-
     @media print {
       body > *:not(#print-document) { display: none !important; }
-      body { background: white !important; color: #1e293b !important; font-family: 'Inter', sans-serif; font-size: 11px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      #print-document { display: block !important; position: relative; width: 100%; height: 100%; padding: 40px; box-sizing: border-box; }
+      body { background: white !important; color: #1e293b !important; font-family: 'Inter', sans-serif; font-size: 11px; -webkit-print-color-adjust: exact; print-color-adjust: exact; margin: 0; padding: 0; }
+      #print-document { display: block !important; position: absolute; top: 0; left: 0; width: 210mm; min-height: 297mm; padding: 15mm; box-sizing: border-box; background: white; z-index: 9999; }
       .pdf-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 120px; font-weight: 900; color: #f1f5f9; z-index: -1; pointer-events: none; opacity: 0.5; }
       .pdf-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; border-bottom: 2px solid #10b981; padding-bottom: 20px; }
       .pdf-logo-text { font-size: 24px; font-weight: 800; color: #0f172a; letter-spacing: -1px; }
@@ -139,7 +136,7 @@
       .pdf-total-box { width: 250px; background: #ecfdf5 !important; border: 1px solid #10b981; border-radius: 6px; padding: 15px; }
       .pdf-total-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 11px; }
       .pdf-total-row.final { border-top: 1px dashed #10b981; padding-top: 8px; margin-top: 8px; font-weight: 900; font-size: 16px; color: #047857; }
-      .pdf-footer-section { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 15px; margin-top: auto; }
+      .pdf-footer-section { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 15px; margin-top: auto; position: fixed; bottom: 15mm; left: 15mm; right: 15mm; }
       .pdf-legal { font-size: 8px; color: #94a3b8; max-width: 70%; line-height: 1.4; }
       .pdf-qr { width: 60px; height: 60px; background: #fff; border: 1px solid #ddd; padding: 2px; }
     }
@@ -288,7 +285,7 @@
              </div>
           </div>
 
-          <!-- COMMON: FRAIS & OPTIONS -->
+          <!-- COMMON -->
           <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-700">
              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -394,6 +391,7 @@
                  <div class="space-y-0">
                     <div class="pay-slip-row bg-slate-50/50 dark:bg-slate-700/30"><span class="pay-slip-label">Chiffre d'Affaires</span><span class="pay-slip-value text-slate-900 dark:text-white" id="fpBrut">0 €</span></div>
                     <div class="pay-slip-row"><span class="pay-slip-label pl-4 text-xs dark:text-slate-400">Cotisations Sociales</span><span class="pay-slip-value text-red-500 text-xs" id="fpSocial">- 0 €</span></div>
+                    <!-- Ajout CFP V13 -->
                     <div class="pay-slip-row"><span class="pay-slip-label pl-4 text-xs dark:text-slate-400">Contribution Formation</span><span class="pay-slip-value text-red-500 text-xs" id="fpCfp">- 0 €</span></div>
                     <div class="pay-slip-row"><span class="pay-slip-label pl-4 text-xs dark:text-slate-400">Impôts (IR / Libératoire)</span><span class="pay-slip-value text-red-500 text-xs" id="fpFiscal">- 0 €</span></div>
                     <div class="pay-slip-row"><span class="pay-slip-label pl-4 text-xs dark:text-slate-400">Frais Pro & CFE</span><span class="pay-slip-value text-slate-500 text-xs" id="fpFraisPro">- 0 €</span></div>
@@ -477,16 +475,21 @@
            <details class="group text-sm"><summary class="cursor-pointer font-medium hover:text-emerald-600">Frais réels ?</summary><p class="text-slate-500 mt-2 text-xs">Non déductibles.</p></details>
         </div>
 
-        <!-- PUB 2 (Outils) -->
+        <!-- PUB 2 (Outils - MODIFIÉ POUR INDY) -->
         <div class="relative overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 mt-6">
            <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500"></div>
            <div class="p-6">
              <div class="flex items-center justify-between mb-4"><h3 class="text-sm font-bold text-slate-900 uppercase tracking-wide flex items-center gap-2 dark:text-white">Outils & Facturation</h3></div>
              <div class="space-y-3">
-               <a href="#" target="_blank" class="group block relative p-4 rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-amber-50 hover:to-white hover:border-amber-200 transition-all duration-300 shadow-sm hover:shadow-md dark:from-slate-700 dark:to-slate-800 dark:border-slate-600 dark:hover:border-amber-500/50">
-                 <div class="absolute top-3 right-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300">Gratuit</span></div>
-                 <div class="flex items-start gap-3"><div class="bg-amber-100 p-2 rounded-lg text-amber-600 dark:bg-slate-600 dark:text-amber-300">⚡</div><div><div class="font-bold text-slate-800 text-sm dark:text-slate-100">Facturez en 2 min</div><div class="text-xs text-slate-500 mt-1">Logiciel certifié.</div></div></div>
+               <!-- OFFRE INDY (Nouveau lien) -->
+               <a href="https://c3po.link/Q9Km6E7Z9a" target="_blank" class="group block relative p-4 rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-amber-50 hover:to-white hover:border-amber-200 transition-all duration-300 shadow-sm hover:shadow-md dark:from-slate-700 dark:to-slate-800 dark:border-slate-600 dark:hover:border-amber-500/50">
+                 <div class="absolute top-3 right-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300">Offert</span></div>
+                 <div class="flex items-start gap-3">
+                   <div class="bg-amber-100 p-2 rounded-lg text-amber-600 dark:bg-slate-600 dark:text-amber-300"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                   <div><div class="font-bold text-slate-800 text-sm group-hover:text-amber-700 transition-colors dark:text-slate-100">Compta Gratuite</div><div class="text-xs text-slate-500 mt-1 leading-relaxed dark:text-slate-400">Automatisez tout avec Indy (100% gratuit).</div></div>
+                 </div>
                </a>
+               <!-- Prop 2 : Formation -->
                <a href="#" target="_blank" class="group block relative p-4 rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-orange-50 hover:to-white hover:border-orange-200 transition-all duration-300 shadow-sm hover:shadow-md dark:from-slate-700 dark:to-slate-800 dark:border-slate-600 dark:hover:border-orange-500/50">
                  <div class="absolute top-3 right-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-300">Boost</span></div>
                  <div class="flex items-start gap-3"><div class="bg-orange-100 p-2 rounded-lg text-orange-600 dark:bg-slate-600 dark:text-orange-300">🚀</div><div><div class="font-bold text-slate-800 text-sm dark:text-slate-100">Trouver des clients</div><div class="text-xs text-slate-500 mt-1">Formation courte.</div></div></div>
@@ -494,6 +497,7 @@
              </div>
            </div>
         </div>
+
       </div>
     </div>
   </main>
@@ -577,6 +581,7 @@
         contentMensuel: document.getElementById('content-mensuel'), contentProjet: document.getElementById('content-projet'),
         // INPUTS
         tjmInput: document.getElementById('tjmInput'), joursInput: document.getElementById('joursInput'),
+        dureeInput: document.getElementById('dureeInput'), 
         caMensuel: document.getElementById('caMensuel'), caAnnuel: document.getElementById('caAnnuel'),
         fraisPro: document.getElementById('fraisPro'),
         activityType: document.getElementById('activityType'),
@@ -618,6 +623,7 @@
       events.forEach(ev => {
         el.tjmInput?.addEventListener(ev, () => compute('tjm'));
         el.joursInput?.addEventListener(ev, () => compute('tjm'));
+        el.dureeInput?.addEventListener(ev, () => compute('tjm'));
         el.caMensuel?.addEventListener(ev, () => compute('mensuel'));
         el.caAnnuel?.addEventListener(ev, () => compute('annuel'));
         el.fraisPro?.addEventListener(ev, () => compute('update'));
@@ -632,6 +638,7 @@
         el.projJours?.addEventListener(ev, computeProject);
         el.tvaHT?.addEventListener(ev, () => calcTva('ht'));
         el.tvaTTC?.addEventListener(ev, () => calcTva('ttc'));
+        el.tresoFacture?.addEventListener(ev, calcTreso);
       });
       
       // Init
@@ -667,6 +674,22 @@
       }
     };
 
+    // --- LOGIC TRESO TOOL ---
+    const calcTreso = () => {
+       if(!el.tresoFacture || !el.activityType) return;
+       const fac = parseFloat(el.tresoFacture.value) || 0;
+       const type = el.activityType.value;
+       const typeData = DATA[type];
+       const fiscalRate = el.optLiberatoire?.checked ? typeData.fiscal_lib : 0;
+       let socialRate = typeData.social;
+       if (el.optAcre?.checked) socialRate = socialRate * 0.5;
+       
+       const totalRate = socialRate + typeData.cfp + fiscalRate;
+       const urssaf = fac * totalRate;
+       el.tresoUrssaf.textContent = Math.round(urssaf) + " €";
+       el.tresoDispo.textContent = Math.round(fac - urssaf) + " €";
+    };
+
     // --- LOGIC IMPOTS IR ---
     const calculateIR = (caAnnuel, type) => {
        const abattement = DATA[type].abattement;
@@ -687,7 +710,6 @@
        else { el.labelImpots.textContent = "Impôt sur le Revenu"; el.subLabelImpots.textContent = "Estimation barème classique"; }
     };
 
-    // --- MAIN COMPUTE ---
     const compute = (source) => {
       if(!el.activityType) return;
       let caM = 0;
@@ -708,12 +730,14 @@
       if (source === 'tjm') {
          const tjm = parseFloat(el.tjmInput?.value) || 0;
          const jours = parseFloat(el.joursInput?.value) || 0;
-         
-         const monthsWorked = 12 - (weeksOff / 4.33);
-         const caA = tjm * jours * monthsWorked;
-         caM = caA / 12; // Lissé sur 12 mois
-
-         if(caM > 0) { el.caMensuel.value = Math.round(caM); el.caAnnuel.value = Math.round(caA); }
+         const duree = parseFloat(el.dureeInput?.value) || 1;
+         if(duree > 1) {
+             caM = (tjm * jours) / duree;
+         } else {
+             // Logique Annuelle avec congés
+             caM = (tjm * jours * (activeWeeks/12)); // Moyenne mensuelle lissée sur l'année
+         }
+         if(caM > 0) { el.caMensuel.value = Math.round(caM); el.caAnnuel.value = Math.round(caM * 12); }
       } 
       else if (source === 'mensuel') {
          caM = parseFloat(el.caMensuel?.value);
@@ -737,6 +761,8 @@
          localStorage.setItem('freelanceData', JSON.stringify(data));
       };
       saveData();
+      
+      calcTreso(); // Update Treso based on settings
 
       if (!caM || isNaN(caM)) {
          if (source !== 'net' && el.result) el.result.classList.add('hidden');
@@ -845,7 +871,6 @@
           const socialRate = DATA[type].social;
           const net = tjmBrut * (1 - socialRate - 0.02); // -2% fiscal approx
           el.projNetJour.textContent = Math.round(net).toLocaleString('fr-FR') + ' €';
-          
           el.projResult.classList.remove('hidden');
        } else {
           el.projResult.classList.add('hidden');
