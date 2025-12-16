@@ -95,7 +95,6 @@
         margin: 0; padding: 0;
       }
       
-      /* Afficher la fiche PDF */
       #print-document { 
         display: block !important; 
         position: absolute; 
@@ -196,6 +195,7 @@
                 <option value="cadre">👔 Salarié Cadre</option>
                 <option value="public">🏛️ Fonction Publique</option>
                 <option value="liberal">💻 Profession Libérale</option>
+                <option value="alternant">🎓 Alternant (Apprentissage / Pro)</option>
               </select>
             </div>
             <div class="flex flex-col justify-between gap-3">
@@ -361,7 +361,7 @@
         <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5 dark:bg-slate-800 dark:border-slate-700">
           <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2 text-sm dark:text-white">Questions Fréquentes</h3>
           <div class="space-y-3 dark:text-slate-300">
-             <details class="group text-sm"><summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">C'est quoi le Super Brut ? <span class="group-open:rotate-180">▼</span></summary><p class="text-slate-500 mt-2 text-xs dark:text-slate-400">C'est le coût total pour l'entreprise (Salaire + charges patronales).</p></details>
+             <details class="group text-sm"><summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">C'est quoi le Super Brut ? <span class="group-open:rotate-180">▼</span></summary><p class="text-slate-500 mt-2 text-xs dark:text-slate-400">C'est le coût total pour l'entreprise (Salaire Brut + charges patronales).</p></details>
              <hr class="border-slate-100 dark:border-slate-700">
              <details class="group text-sm"><summary class="cursor-pointer font-medium hover:text-blue-600 list-none flex justify-between">13ème mois : comment ça marche ? <span class="group-open:rotate-180">▼</span></summary><p class="text-slate-500 mt-2 text-xs dark:text-slate-400">Brut annuel multiplié par 13, mais le mensuel de base reste le même.</p></details>
              <hr class="border-slate-100 dark:border-slate-700">
@@ -508,8 +508,9 @@
 
   <!-- ENGINE JS V10 (PDF Salary) -->
   <script>
-    const RATES = { non_cadre: 0.22, cadre: 0.25, public: 0.15, liberal: 0.45 };
-    const EMPLOYER_RATES = { non_cadre: 0.42, cadre: 0.45, public: 0.45, liberal: 0 };
+    // RATES mis à jour pour inclure l'Alternant à 2%
+    const RATES = { non_cadre: 0.22, cadre: 0.25, public: 0.15, liberal: 0.45, alternant: 0.02 }; 
+    const EMPLOYER_RATES = { non_cadre: 0.42, cadre: 0.45, public: 0.45, liberal: 0, alternant: 0.05 }; 
     const SMIC_NET_2025 = 1426; 
     const CSG_NON_DED_RATE = 0.029; 
 
@@ -529,7 +530,7 @@
         brutMensuel: document.getElementById('brutMensuel'),
         brutAnnuel: document.getElementById('brutAnnuel'),
         netMensuel: document.getElementById('netMensuel'),
-        netAnnuel: document.getElementById('netAnnuel'), // Restored
+        netAnnuel: document.getElementById('netAnnuel'), 
         statut: document.getElementById('statut'),
         mois13: document.getElementById('mois13'),
         tauxImpot: document.getElementById('tauxImpot'),
@@ -610,8 +611,13 @@
       const coutTotal = monthlyGross * (1 + tauxPat); 
       
       // Calcul Net Imposable (Estimation CSG Non Déductible)
+      // La base CSG/CRDS est légèrement différente pour les alternants (souvent exonérés), mais pour cette simulation simplifiée,
+      // on garde la formule standard sur le brut.
       const csgNonDed = monthlyGross * 0.9825 * CSG_NON_DED_RATE;
       const monthlyImposable = monthlyNet + csgNonDed;
+      
+      // Ajustement : si Alternant, l'exonération IR est supposée pour les salaires sous le SMIC annuel, mais le simulateur ne peut pas le vérifier.
+      // On applique donc le PAS sur l'imposable si > 0, mais la retenue salariale faible est déjà appliquée.
 
       // Calcul Net Après Impôt (Basé sur le Net Imposable !)
       const impotMontant = (monthlyImposable * (impot / 100));
@@ -632,6 +638,10 @@
       if(el.badgeStatut) {
           const statutLabel = el.statut.options[el.statut.selectedIndex].text.split(' ')[1].toUpperCase();
           el.badgeStatut.textContent = statutLabel;
+          // Si alternant, badge spécifique pour clarifier
+          if (el.statut.value === 'alternant') {
+              el.badgeStatut.textContent = 'ALTERNANT';
+          }
       }
       if(el.gridStatut) el.gridStatut.textContent = el.statut.options[el.statut.selectedIndex].text;
 
