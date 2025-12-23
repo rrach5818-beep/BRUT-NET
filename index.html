@@ -9,8 +9,20 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   
   <link rel="canonical" href="https://paienet.fr/">
+  
+  <!-- [ADSENSE] Script de vérification et de monétisation officiel -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5275018762590702" crossorigin="anonymous"></script>
 
-  <!-- Tailwind CSS (Chargement prioritaire pour le design) -->
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-053E5TJ1PX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-053E5TJ1PX');
+  </script>
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -44,8 +56,11 @@
     .pie-chart::after { content: ""; position: absolute; inset: 12px; background: #f8fafc; border-radius: 50%; }
     .dark .pie-chart::after { background: #1e293b; }
 
-    .input-result { background: transparent; border: 1px dashed transparent; width: 100%; transition: all 0.2s; }
-    .input-result:focus { outline: none; }
+    /* Input Result Editable Style */
+    .input-result { background: transparent; border: 1px dashed transparent; width: 100%; transition: all 0.2s; cursor: text; }
+    .input-result:hover { border-color: #cbd5e1; }
+    .input-result:focus { outline: none; border-color: #2563eb; background: rgba(255,255,255,0.5); }
+    .dark .input-result:focus { background: rgba(30, 41, 59, 0.5); }
 
     .pay-slip-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #e2e8f0; font-size: 0.875rem; }
     .dark .pay-slip-row { border-bottom-color: #334155; }
@@ -202,7 +217,8 @@
                   <div class="w-full text-left">
                     <span class="block text-blue-600 text-xs font-bold uppercase mb-1 dark:text-blue-400 tracking-widest text-left">Net à payer (Avant Impôt)</span>
                     <div class="relative flex items-center text-left">
-                      <input type="text" id="netMensuel" class="input-result text-4xl font-extrabold text-blue-600 tracking-tight placeholder-blue-200 w-full p-0 pr-16" placeholder="0" readonly>
+                      <!-- Ajout de id, retrait readonly, type text pour gestion espace -->
+                      <input type="text" id="netMensuel" class="input-result text-4xl font-extrabold text-blue-600 tracking-tight placeholder-blue-200 w-full p-0 pr-16" placeholder="0">
                       <span class="absolute right-0 top-1/2 -translate-y-1/2 text-sm text-slate-400 pointer-events-none font-medium">€ / mois</span>
                     </div>
                   </div>
@@ -213,7 +229,8 @@
                    <div>
                        <span class="block text-[10px] text-slate-400 uppercase font-bold mb-1 tracking-wider text-left">Net Annuel</span>
                        <div class="relative text-left">
-                           <input type="text" id="netAnnuel" class="input-result text-lg font-bold text-slate-700 w-full p-0 border-0 focus:ring-0 dark:text-slate-200 text-left" placeholder="0" readonly>
+                           <!-- Ajout de id, retrait readonly -->
+                           <input type="text" id="netAnnuel" class="input-result text-lg font-bold text-slate-700 w-full p-0 border-0 focus:ring-0 dark:text-slate-200 text-left" placeholder="0">
                            <span class="absolute right-0 top-0 text-xs text-slate-400 pointer-events-none font-medium text-left">€</span>
                        </div>
                    </div>
@@ -517,23 +534,45 @@
       initialised = true;
       setTimeout(() => safePushAd('ad-top-container'), 1000);
 
-      el.brutMensuel?.addEventListener('input', () => compute('brutMensuel'));
-      el.brutAnnuel?.addEventListener('input', () => compute('brutAnnuel'));
+      // ADD listeners for all input fields including net values
+      ['brutMensuel','brutAnnuel','tauxImpot', 'netMensuel', 'netAnnuel'].forEach(id => {
+         document.getElementById(id).addEventListener('input', () => compute(id));
+      });
       el.statut?.addEventListener('change', () => compute('option'));
       el.mois13?.addEventListener('change', () => compute('option'));
-      el.tauxImpot?.addEventListener('input', () => compute('option'));
     });
+
+    const safeParseFloat = (val) => {
+        if (!val) return 0;
+        if (typeof val === 'number') return val;
+        // Clean spaces (like in "2 500") and handle comma
+        return parseFloat(val.replace(/\s/g, '').replace(',', '.')) || 0;
+    };
 
     const compute = (source) => {
       const nbMois = el.mois13.checked ? 13 : 12;
       const tS = RATES[el.statut.value] || 0.22;
       const tP = EMPLOYER_RATES[el.statut.value] || 0;
       const tI = Math.min(100, Math.max(0, parseFloat(el.tauxImpot.value) || 0));
-      let mG = 0;
+      let mG = 0; // Mensuel Brut Global
 
-      if (source === 'brutMensuel') mG = parseFloat(el.brutMensuel.value);
-      else if (source === 'brutAnnuel') mG = parseFloat(el.brutAnnuel.value) / nbMois;
-      else mG = parseFloat(el.brutMensuel.value);
+      // Determine base gross monthly based on source
+      if (source === 'brutMensuel') {
+          mG = safeParseFloat(el.brutMensuel.value);
+      } else if (source === 'brutAnnuel') {
+          mG = safeParseFloat(el.brutAnnuel.value) / nbMois;
+      } else if (source === 'netMensuel') {
+          // Reverse calculation: Brut = Net / (1 - rate)
+          const mN_input = safeParseFloat(el.netMensuel.value);
+          mG = mN_input / (1 - tS);
+      } else if (source === 'netAnnuel') {
+          // Reverse calculation from annual net
+          const mN_ann_input = safeParseFloat(el.netAnnuel.value);
+          mG = (mN_ann_input / nbMois) / (1 - tS);
+      } else {
+          // Default fall-back (options changed)
+          mG = safeParseFloat(el.brutMensuel.value);
+      }
 
       if (!mG || isNaN(mG) || mG === Infinity) return;
 
@@ -545,16 +584,20 @@
       const iM = (mI * (tI / 100));
       const mNA = mN - iM;
 
-      const act = document.activeElement ? document.activeElement.id : null;
-      if (act !== 'brutMensuel') el.brutMensuel.value = Math.round(mG);
-      if (act !== 'brutAnnuel') el.brutAnnuel.value = Math.round(mG * nbMois);
+      // Update fields ONLY if they are NOT the active element to prevent cursor jumping
+      const activeId = document.activeElement ? document.activeElement.id : null;
+
+      if (activeId !== 'brutMensuel') el.brutMensuel.value = Math.round(mG);
+      if (activeId !== 'brutAnnuel') el.brutAnnuel.value = Math.round(mG * nbMois);
+      
+      // For text inputs (Net), use locale string for display
+      if (activeId !== 'netMensuel') el.netMensuel.value = Math.round(mN).toLocaleString('fr-FR');
+      if (activeId !== 'netAnnuel') el.netAnnuel.value = Math.round(mN * nbMois).toLocaleString('fr-FR');
 
       // MAIN UI UPDATES
       el.netImposable.textContent = Math.round(mI).toLocaleString('fr-FR');
       el.coutCharges.textContent = Math.round(cS).toLocaleString('fr-FR');
       el.coutEmployeur.textContent = Math.round(cT).toLocaleString('fr-FR');
-      el.netMensuel.value = Math.round(mN).toLocaleString('fr-FR');
-      el.netAnnuel.value = Math.round(mN * nbMois).toLocaleString('fr-FR');
       
       const nP = ((1 - tS) * 100).toFixed(0);
       el.percentNet.textContent = `${nP}%`;
