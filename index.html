@@ -69,7 +69,7 @@
     .dark .pay-slip-row { border-bottom-color: #334155; }
 
     /* Modals System */
-    .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 20px; }
+    .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 20px; }
     .modal.active { display: flex; animation: fadeIn 0.3s ease-out; }
 
     /* Expandable SEO */
@@ -265,6 +265,62 @@
                   <div class="flex justify-between text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><span class="flex items-center gap-1.5 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><span class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600"></span><span class="text-slate-600 dark:text-slate-300 text-left text-left text-left text-left text-left">Cotisations</span></span><span class="text-slate-700 dark:text-slate-200 text-left text-left" id="percentCharges">--%</span></div>
                 </div>
               </div>
+            </div>
+
+            <!-- MODULE BUDGET / RESTE A VIVRE (Nouveau) -->
+            <div class="border-t border-slate-200 bg-slate-50 p-6 rounded-b-xl dark:bg-slate-800/50 dark:border-slate-700 transition-colors">
+               <div class="flex justify-between items-center mb-4">
+                  <div class="flex items-center gap-2">
+                     <span class="text-xl">🏡</span>
+                     <h3 class="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wide">Calculer mon Reste à Vivre</h3>
+                  </div>
+                  <div class="relative inline-block w-10 mr-2 align-middle">
+                     <input type="checkbox" id="toggleBudget" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-slate-300 left-0 transition-all duration-200"/>
+                     <label for="toggleBudget" class="toggle-label block overflow-hidden h-5 rounded-full bg-slate-300 cursor-pointer"></label>
+                  </div>
+               </div>
+               
+               <div id="budgetSection" class="hidden space-y-4 pt-2 border-t border-slate-200 dark:border-slate-700/50">
+                  <div class="grid grid-cols-2 gap-4">
+                     <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Loyer / Crédit</label>
+                        <input type="number" id="expenseRent" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                     </div>
+                     <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Factures & Énergie</label>
+                        <input type="number" id="expenseBills" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                     </div>
+                     <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Alimentation</label>
+                        <input type="number" id="expenseFood" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                     </div>
+                     <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Transports</label>
+                        <input type="number" id="expenseTransport" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                     </div>
+                     <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Loisirs / Sorties</label>
+                        <input type="number" id="expenseLeisure" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                     </div>
+                     <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Épargne / Projets</label>
+                        <input type="number" id="expenseSavings" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                     </div>
+                     <div class="space-y-1 col-span-2">
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Autres Charges</label>
+                        <input type="number" id="expenseOther" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                     </div>
+                  </div>
+                  
+                  <div class="bg-blue-50 rounded-xl p-4 flex justify-between items-center border border-blue-100 dark:bg-blue-900/20 dark:border-blue-800 mt-4">
+                     <div class="flex flex-col">
+                        <span class="text-[10px] font-bold text-blue-600 uppercase tracking-widest dark:text-blue-400">Reste à Vivre Mensuel</span>
+                        <span class="text-xs text-blue-400 dark:text-blue-500 mt-0.5">Après déduction des charges</span>
+                     </div>
+                     <span class="text-2xl font-black text-blue-700 dark:text-blue-300" id="resultRemaining">0 €</span>
+                  </div>
+                  <p class="text-[9px] text-slate-400 italic text-center mt-2">🔒 Vos données budgétaires restent strictement sur votre appareil.</p>
+               </div>
             </div>
 
             <details id="detailsCotisations" class="group border-t border-slate-200 bg-white dark:bg-slate-800 dark:border-slate-700 text-left text-left text-left text-left text-left text-left">
@@ -525,7 +581,18 @@
       salaryTableBody: document.getElementById('salaryTableBody'),
       gridStatut: document.getElementById('gridStatut'),
       smicTag: document.getElementById('smicTag'),
-      smicMultiple: document.getElementById('smicMultiple')
+      smicMultiple: document.getElementById('smicMultiple'),
+      // Budget module elements
+      toggleBudget: document.getElementById('toggleBudget'),
+      budgetSection: document.getElementById('budgetSection'),
+      expenseRent: document.getElementById('expenseRent'),
+      expenseBills: document.getElementById('expenseBills'),
+      expenseFood: document.getElementById('expenseFood'),
+      expenseTransport: document.getElementById('expenseTransport'),
+      expenseLeisure: document.getElementById('expenseLeisure'),
+      expenseSavings: document.getElementById('expenseSavings'),
+      expenseOther: document.getElementById('expenseOther'),
+      resultRemaining: document.getElementById('resultRemaining')
     };
 
     let adSeoInitialized = false;
@@ -564,6 +631,15 @@
       });
       el.statut?.addEventListener('change', () => compute('option'));
       el.mois13?.addEventListener('change', () => compute('option'));
+
+      // Budget Listeners
+      el.toggleBudget?.addEventListener('change', () => {
+          el.budgetSection.classList.toggle('hidden', !el.toggleBudget.checked);
+          compute('budget'); // Recalculate layout/data
+      });
+      ['expenseRent', 'expenseBills', 'expenseFood', 'expenseTransport', 'expenseLeisure', 'expenseSavings', 'expenseOther'].forEach(id => {
+          document.getElementById(id).addEventListener('input', () => compute('budget'));
+      });
     });
 
     const safeParseFloat = (val) => {
@@ -593,12 +669,15 @@
           // Reverse calculation from annual net
           const mN_ann_input = safeParseFloat(el.netAnnuel.value);
           mG = (mN_ann_input / nbMois) / (1 - tS);
+      } else if (source === 'budget') {
+          // Don't change base salary, just update budget
+          mG = safeParseFloat(el.brutMensuel.value); 
       } else {
           // Default fall-back (options changed)
           mG = safeParseFloat(el.brutMensuel.value);
       }
 
-      if (!mG || isNaN(mG) || mG === Infinity) return;
+      if (source !== 'budget' && (!mG || isNaN(mG) || mG === Infinity)) return;
 
       const mN = mG * (1 - tS);
       const cS = mG - mN;
@@ -652,6 +731,23 @@
       document.getElementById('fpNet').textContent = Math.round(mN).toLocaleString('fr-FR') + ' €';
       document.getElementById('fpNetImposable').textContent = Math.round(mI).toLocaleString('fr-FR') + ' €';
       document.getElementById('fpCoutEmployeur').textContent = Math.round(cT).toLocaleString('fr-FR') + ' €';
+
+      // BUDGET MODULE UPDATE
+      if(el.toggleBudget.checked) {
+          const rent = safeParseFloat(el.expenseRent.value);
+          const bills = safeParseFloat(el.expenseBills.value);
+          const food = safeParseFloat(el.expenseFood.value);
+          const trans = safeParseFloat(el.expenseTransport.value);
+          const leisure = safeParseFloat(el.expenseLeisure.value);
+          const savings = safeParseFloat(el.expenseSavings.value);
+          const other = safeParseFloat(el.expenseOther.value);
+          
+          const remaining = mNA - (rent + bills + food + trans + leisure + savings + other);
+          el.resultRemaining.textContent = Math.round(remaining).toLocaleString('fr-FR') + ' €';
+          
+          if(remaining < 0) el.resultRemaining.classList.replace('text-blue-700', 'text-red-600');
+          else el.resultRemaining.classList.replace('text-red-600', 'text-blue-700');
+      }
 
       // PDF UPDATES
       document.getElementById('pdfBrut').textContent = Math.round(mG).toLocaleString('fr-FR') + ' €';
@@ -711,7 +807,16 @@
                 brut: el.brutMensuel.value,
                 statut: el.statut.value,
                 mois13: el.mois13.checked,
-                taux: el.tauxImpot.value
+                taux: el.tauxImpot.value,
+                // Save budget state too
+                budget: el.toggleBudget.checked,
+                rent: el.expenseRent.value,
+                bills: el.expenseBills.value,
+                food: el.expenseFood.value,
+                trans: el.expenseTransport.value,
+                leisure: el.expenseLeisure.value,
+                savings: el.expenseSavings.value,
+                other: el.expenseOther.value
             };
             localStorage.setItem('paienet_last_sim', JSON.stringify(data));
         } catch(e) { /* silent fail for iframes */ }
@@ -740,6 +845,19 @@
                       el.statut.value = data.statut || 'non_cadre';
                       el.mois13.checked = data.mois13 || false;
                       el.tauxImpot.value = data.taux || '';
+                      
+                      // Load Budget
+                      if(data.budget) {
+                          el.toggleBudget.checked = true;
+                          el.budgetSection.classList.remove('hidden');
+                          el.expenseRent.value = data.rent || '';
+                          el.expenseBills.value = data.bills || '';
+                          el.expenseFood.value = data.food || '';
+                          el.expenseTransport.value = data.trans || '';
+                          el.expenseLeisure.value = data.leisure || '';
+                          el.expenseSavings.value = data.savings || '';
+                          el.expenseOther.value = data.other || '';
+                      }
                       compute('option');
                   }
               }
@@ -814,6 +932,7 @@
             ["Net Imposable", el.netImposable.textContent + " €"],
             ["Cout Total Employeur", el.coutEmployeur.textContent + " €"],
             ["Taux Horaire Net", document.getElementById('tauxHoraireNet').textContent + " €/h"],
+            ["Reste a Vivre", document.getElementById('resultRemaining').textContent],
             ["Date Simulation", new Date().toLocaleDateString()]
         ];
         
