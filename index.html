@@ -69,7 +69,7 @@
     .dark .pay-slip-row { border-bottom-color: #334155; }
 
     /* Modals System */
-    .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 20px; }
+    .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 20px; }
     .modal.active { display: flex; animation: fadeIn 0.3s ease-out; }
 
     /* Expandable SEO */
@@ -162,6 +162,7 @@
           <div class="flex justify-between items-start mb-2 no-print text-left">
             <h1 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white tracking-tight italic text-left">Convertisseur Brut <span class="text-blue-600">↔</span> Net</h1>
             <div class="flex flex-col items-end gap-1">
+               <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-800">✅ Taux 2025</span>
                <span id="shareMsg" class="hidden text-xs text-green-600 font-medium bg-green-50 dark:bg-green-900/30 px-2 py-1 rounded">Lien copié !</span>
             </div>
           </div>
@@ -309,6 +310,17 @@
                      <div class="space-y-1 col-span-2">
                         <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Autres Charges</label>
                         <input type="number" id="expenseOther" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                     </div>
+                  </div>
+                  
+                  <!-- Jauge de Santé Financière -->
+                  <div class="mt-4">
+                     <div class="flex justify-between items-end mb-1">
+                        <span class="text-[9px] font-bold uppercase text-slate-500 dark:text-slate-400 tracking-widest">Taux d'Effort (Charges / Net)</span>
+                        <span id="healthPercentage" class="text-xs font-bold text-slate-700 dark:text-slate-300">0%</span>
+                     </div>
+                     <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div id="budgetBar" class="bg-emerald-500 h-2.5 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
                      </div>
                   </div>
                   
@@ -742,11 +754,32 @@
           const savings = safeParseFloat(el.expenseSavings.value);
           const other = safeParseFloat(el.expenseOther.value);
           
-          const remaining = mNA - (rent + bills + food + trans + leisure + savings + other);
+          const totalExpenses = rent + bills + food + trans + leisure + savings + other;
+          const remaining = mNA - totalExpenses;
+          
+          // Update Remaining text
           el.resultRemaining.textContent = Math.round(remaining).toLocaleString('fr-FR') + ' €';
           
           if(remaining < 0) el.resultRemaining.classList.replace('text-blue-700', 'text-red-600');
           else el.resultRemaining.classList.replace('text-red-600', 'text-blue-700');
+
+          // Update Health Bar
+          const ratio = mNA > 0 ? (totalExpenses / mNA) * 100 : 0;
+          const healthBar = document.getElementById('budgetBar');
+          const healthText = document.getElementById('healthPercentage');
+          
+          healthBar.style.width = Math.min(ratio, 100) + '%';
+          healthText.textContent = ratio.toFixed(0) + '%';
+          
+          // Color logic
+          healthBar.className = "h-2.5 rounded-full transition-all duration-500 ease-out"; // Reset base classes
+          if(ratio < 33) {
+             healthBar.classList.add('bg-emerald-500'); // Green
+          } else if(ratio < 50) {
+             healthBar.classList.add('bg-amber-500'); // Orange
+          } else {
+             healthBar.classList.add('bg-red-500'); // Red
+          }
       }
 
       // PDF UPDATES
