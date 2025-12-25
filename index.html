@@ -10,10 +10,7 @@
   
   <link rel="canonical" href="https://paienet.fr/">
   
-  <!-- [ADSENSE] Script de vérification et de monétisation officiel -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5275018762590702" crossorigin="anonymous"></script>
-
-  <!-- GA4 -->
+  <!-- GA4 (Analytics) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-053E5TJ1PX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -80,13 +77,15 @@
     .ad-placeholder { 
       background: rgba(241, 245, 249, 0.5); 
       border: 1px dashed #cbd5e1; 
-      display: block; 
+      display: flex; 
+      align-items: center;
+      justify-content: center;
       text-align: center; 
       color: #94a3b8; 
       font-size: 10px; 
       text-transform: uppercase; 
       letter-spacing: 1px; 
-      min-height: 90px; 
+      min-height: 280px; 
       width: 100%; 
       border-radius: 8px; 
       margin: 20px 0; 
@@ -126,7 +125,7 @@
 
 <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen transition-colors duration-300 dark:bg-slate-900 dark:text-slate-100 text-left">
 
-  <!-- Header Design Riche -->
+  <!-- Header -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-20 shadow-sm no-print dark:bg-slate-800 dark:border-slate-700">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center text-left">
       <a href="index.html" class="flex items-center gap-2 group shrink-0">
@@ -156,7 +155,7 @@
   <main class="max-w-6xl mx-auto px-4 py-8 md:py-10 flex-grow text-left">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 text-left items-start">
       
-      <!-- CALCULATEUR (Colonne Gauche - 8/12) -->
+      <!-- CALCULATEUR -->
       <div class="lg:col-span-8 space-y-6 text-left">
         <div id="main-container" class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 md:p-8 dark:bg-slate-800 dark:border-slate-700 transition-colors text-left">
           <div class="flex justify-between items-start mb-2 no-print text-left">
@@ -186,7 +185,7 @@
               </div>
               <div class="flex items-center gap-2">
                 <label for="tauxImpot" class="text-sm font-medium text-slate-700 whitespace-nowrap dark:text-slate-300">Taux PAS (%) :</label>
-                <input type="number" id="tauxImpot" placeholder="0" class="w-full p-1.5 text-sm border border-slate-300 rounded focus:ring-1 focus:ring-blue-500 outline-none text-right dark:bg-slate-800 dark:border-slate-600 dark:text-white" min="0" max="100" step="0.1">
+                <input type="text" id="tauxImpot" placeholder="0" class="w-full p-1.5 text-sm border border-slate-300 rounded focus:ring-1 focus:ring-blue-500 outline-none text-right dark:bg-slate-800 dark:border-slate-600 dark:text-white">
               </div>
             </div>
           </div>
@@ -195,14 +194,14 @@
             <div class="relative group">
               <label class="block text-[10px] font-bold text-slate-500 uppercase mb-2 dark:text-slate-400 tracking-widest text-left">Salaire Brut Mensuel</label>
               <div class="relative">
-                <input type="number" id="brutMensuel" placeholder="Ex: 2500" class="w-full pl-4 pr-10 py-3 rounded-lg border-2 border-slate-200 focus:border-blue-500 outline-none text-xl font-bold text-slate-800 shadow-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white">
+                <input type="text" id="brutMensuel" placeholder="Ex: 2500" class="w-full pl-4 pr-10 py-3 rounded-lg border-2 border-slate-200 focus:border-blue-500 outline-none text-xl font-bold text-slate-800 shadow-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white">
                 <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 font-medium pointer-events-none">€</span>
               </div>
             </div>
             <div class="relative group">
               <label class="block text-[10px] font-bold text-slate-500 uppercase mb-2 dark:text-slate-400 tracking-widest text-left">Salaire Brut Annuel</label>
               <div class="relative text-left">
-                <input type="number" id="brutAnnuel" placeholder="Ex: 30000" class="w-full pl-4 pr-10 py-3 rounded-lg border-2 border-slate-200 focus:border-blue-500 outline-none text-xl font-bold text-slate-800 shadow-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white">
+                <input type="text" id="brutAnnuel" placeholder="Ex: 30000" class="w-full pl-4 pr-10 py-3 rounded-lg border-2 border-slate-200 focus:border-blue-500 outline-none text-xl font-bold text-slate-800 shadow-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white">
                 <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 font-medium pointer-events-none">€</span>
               </div>
             </div>
@@ -266,7 +265,7 @@
                   <div class="flex justify-between text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><span class="flex items-center gap-1.5 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><span class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600"></span><span class="text-slate-600 dark:text-slate-300 text-left text-left text-left text-left text-left">Cotisations</span></span><span class="text-slate-700 dark:text-slate-200 text-left text-left" id="percentCharges">--%</span></div>
                 </div>
 
-                <!-- Répartition Visuelle des Cotisations (NOUVEAU) -->
+                <!-- Répartition Visuelle des Cotisations -->
                 <div class="mt-8 text-left w-full">
                     <h4 class="text-[9px] font-black uppercase text-slate-400 mb-3 tracking-widest border-b border-slate-100 pb-1 dark:border-slate-700">Où vont vos cotisations ?</h4>
                     <div class="space-y-3">
@@ -291,7 +290,51 @@
               </div>
             </div>
 
-            <!-- MODULE BUDGET / RESTE A VIVRE (Nouveau) -->
+            <!-- NOUVEAU MODULE: ANALYSE FISCALE & STATUTS -->
+            <div id="fiscalModule" class="border-t border-slate-200 bg-slate-50 p-6 rounded-b-xl dark:bg-slate-800/50 dark:border-slate-700 transition-colors hidden">
+               <h3 class="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wide mb-4 flex items-center gap-2"><span class="text-lg">⚖️</span> Analyse Fiscale & Statuts</h3>
+               
+               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                   <!-- Carte Impôts -->
+                   <div class="bg-white p-4 rounded-xl border border-slate-200 dark:bg-slate-800 dark:border-slate-600 shadow-sm">
+                       <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Estimation Impôt 2025 (Célibataire)</h4>
+                       <div class="flex justify-between items-end mb-2">
+                           <span class="text-xs text-slate-500 dark:text-slate-400">Impôt Annuel Est.</span>
+                           <span class="text-lg font-bold text-slate-900 dark:text-white" id="taxAmount">0 €</span>
+                       </div>
+                       <div class="flex justify-between items-end mb-2">
+                           <span class="text-xs text-slate-500 dark:text-slate-400">Taux Moyen</span>
+                           <span class="text-sm font-bold text-blue-600" id="taxRateAverage">0%</span>
+                       </div>
+                       <div class="flex justify-between items-end">
+                           <span class="text-xs text-slate-500 dark:text-slate-400">Tranche Marginale (TMI)</span>
+                           <span class="text-xs font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded dark:bg-purple-900/30" id="taxTMI">0%</span>
+                       </div>
+                       <p class="text-[8px] text-slate-400 mt-3 italic">*Basé sur 1 part fiscale et abattement 10%.</p>
+                   </div>
+
+                   <!-- Carte Comparateur -->
+                   <div class="bg-white p-4 rounded-xl border border-slate-200 dark:bg-slate-800 dark:border-slate-600 shadow-sm">
+                       <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Comparateur Net (Même Brut)</h4>
+                       <div class="space-y-2 text-xs">
+                           <div class="flex justify-between">
+                               <span class="text-slate-600 dark:text-slate-300">Salarié Non-Cadre</span>
+                               <span class="font-bold text-slate-900 dark:text-white" id="compNonCadre">0 €</span>
+                           </div>
+                           <div class="flex justify-between">
+                               <span class="text-slate-600 dark:text-slate-300">Salarié Cadre</span>
+                               <span class="font-bold text-slate-900 dark:text-white" id="compCadre">0 €</span>
+                           </div>
+                           <div class="flex justify-between pt-2 border-t border-slate-100 dark:border-slate-700">
+                               <span class="text-emerald-600 font-bold dark:text-emerald-400">Freelance / Libéral</span>
+                               <span class="font-bold text-emerald-600 dark:text-emerald-400" id="compFreelance">0 €</span>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+            </div>
+
+            <!-- MODULE BUDGET / RESTE A VIVRE (Opt-in) -->
             <div class="border-t border-slate-200 bg-slate-50 p-6 rounded-b-xl dark:bg-slate-800/50 dark:border-slate-700 transition-colors">
                <div class="flex justify-between items-center mb-4">
                   <div class="flex items-center gap-2">
@@ -308,31 +351,31 @@
                   <div class="grid grid-cols-2 gap-4">
                      <div class="space-y-1">
                         <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Loyer / Crédit</label>
-                        <input type="number" id="expenseRent" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                        <input type="text" id="expenseRent" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
                      </div>
                      <div class="space-y-1">
-                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Factures&Énergie</label>
-                        <input type="number" id="expenseBills" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Factures & Énergie</label>
+                        <input type="text" id="expenseBills" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
                      </div>
                      <div class="space-y-1">
                         <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Alimentation</label>
-                        <input type="number" id="expenseFood" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                        <input type="text" id="expenseFood" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
                      </div>
                      <div class="space-y-1">
                         <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Transports</label>
-                        <input type="number" id="expenseTransport" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                        <input type="text" id="expenseTransport" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
                      </div>
                      <div class="space-y-1">
                         <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Loisirs / Sorties</label>
-                        <input type="number" id="expenseLeisure" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                        <input type="text" id="expenseLeisure" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
                      </div>
                      <div class="space-y-1">
                         <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Épargne / Projets</label>
-                        <input type="number" id="expenseSavings" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                        <input type="text" id="expenseSavings" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
                      </div>
                      <div class="space-y-1 col-span-2">
                         <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Autres Charges</label>
-                        <input type="number" id="expenseOther" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                        <input type="text" id="expenseOther" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
                      </div>
                   </div>
                   
@@ -386,54 +429,740 @@
           </div>
         </div>
 
-        <!-- CONTENU SEO MASSIF (+600 mots) -->
-        <div id="seo-content" class="no-print space-y-8 text-left text-left text-left text-left text-left text-left">
-          <article class="prose prose-slate max-w-none bg-white p-8 rounded-3xl shadow-sm border border-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:prose-invert text-left text-left text-left text-left">
-            <h2 class="text-2xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic border-b-4 border-blue-600 pb-4 inline-block mb-6 text-left">Guide Stratégique : Salaire Brut en Net en 2025</h2>
-            <p class="leading-relaxed text-slate-600 dark:text-slate-400 text-left text-left text-left text-left text-left">Maîtriser la conversion précise entre le <strong>salaire brut et le salaire net</strong> est une compétence financière fondamentale en 2025. Que vous soyez en phase de recrutement, salarié en poste ou alternant, disposer d'un simulateur de paie analytique est impératif pour anticiper votre reste à vivre réel. PaieNet.fr a été conçu par des experts pour offrir une transparence totale sur les mécanismes de prélèvements sociaux obligatoires en France.</p>
-            
-            <h3 class="text-lg font-bold mt-8 uppercase tracking-widest text-blue-600 text-xs border-l-4 border-blue-600 pl-4 mb-4 text-left text-left text-left">L'Importance du Salaire Brut</h3>
-            <p class="text-sm leading-relaxed mb-4 text-slate-600 dark:text-slate-400 text-left text-left text-left text-left">Le salaire brut contractuel constitue la base de votre rémunération avant tout prélèvement. Il sert de socle pour le calcul de vos droits sociaux : assurance chômage, retraite de base et complémentaire, et indemnités journalières. Lors de toute négociation annuelle, le brut annuel doit être votre unique référentiel de stabilité.</p>
+        <!-- Bloc Pub (Bas Sidebar) -->
+        <div id="ad-sidebar-container" class="ad-placeholder no-print" style="width: 100% !important; min-height: 250px !important;">
+           <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5275018762590702"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+        </div>
+      </div>
 
-            <div id="seo-extra">
-               <h3 class="text-lg font-bold mt-8 uppercase tracking-widest text-blue-600 text-xs border-l-4 border-blue-600 pl-4 mb-4 italic text-left text-left text-left text-left text-left text-left">Pourquoi les charges varient selon votre statut ?</h3>
-               <p class="text-sm leading-relaxed mb-4 text-slate-600 dark:text-slate-400 text-left text-left text-left text-left">En France, la structure des cotisations sociales dépend du contrat de travail. Pour un <strong>salarié non-cadre</strong>, le taux de retenue salariale moyen est de 22%. Les <strong>cadres</strong>, de par leur affiliation à des caisses de retraite complémentaire (AGIRC-ARRCO) et de prévoyance plus protectrices, voient leur taux de charges monter à environ 25% du brut.</p>
+      <!-- SIDEBAR (Colonne Droite - 4/12) - STICKY & DESIGN RICHE -->
+      <div class="lg:col-span-4 space-y-6 no-print text-left text-slate-800 dark:text-slate-100 italic sticky top-24">
+        
+        <!-- Bloc Pub -->
+        <div id="ad-top-container" class="ad-placeholder" style="width: 100% !important; min-height: 250px !important;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5275018762590702"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
 
-               <!-- [ADSENSE] Emplacement In-Feed (Protégé via expandSEO) -->
-               <div id="ad-seo-container" class="ad-placeholder no-print my-8" style="width: 100% !important; min-height: 90px !important;">
-                  <ins class="adsbygoogle"
-                       style="display:block"
-                       data-ad-client="ca-pub-5275018762590702"
-                       data-ad-slot="0987654321"
-                       data-ad-format="auto"
-                       data-full-width-responsive="true"></ins>
-               </div>
-
-               <h3 class="text-lg font-bold mt-8 uppercase tracking-widest text-blue-600 text-xs border-l-4 border-blue-600 pl-4 mb-4 italic text-left text-left text-left text-left text-left text-left">Le Cas de l'Alternance et de l'Apprentissage</h3>
-               <p class="text-sm leading-relaxed mb-4 text-slate-600 dark:text-slate-400 text-left text-left text-left text-left text-left text-left">L'alternance bénéficie d'un régime d'exonération salariale unique. Sous un plafond de rémunération (fixé à 79% du SMIC), l'alternant est exonéré de la majorité des cotisations sociales. Notre simulateur applique un taux ajusté de <strong>2%</strong> calibré sur l'observation des bulletins de paie réels de 2025.</p>
-
-               <h3 class="text-lg font-bold mt-8 uppercase tracking-widest text-blue-600 text-xs border-l-4 border-blue-600 pl-4 mb-4 italic text-left text-left text-left text-left text-left text-left">Anticiper le Prélèvement à la Source (PAS)</h3>
-               <p class="text-sm leading-relaxed mb-4 text-slate-600 dark:text-slate-400 text-left text-left text-left text-left text-left text-left">Depuis 2019, le salaire net à payer ne correspond plus au virement final. L'impôt sur le revenu est déduit à la source sur la base du <strong>Net Imposable</strong>. Ce dernier est toujours supérieur au net à payer car il réintègre la CSG et la CRDS non déductibles. Utiliser le champ dédié à votre taux PAS personnalisé dans notre outil vous permet de connaître votre virement bancaire final au centime près.</p>
-
-               <h3 class="text-lg font-bold mt-8 uppercase tracking-widest text-blue-600 text-xs border-l-4 border-blue-600 pl-4 mb-4 italic text-left text-left text-left text-left text-left text-left">Le Coût Employeur : Argument de négociation</h3>
-               <p class="text-sm leading-relaxed mb-4 text-slate-600 dark:text-slate-400 text-left text-left text-left text-left text-left text-left">Pour une entreprise, l'investissement réel dépasse largement le salaire brut. Les charges patronales s'ajoutent à cette base (environ 42% du brut). Connaître ce "Super-Brut" est un argument de poids lors d'une négociation : cela démontre votre compréhension des enjeux financiers de votre employeur.</p>
-               
-               <h3 class="text-lg font-bold mt-8 uppercase tracking-widest text-blue-600 text-xs border-l-4 border-blue-600 pl-4 mb-4 italic text-left text-left text-left text-left text-left text-left">Prime de 13ème mois et rémunération lissée</h3>
-               <p class="text-sm leading-relaxed mb-4 text-slate-600 dark:text-slate-400 text-left text-left text-left text-left text-left text-left">Si votre contrat prévoit un 13ème mois, il est crucial de lisser ce revenu sur l'année pour évaluer votre capacité d'emprunt mensuelle. Notre simulateur offre une option dédiée pour calculer ce lissage automatiquement.</p>
-            </div>
-
-            <button id="toggleSEO" onclick="expandSEO()" class="mt-8 text-blue-600 font-black text-xs uppercase tracking-widest hover:text-blue-700 flex items-center gap-2 group italic text-left text-left">Lire l'intégralité du guide expert ↓</button>
-          </article>
-
-          <div id="seoGridContainer" class="bg-white rounded-2xl border border-slate-200 p-8 dark:bg-slate-800 dark:border-slate-700 text-left text-left text-left text-left">
-            <h3 class="text-lg font-black text-slate-900 mb-6 dark:text-white uppercase text-xs tracking-widest border-b-2 border-slate-50 pb-2 italic text-left">Grille d'analyse comparative (<span id="gridStatut">Non Cadre</span>)</h3>
-            <div class="overflow-x-auto text-left text-left">
-              <table class="w-full text-left text-xs font-medium text-left text-left">
-                <thead><tr><th class="p-3 uppercase tracking-tighter border-b text-left text-left">Brut Annuel</th><th class="p-3 uppercase tracking-tighter border-b text-left text-left">Brut Mensuel</th><th class="p-3 uppercase tracking-tighter border-b text-left text-left">Net Mensuel</th><th class="p-3 italic border-b text-left text-left">Imposable est.</th></tr></thead>
-                <tbody id="salaryTableBody"></tbody>
-              </table>
+        <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 text-left">
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+          <div class="p-6">
+            <h3 class="text-[10px] font-bold text-slate-900 uppercase tracking-widest flex items-center gap-2 mb-6 dark:text-white italic">Outils Professionnels</h3>
+            <div class="space-y-4">
+              <a href="https://c3po.link/Q9Km6E7Z9a" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-cyan-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-cyan-100 p-3 rounded-xl text-cyan-600 dark:bg-slate-600 shadow-inner font-black italic text-center">📊</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Compta & Fiscalité</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Automatisez vos revenus avec Indy (100% gratuit).</div></div>
+                </div>
+              </a>
+              <a href="https://bour.so/p/RUhqIX1d2Cs" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-blue-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-blue-100 p-3 rounded-xl text-blue-600 dark:bg-slate-600 shadow-inner font-black italic text-center">🏦</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Banque Mobile Pro</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Optimisez vos revenus. +150€ offerts ici.</div></div>
+                </div>
+              </a>
             </div>
           </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 dark:bg-slate-800 dark:border-slate-700">
+          <h3 class="font-bold text-slate-900 mb-6 text-[10px] dark:text-white uppercase tracking-widest italic border-b pb-2">Questions Analytiques (FAQ)</h3>
+          <div class="space-y-6 dark:text-slate-300">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Pourquoi le net imposable est-il plus élevé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Il réintègre la part de CSG et CRDS dite non déductible fiscalement. C'est le référentiel utilisé par l'administration pour calculer votre impôt.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Négociation : Salaire Brut Annuel ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Absolument. Le brut annuel est la seule base légale mentionnée sur le contrat. Le mensuel peut varier selon le nombre de jours ouvrés ou les primes.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impact des Titres Restaurant ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Votre net "virement" sera diminué de votre quote-part salariale (souvent 50% de la valeur faciale du titre).</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Stagiaires : Quel taux de charges ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Sous le plafond de sécurité sociale (4,35€/h en 2025), la gratification est exonérée. Le Brut est égal au Net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">C'est quoi le Net Social ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le montant à déclarer pour vos droits sociaux (CAF). Il figure obligatoirement sur votre bulletin de paie.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impôt : Taux Personnalisé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le taux calculé selon vos revenus du foyer. Si vous ne le communiquez pas, votre employeur appliquera le taux par défaut.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Mutuelle Obligatoire ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">La mutuelle collective est financée à 50% min. par l'employeur. Votre part est déduite de votre salaire net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Plafonds Sécurité Sociale ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Le plafond (PMSS) sert de base au calcul de certaines cotisations. Il est réévalué chaque année au 1er janvier.</p></details>
+          </div>
+        </div>
+
+        <!-- Bloc Pub (Bas Sidebar) -->
+        <div id="ad-sidebar-container" class="ad-placeholder no-print" style="width: 100% !important; min-height: 250px !important;">
+           <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5275018762590702"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+        </div>
+      </div>
+
+      <!-- SIDEBAR (Colonne Droite - 4/12) - STICKY & DESIGN RICHE -->
+      <div class="lg:col-span-4 space-y-6 no-print text-left text-slate-800 dark:text-slate-100 italic sticky top-24">
+        
+        <!-- Bloc Pub -->
+        <div id="ad-top-container" class="ad-placeholder" style="width: 100% !important; min-height: 250px !important;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5275018762590702"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 text-left">
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+          <div class="p-6">
+            <h3 class="text-[10px] font-bold text-slate-900 uppercase tracking-widest flex items-center gap-2 mb-6 dark:text-white italic">Outils Professionnels</h3>
+            <div class="space-y-4">
+              <a href="https://c3po.link/Q9Km6E7Z9a" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-cyan-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-cyan-100 p-3 rounded-xl text-cyan-600 dark:bg-slate-600 shadow-inner font-black italic text-center">📊</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Compta & Fiscalité</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Automatisez vos revenus avec Indy (100% gratuit).</div></div>
+                </div>
+              </a>
+              <a href="https://bour.so/p/RUhqIX1d2Cs" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-blue-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-blue-100 p-3 rounded-xl text-blue-600 dark:bg-slate-600 shadow-inner font-black italic text-center">🏦</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Banque Mobile Pro</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Optimisez vos revenus. +150€ offerts ici.</div></div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 dark:bg-slate-800 dark:border-slate-700">
+          <h3 class="font-bold text-slate-900 mb-6 text-[10px] dark:text-white uppercase tracking-widest italic border-b pb-2">Questions Analytiques (FAQ)</h3>
+          <div class="space-y-6 dark:text-slate-300">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Pourquoi le net imposable est-il plus élevé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Il réintègre la part de CSG et CRDS dite non déductible fiscalement. C'est le référentiel utilisé par l'administration pour calculer votre impôt.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Négociation : Salaire Brut Annuel ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Absolument. Le brut annuel est la seule base légale mentionnée sur le contrat. Le mensuel peut varier selon le nombre de jours ouvrés ou les primes.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impact des Titres Restaurant ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Votre net "virement" sera diminué de votre quote-part salariale (souvent 50% de la valeur faciale du titre).</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Stagiaires : Quel taux de charges ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Sous le plafond de sécurité sociale (4,35€/h en 2025), la gratification est exonérée. Le Brut est égal au Net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">C'est quoi le Net Social ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le montant à déclarer pour vos droits sociaux (CAF). Il figure obligatoirement sur votre bulletin de paie.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impôt : Taux Personnalisé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le taux calculé selon vos revenus du foyer. Si vous ne le communiquez pas, votre employeur appliquera le taux par défaut.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Mutuelle Obligatoire ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">La mutuelle collective est financée à 50% min. par l'employeur. Votre part est déduite de votre salaire net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Plafonds Sécurité Sociale ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Le plafond (PMSS) sert de base au calcul de certaines cotisations. Il est réévalué chaque année au 1er janvier.</p></details>
+          </div>
+        </div>
+
+        <!-- Bloc Pub (Bas Sidebar) -->
+        <div id="ad-sidebar-container" class="ad-placeholder no-print" style="width: 100% !important; min-height: 250px !important;">
+           <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5275018762590702"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+        </div>
+      </div>
+
+      <!-- SIDEBAR (Colonne Droite - 4/12) - STICKY & DESIGN RICHE -->
+      <div class="lg:col-span-4 space-y-6 no-print text-left text-slate-800 dark:text-slate-100 italic sticky top-24">
+        
+        <!-- Bloc Pub -->
+        <div id="ad-top-container" class="ad-placeholder" style="width: 100% !important; min-height: 250px !important;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5275018762590702"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 text-left">
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+          <div class="p-6">
+            <h3 class="text-[10px] font-bold text-slate-900 uppercase tracking-widest flex items-center gap-2 mb-6 dark:text-white italic">Outils Professionnels</h3>
+            <div class="space-y-4">
+              <a href="https://c3po.link/Q9Km6E7Z9a" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-cyan-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-cyan-100 p-3 rounded-xl text-cyan-600 dark:bg-slate-600 shadow-inner font-black italic text-center">📊</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Compta & Fiscalité</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Automatisez vos revenus avec Indy (100% gratuit).</div></div>
+                </div>
+              </a>
+              <a href="https://bour.so/p/RUhqIX1d2Cs" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-blue-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-blue-100 p-3 rounded-xl text-blue-600 dark:bg-slate-600 shadow-inner font-black italic text-center">🏦</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Banque Mobile Pro</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Optimisez vos revenus. +150€ offerts ici.</div></div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 dark:bg-slate-800 dark:border-slate-700">
+          <h3 class="font-bold text-slate-900 mb-6 text-[10px] dark:text-white uppercase tracking-widest italic border-b pb-2">Questions Analytiques (FAQ)</h3>
+          <div class="space-y-6 dark:text-slate-300">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Pourquoi le net imposable est-il plus élevé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Il réintègre la part de CSG et CRDS dite non déductible fiscalement. C'est le référentiel utilisé par l'administration pour calculer votre impôt.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Négociation : Salaire Brut Annuel ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Absolument. Le brut annuel est la seule base légale mentionnée sur le contrat. Le mensuel peut varier selon le nombre de jours ouvrés ou les primes.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impact des Titres Restaurant ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Votre net "virement" sera diminué de votre quote-part salariale (souvent 50% de la valeur faciale du titre).</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Stagiaires : Quel taux de charges ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Sous le plafond de sécurité sociale (4,35€/h en 2025), la gratification est exonérée. Le Brut est égal au Net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">C'est quoi le Net Social ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le montant à déclarer pour vos droits sociaux (CAF). Il figure obligatoirement sur votre bulletin de paie.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impôt : Taux Personnalisé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le taux calculé selon vos revenus du foyer. Si vous ne le communiquez pas, votre employeur appliquera le taux par défaut.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Mutuelle Obligatoire ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">La mutuelle collective est financée à 50% min. par l'employeur. Votre part est déduite de votre salaire net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Plafonds Sécurité Sociale ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Le plafond (PMSS) sert de base au calcul de certaines cotisations. Il est réévalué chaque année au 1er janvier.</p></details>
+          </div>
+        </div>
+
+        <!-- Bloc Pub (Bas Sidebar) -->
+        <div id="ad-sidebar-container" class="ad-placeholder no-print" style="width: 100% !important; min-height: 250px !important;">
+           <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5275018762590702"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+        </div>
+      </div>
+
+      <!-- SIDEBAR (Colonne Droite - 4/12) - STICKY & DESIGN RICHE -->
+      <div class="lg:col-span-4 space-y-6 no-print text-left text-slate-800 dark:text-slate-100 italic sticky top-24">
+        
+        <!-- Bloc Pub -->
+        <div id="ad-top-container" class="ad-placeholder" style="width: 100% !important; min-height: 250px !important;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5275018762590702"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 text-left">
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+          <div class="p-6">
+            <h3 class="text-[10px] font-bold text-slate-900 uppercase tracking-widest flex items-center gap-2 mb-6 dark:text-white italic">Outils Professionnels</h3>
+            <div class="space-y-4">
+              <a href="https://c3po.link/Q9Km6E7Z9a" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-cyan-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-cyan-100 p-3 rounded-xl text-cyan-600 dark:bg-slate-600 shadow-inner font-black italic text-center">📊</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Compta & Fiscalité</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Automatisez vos revenus avec Indy (100% gratuit).</div></div>
+                </div>
+              </a>
+              <a href="https://bour.so/p/RUhqIX1d2Cs" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-blue-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-blue-100 p-3 rounded-xl text-blue-600 dark:bg-slate-600 shadow-inner font-black italic text-center">🏦</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Banque Mobile Pro</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Optimisez vos revenus. +150€ offerts ici.</div></div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 dark:bg-slate-800 dark:border-slate-700">
+          <h3 class="font-bold text-slate-900 mb-6 text-[10px] dark:text-white uppercase tracking-widest italic border-b pb-2">Questions Analytiques (FAQ)</h3>
+          <div class="space-y-6 dark:text-slate-300">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Pourquoi le net imposable est-il plus élevé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Il réintègre la part de CSG et CRDS dite non déductible fiscalement. C'est le référentiel utilisé par l'administration pour calculer votre impôt.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Négociation : Salaire Brut Annuel ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Absolument. Le brut annuel est la seule base légale mentionnée sur le contrat. Le mensuel peut varier selon le nombre de jours ouvrés ou les primes.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impact des Titres Restaurant ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Votre net "virement" sera diminué de votre quote-part salariale (souvent 50% de la valeur faciale du titre).</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Stagiaires : Quel taux de charges ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Sous le plafond de sécurité sociale (4,35€/h en 2025), la gratification est exonérée. Le Brut est égal au Net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">C'est quoi le Net Social ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le montant à déclarer pour vos droits sociaux (CAF). Il figure obligatoirement sur votre bulletin de paie.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impôt : Taux Personnalisé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le taux calculé selon vos revenus du foyer. Si vous ne le communiquez pas, votre employeur appliquera le taux par défaut.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Mutuelle Obligatoire ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">La mutuelle collective est financée à 50% min. par l'employeur. Votre part est déduite de votre salaire net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Plafonds Sécurité Sociale ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Le plafond (PMSS) sert de base au calcul de certaines cotisations. Il est réévalué chaque année au 1er janvier.</p></details>
+          </div>
+        </div>
+
+        <!-- Bloc Pub (Bas Sidebar) -->
+        <div id="ad-sidebar-container" class="ad-placeholder no-print" style="width: 100% !important; min-height: 250px !important;">
+           <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5275018762590702"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+        </div>
+      </div>
+
+      <!-- SIDEBAR (Colonne Droite - 4/12) - STICKY & DESIGN RICHE -->
+      <div class="lg:col-span-4 space-y-6 no-print text-left text-slate-800 dark:text-slate-100 italic sticky top-24">
+        
+        <!-- Bloc Pub -->
+        <div id="ad-top-container" class="ad-placeholder" style="width: 100% !important; min-height: 250px !important;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5275018762590702"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 text-left">
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+          <div class="p-6">
+            <h3 class="text-[10px] font-bold text-slate-900 uppercase tracking-widest flex items-center gap-2 mb-6 dark:text-white italic">Outils Professionnels</h3>
+            <div class="space-y-4">
+              <a href="https://c3po.link/Q9Km6E7Z9a" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-cyan-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-cyan-100 p-3 rounded-xl text-cyan-600 dark:bg-slate-600 shadow-inner font-black italic text-center">📊</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Compta & Fiscalité</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Automatisez vos revenus avec Indy (100% gratuit).</div></div>
+                </div>
+              </a>
+              <a href="https://bour.so/p/RUhqIX1d2Cs" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-blue-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-blue-100 p-3 rounded-xl text-blue-600 dark:bg-slate-600 shadow-inner font-black italic text-center">🏦</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Banque Mobile Pro</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Optimisez vos revenus. +150€ offerts ici.</div></div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 dark:bg-slate-800 dark:border-slate-700">
+          <h3 class="font-bold text-slate-900 mb-6 text-[10px] dark:text-white uppercase tracking-widest italic border-b pb-2">Questions Analytiques (FAQ)</h3>
+          <div class="space-y-6 dark:text-slate-300">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Pourquoi le net imposable est-il plus élevé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Il réintègre la part de CSG et CRDS dite non déductible fiscalement. C'est le référentiel utilisé par l'administration pour calculer votre impôt.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Négociation : Salaire Brut Annuel ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Absolument. Le brut annuel est la seule base légale mentionnée sur le contrat. Le mensuel peut varier selon le nombre de jours ouvrés ou les primes.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impact des Titres Restaurant ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Votre net "virement" sera diminué de votre quote-part salariale (souvent 50% de la valeur faciale du titre).</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Stagiaires : Quel taux de charges ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Sous le plafond de sécurité sociale (4,35€/h en 2025), la gratification est exonérée. Le Brut est égal au Net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">C'est quoi le Net Social ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le montant à déclarer pour vos droits sociaux (CAF). Il figure obligatoirement sur votre bulletin de paie.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impôt : Taux Personnalisé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le taux calculé selon vos revenus du foyer. Si vous ne le communiquez pas, votre employeur appliquera le taux par défaut.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Mutuelle Obligatoire ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">La mutuelle collective est financée à 50% min. par l'employeur. Votre part est déduite de votre salaire net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Plafonds Sécurité Sociale ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Le plafond (PMSS) sert de base au calcul de certaines cotisations. Il est réévalué chaque année au 1er janvier.</p></details>
+          </div>
+        </div>
+
+        <!-- Bloc Pub (Bas Sidebar) -->
+        <div id="ad-sidebar-container" class="ad-placeholder no-print" style="width: 100% !important; min-height: 250px !important;">
+           <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5275018762590702"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+        </div>
+      </div>
+
+      <!-- SIDEBAR (Colonne Droite - 4/12) - STICKY & DESIGN RICHE -->
+      <div class="lg:col-span-4 space-y-6 no-print text-left text-slate-800 dark:text-slate-100 italic sticky top-24">
+        
+        <!-- Bloc Pub -->
+        <div id="ad-top-container" class="ad-placeholder" style="width: 100% !important; min-height: 250px !important;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5275018762590702"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 text-left">
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+          <div class="p-6">
+            <h3 class="text-[10px] font-bold text-slate-900 uppercase tracking-widest flex items-center gap-2 mb-6 dark:text-white italic">Outils Professionnels</h3>
+            <div class="space-y-4">
+              <a href="https://c3po.link/Q9Km6E7Z9a" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-cyan-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-cyan-100 p-3 rounded-xl text-cyan-600 dark:bg-slate-600 shadow-inner font-black italic text-center">📊</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Compta & Fiscalité</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Automatisez vos revenus avec Indy (100% gratuit).</div></div>
+                </div>
+              </a>
+              <a href="https://bour.so/p/RUhqIX1d2Cs" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-blue-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-blue-100 p-3 rounded-xl text-blue-600 dark:bg-slate-600 shadow-inner font-black italic text-center">🏦</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Banque Mobile Pro</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Optimisez vos revenus. +150€ offerts ici.</div></div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 dark:bg-slate-800 dark:border-slate-700">
+          <h3 class="font-bold text-slate-900 mb-6 text-[10px] dark:text-white uppercase tracking-widest italic border-b pb-2">Questions Analytiques (FAQ)</h3>
+          <div class="space-y-6 dark:text-slate-300">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Pourquoi le net imposable est-il plus élevé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Il réintègre la part de CSG et CRDS dite non déductible fiscalement. C'est le référentiel utilisé par l'administration pour calculer votre impôt.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Négociation : Salaire Brut Annuel ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Absolument. Le brut annuel est la seule base légale mentionnée sur le contrat. Le mensuel peut varier selon le nombre de jours ouvrés ou les primes.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impact des Titres Restaurant ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Votre net "virement" sera diminué de votre quote-part salariale (souvent 50% de la valeur faciale du titre).</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Stagiaires : Quel taux de charges ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Sous le plafond de sécurité sociale (4,35€/h en 2025), la gratification est exonérée. Le Brut est égal au Net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">C'est quoi le Net Social ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le montant à déclarer pour vos droits sociaux (CAF). Il figure obligatoirement sur votre bulletin de paie.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impôt : Taux Personnalisé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le taux calculé selon vos revenus du foyer. Si vous ne le communiquez pas, votre employeur appliquera le taux par défaut.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Mutuelle Obligatoire ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">La mutuelle collective est financée à 50% min. par l'employeur. Votre part est déduite de votre salaire net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Plafonds Sécurité Sociale ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Le plafond (PMSS) sert de base au calcul de certaines cotisations. Il est réévalué chaque année au 1er janvier.</p></details>
+          </div>
+        </div>
+
+        <!-- Bloc Pub (Bas Sidebar) -->
+        <div id="ad-sidebar-container" class="ad-placeholder no-print" style="width: 100% !important; min-height: 250px !important;">
+           <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5275018762590702"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+        </div>
+      </div>
+
+      <!-- SIDEBAR (Colonne Droite - 4/12) - STICKY & DESIGN RICHE -->
+      <div class="lg:col-span-4 space-y-6 no-print text-left text-slate-800 dark:text-slate-100 italic sticky top-24">
+        
+        <!-- Bloc Pub -->
+        <div id="ad-top-container" class="ad-placeholder" style="width: 100% !important; min-height: 250px !important;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5275018762590702"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 text-left">
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+          <div class="p-6">
+            <h3 class="text-[10px] font-bold text-slate-900 uppercase tracking-widest flex items-center gap-2 mb-6 dark:text-white italic">Outils Professionnels</h3>
+            <div class="space-y-4">
+              <a href="https://c3po.link/Q9Km6E7Z9a" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-cyan-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-cyan-100 p-3 rounded-xl text-cyan-600 dark:bg-slate-600 shadow-inner font-black italic text-center">📊</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Compta & Fiscalité</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Automatisez vos revenus avec Indy (100% gratuit).</div></div>
+                </div>
+              </a>
+              <a href="https://bour.so/p/RUhqIX1d2Cs" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-blue-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-blue-100 p-3 rounded-xl text-blue-600 dark:bg-slate-600 shadow-inner font-black italic text-center">🏦</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Banque Mobile Pro</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Optimisez vos revenus. +150€ offerts ici.</div></div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 dark:bg-slate-800 dark:border-slate-700">
+          <h3 class="font-bold text-slate-900 mb-6 text-[10px] dark:text-white uppercase tracking-widest italic border-b pb-2">Questions Analytiques (FAQ)</h3>
+          <div class="space-y-6 dark:text-slate-300">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Pourquoi le net imposable est-il plus élevé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Il réintègre la part de CSG et CRDS dite non déductible fiscalement. C'est le référentiel utilisé par l'administration pour calculer votre impôt.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Négociation : Salaire Brut Annuel ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Absolument. Le brut annuel est la seule base légale mentionnée sur le contrat. Le mensuel peut varier selon le nombre de jours ouvrés ou les primes.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impact des Titres Restaurant ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Votre net "virement" sera diminué de votre quote-part salariale (souvent 50% de la valeur faciale du titre).</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Stagiaires : Quel taux de charges ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Sous le plafond de sécurité sociale (4,35€/h en 2025), la gratification est exonérée. Le Brut est égal au Net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">C'est quoi le Net Social ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le montant à déclarer pour vos droits sociaux (CAF). Il figure obligatoirement sur votre bulletin de paie.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impôt : Taux Personnalisé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le taux calculé selon vos revenus du foyer. Si vous ne le communiquez pas, votre employeur appliquera le taux par défaut.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Mutuelle Obligatoire ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">La mutuelle collective est financée à 50% min. par l'employeur. Votre part est déduite de votre salaire net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Plafonds Sécurité Sociale ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Le plafond (PMSS) sert de base au calcul de certaines cotisations. Il est réévalué chaque année au 1er janvier.</p></details>
+          </div>
+        </div>
+
+        <!-- Bloc Pub (Bas Sidebar) -->
+        <div id="ad-sidebar-container" class="ad-placeholder no-print" style="width: 100% !important; min-height: 250px !important;">
+           <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5275018762590702"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+        </div>
+      </div>
+
+      <!-- SIDEBAR (Colonne Droite - 4/12) - STICKY & DESIGN RICHE -->
+      <div class="lg:col-span-4 space-y-6 no-print text-left text-slate-800 dark:text-slate-100 italic sticky top-24">
+        
+        <!-- Bloc Pub -->
+        <div id="ad-top-container" class="ad-placeholder" style="width: 100% !important; min-height: 250px !important;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5275018762590702"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 text-left">
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+          <div class="p-6">
+            <h3 class="text-[10px] font-bold text-slate-900 uppercase tracking-widest flex items-center gap-2 mb-6 dark:text-white italic">Outils Professionnels</h3>
+            <div class="space-y-4">
+              <a href="https://c3po.link/Q9Km6E7Z9a" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-cyan-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-cyan-100 p-3 rounded-xl text-cyan-600 dark:bg-slate-600 shadow-inner font-black italic text-center">📊</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Compta & Fiscalité</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Automatisez vos revenus avec Indy (100% gratuit).</div></div>
+                </div>
+              </a>
+              <a href="https://bour.so/p/RUhqIX1d2Cs" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-blue-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-blue-100 p-3 rounded-xl text-blue-600 dark:bg-slate-600 shadow-inner font-black italic text-center">🏦</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Banque Mobile Pro</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Optimisez vos revenus. +150€ offerts ici.</div></div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 dark:bg-slate-800 dark:border-slate-700">
+          <h3 class="font-bold text-slate-900 mb-6 text-[10px] dark:text-white uppercase tracking-widest italic border-b pb-2">Questions Analytiques (FAQ)</h3>
+          <div class="space-y-6 dark:text-slate-300">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Pourquoi le net imposable est-il plus élevé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Il réintègre la part de CSG et CRDS dite non déductible fiscalement. C'est le référentiel utilisé par l'administration pour calculer votre impôt.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Négociation : Salaire Brut Annuel ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Absolument. Le brut annuel est la seule base légale mentionnée sur le contrat. Le mensuel peut varier selon le nombre de jours ouvrés ou les primes.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impact des Titres Restaurant ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Votre net "virement" sera diminué de votre quote-part salariale (souvent 50% de la valeur faciale du titre).</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Stagiaires : Quel taux de charges ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Sous le plafond de sécurité sociale (4,35€/h en 2025), la gratification est exonérée. Le Brut est égal au Net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">C'est quoi le Net Social ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le montant à déclarer pour vos droits sociaux (CAF). Il figure obligatoirement sur votre bulletin de paie.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impôt : Taux Personnalisé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le taux calculé selon vos revenus du foyer. Si vous ne le communiquez pas, votre employeur appliquera le taux par défaut.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Mutuelle Obligatoire ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">La mutuelle collective est financée à 50% min. par l'employeur. Votre part est déduite de votre salaire net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Plafonds Sécurité Sociale ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Le plafond (PMSS) sert de base au calcul de certaines cotisations. Il est réévalué chaque année au 1er janvier.</p></details>
+          </div>
+        </div>
+
+        <!-- Bloc Pub (Bas Sidebar) -->
+        <div id="ad-sidebar-container" class="ad-placeholder no-print" style="width: 100% !important; min-height: 250px !important;">
+           <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5275018762590702"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+        </div>
+      </div>
+
+      <!-- SIDEBAR (Colonne Droite - 4/12) - STICKY & DESIGN RICHE -->
+      <div class="lg:col-span-4 space-y-6 no-print text-left text-slate-800 dark:text-slate-100 italic sticky top-24">
+        
+        <!-- Bloc Pub -->
+        <div id="ad-top-container" class="ad-placeholder" style="width: 100% !important; min-height: 250px !important;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5275018762590702"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 text-left">
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+          <div class="p-6">
+            <h3 class="text-[10px] font-bold text-slate-900 uppercase tracking-widest flex items-center gap-2 mb-6 dark:text-white italic">Outils Professionnels</h3>
+            <div class="space-y-4">
+              <a href="https://c3po.link/Q9Km6E7Z9a" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-cyan-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-cyan-100 p-3 rounded-xl text-cyan-600 dark:bg-slate-600 shadow-inner font-black italic text-center">📊</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Compta & Fiscalité</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Automatisez vos revenus avec Indy (100% gratuit).</div></div>
+                </div>
+              </a>
+              <a href="https://bour.so/p/RUhqIX1d2Cs" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-blue-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-blue-100 p-3 rounded-xl text-blue-600 dark:bg-slate-600 shadow-inner font-black italic text-center">🏦</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Banque Mobile Pro</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Optimisez vos revenus. +150€ offerts ici.</div></div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 dark:bg-slate-800 dark:border-slate-700">
+          <h3 class="font-bold text-slate-900 mb-6 text-[10px] dark:text-white uppercase tracking-widest italic border-b pb-2">Questions Analytiques (FAQ)</h3>
+          <div class="space-y-6 dark:text-slate-300">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Pourquoi le net imposable est-il plus élevé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Il réintègre la part de CSG et CRDS dite non déductible fiscalement. C'est le référentiel utilisé par l'administration pour calculer votre impôt.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Négociation : Salaire Brut Annuel ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Absolument. Le brut annuel est la seule base légale mentionnée sur le contrat. Le mensuel peut varier selon le nombre de jours ouvrés ou les primes.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impact des Titres Restaurant ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Votre net "virement" sera diminué de votre quote-part salariale (souvent 50% de la valeur faciale du titre).</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Stagiaires : Quel taux de charges ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Sous le plafond de sécurité sociale (4,35€/h en 2025), la gratification est exonérée. Le Brut est égal au Net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">C'est quoi le Net Social ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le montant à déclarer pour vos droits sociaux (CAF). Il figure obligatoirement sur votre bulletin de paie.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impôt : Taux Personnalisé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le taux calculé selon vos revenus du foyer. Si vous ne le communiquez pas, votre employeur appliquera le taux par défaut.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Mutuelle Obligatoire ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">La mutuelle collective est financée à 50% min. par l'employeur. Votre part est déduite de votre salaire net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Plafonds Sécurité Sociale ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Le plafond (PMSS) sert de base au calcul de certaines cotisations. Il est réévalué chaque année au 1er janvier.</p></details>
+          </div>
+        </div>
+
+        <!-- Bloc Pub (Bas Sidebar) -->
+        <div id="ad-sidebar-container" class="ad-placeholder no-print" style="width: 100% !important; min-height: 250px !important;">
+           <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5275018762590702"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+        </div>
+      </div>
+
+      <!-- SIDEBAR (Colonne Droite - 4/12) - STICKY & DESIGN RICHE -->
+      <div class="lg:col-span-4 space-y-6 no-print text-left text-slate-800 dark:text-slate-100 italic sticky top-24">
+        
+        <!-- Bloc Pub -->
+        <div id="ad-top-container" class="ad-placeholder" style="width: 100% !important; min-height: 250px !important;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5275018762590702"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 text-left">
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+          <div class="p-6">
+            <h3 class="text-[10px] font-bold text-slate-900 uppercase tracking-widest flex items-center gap-2 mb-6 dark:text-white italic">Outils Professionnels</h3>
+            <div class="space-y-4">
+              <a href="https://c3po.link/Q9Km6E7Z9a" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-cyan-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-cyan-100 p-3 rounded-xl text-cyan-600 dark:bg-slate-600 shadow-inner font-black italic text-center">📊</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Compta & Fiscalité</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Automatisez vos revenus avec Indy (100% gratuit).</div></div>
+                </div>
+              </a>
+              <a href="https://bour.so/p/RUhqIX1d2Cs" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-blue-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-blue-100 p-3 rounded-xl text-blue-600 dark:bg-slate-600 shadow-inner font-black italic text-center">🏦</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Banque Mobile Pro</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Optimisez vos revenus. +150€ offerts ici.</div></div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 dark:bg-slate-800 dark:border-slate-700">
+          <h3 class="font-bold text-slate-900 mb-6 text-[10px] dark:text-white uppercase tracking-widest italic border-b pb-2">Questions Analytiques (FAQ)</h3>
+          <div class="space-y-6 dark:text-slate-300">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Pourquoi le net imposable est-il plus élevé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Il réintègre la part de CSG et CRDS dite non déductible fiscalement. C'est le référentiel utilisé par l'administration pour calculer votre impôt.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Négociation : Salaire Brut Annuel ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Absolument. Le brut annuel est la seule base légale mentionnée sur le contrat. Le mensuel peut varier selon le nombre de jours ouvrés ou les primes.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impact des Titres Restaurant ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Votre net "virement" sera diminué de votre quote-part salariale (souvent 50% de la valeur faciale du titre).</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Stagiaires : Quel taux de charges ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Sous le plafond de sécurité sociale (4,35€/h en 2025), la gratification est exonérée. Le Brut est égal au Net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">C'est quoi le Net Social ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le montant à déclarer pour vos droits sociaux (CAF). Il figure obligatoirement sur votre bulletin de paie.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impôt : Taux Personnalisé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le taux calculé selon vos revenus du foyer. Si vous ne le communiquez pas, votre employeur appliquera le taux par défaut.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Mutuelle Obligatoire ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">La mutuelle collective est financée à 50% min. par l'employeur. Votre part est déduite de votre salaire net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Plafonds Sécurité Sociale ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Le plafond (PMSS) sert de base au calcul de certaines cotisations. Il est réévalué chaque année au 1er janvier.</p></details>
+          </div>
+        </div>
+
+        <!-- Bloc Pub (Bas Sidebar) -->
+        <div id="ad-sidebar-container" class="ad-placeholder no-print" style="width: 100% !important; min-height: 250px !important;">
+           <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5275018762590702"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+        </div>
+      </div>
+
+      <!-- SIDEBAR (Colonne Droite - 4/12) - STICKY & DESIGN RICHE -->
+      <div class="lg:col-span-4 space-y-6 no-print text-left text-slate-800 dark:text-slate-100 italic sticky top-24">
+        
+        <!-- Bloc Pub -->
+        <div id="ad-top-container" class="ad-placeholder" style="width: 100% !important; min-height: 250px !important;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5275018762590702"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 text-left">
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+          <div class="p-6">
+            <h3 class="text-[10px] font-bold text-slate-900 uppercase tracking-widest flex items-center gap-2 mb-6 dark:text-white italic">Outils Professionnels</h3>
+            <div class="space-y-4">
+              <a href="https://c3po.link/Q9Km6E7Z9a" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-cyan-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-cyan-100 p-3 rounded-xl text-cyan-600 dark:bg-slate-600 shadow-inner font-black italic text-center">📊</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Compta & Fiscalité</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Automatisez vos revenus avec Indy (100% gratuit).</div></div>
+                </div>
+              </a>
+              <a href="https://bour.so/p/RUhqIX1d2Cs" target="_blank" rel="noopener noreferrer" class="group block p-4 rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white hover:from-blue-50 transition-all dark:from-slate-700 dark:border-slate-600 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="bg-blue-100 p-3 rounded-xl text-blue-600 dark:bg-slate-600 shadow-inner font-black italic text-center">🏦</div>
+                  <div><div class="font-bold text-slate-800 text-sm dark:text-slate-100 group-hover:text-blue-600 uppercase tracking-tighter italic">Banque Mobile Pro</div><div class="text-[10px] text-slate-500 mt-1 dark:text-slate-400 leading-tight italic">Optimisez vos revenus. +150€ offerts ici.</div></div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 dark:bg-slate-800 dark:border-slate-700">
+          <h3 class="font-bold text-slate-900 mb-6 text-[10px] dark:text-white uppercase tracking-widest italic border-b pb-2">Questions Analytiques (FAQ)</h3>
+          <div class="space-y-6 dark:text-slate-300">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Pourquoi le net imposable est-il plus élevé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Il réintègre la part de CSG et CRDS dite non déductible fiscalement. C'est le référentiel utilisé par l'administration pour calculer votre impôt.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Négociation : Salaire Brut Annuel ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Absolument. Le brut annuel est la seule base légale mentionnée sur le contrat. Le mensuel peut varier selon le nombre de jours ouvrés ou les primes.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impact des Titres Restaurant ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Votre net "virement" sera diminué de votre quote-part salariale (souvent 50% de la valeur faciale du titre).</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Stagiaires : Quel taux de charges ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Sous le plafond de sécurité sociale (4,35€/h en 2025), la gratification est exonérée. Le Brut est égal au Net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">C'est quoi le Net Social ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le montant à déclarer pour vos droits sociaux (CAF). Il figure obligatoirement sur votre bulletin de paie.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Impôt : Taux Personnalisé ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">C'est le taux calculé selon vos revenus du foyer. Si vous ne le communiquez pas, votre employeur appliquera le taux par défaut.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Mutuelle Obligatoire ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">La mutuelle collective est financée à 50% min. par l'employeur. Votre part est déduite de votre salaire net.</p></details>
+             <hr class="border-slate-100 dark:border-slate-700">
+             <details class="group text-sm"><summary class="cursor-pointer font-bold hover:text-blue-600 list-none flex justify-between tracking-tighter italic">Plafonds Sécurité Sociale ? <span class="group-open:rotate-180 transition-transform">▼</span></summary><p class="text-slate-500 mt-3 text-[11px] leading-relaxed italic border-l-2 border-slate-100 dark:border-slate-700 pl-4">Le plafond (PMSS) sert de base au calcul de certaines cotisations. Il est réévalué chaque année au 1er janvier.</p></details>
+          </div>
+        </div>
+
+        <!-- Bloc Pub (Bas Sidebar) -->
+        <div id="ad-sidebar-container" class="ad-placeholder no-print" style="width: 100% !important; min-height: 250px !important;">
+           <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5275018762590702"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
         </div>
       </div>
 
@@ -584,7 +1313,14 @@
   <script>
     // ERROR SUPPRESSION HANDLER FOR ADSENSE/ANALYTICS NOISE
     window.onerror = function(message, source, lineno, colno, error) {
-      if (message === "Script error.") {
+      if (!message) return false;
+      const msg = message.toString().toLowerCase();
+      if (
+        msg.includes("script error") || 
+        msg.includes("adsbygoogle") || 
+        msg.includes("tagerror") || 
+        msg.includes("no slot size")
+      ) {
         return true; // Suppress external cross-origin script errors
       }
     };
@@ -594,58 +1330,107 @@
     const SMIC_NET_2025 = 1426; 
     const CSG_NON_DED_RATE = 0.029; 
 
-    // Cache DOM elements
-    const el = {
-      brutMensuel: document.getElementById('brutMensuel'),
-      brutAnnuel: document.getElementById('brutAnnuel'),
-      netMensuel: document.getElementById('netMensuel'),
-      netAnnuel: document.getElementById('netAnnuel'), 
-      statut: document.getElementById('statut'),
-      mois13: document.getElementById('mois13'),
-      tauxImpot: document.getElementById('tauxImpot'),
-      result: document.getElementById('result'),
-      netApresImpot: document.getElementById('netApresImpot'),
-      netImposable: document.getElementById('netImposable'),
-      coutCharges: document.getElementById('coutCharges'),
-      coutEmployeur: document.getElementById('coutEmployeur'),
-      badgeStatut: document.getElementById('badgeStatut'),
-      blocImpot: document.getElementById('blocImpot'),
-      chartPie: document.getElementById('chartPie'),
-      percentNet: document.getElementById('percentNet'),
-      percentCharges: document.getElementById('percentCharges'),
-      salaryTableBody: document.getElementById('salaryTableBody'),
-      gridStatut: document.getElementById('gridStatut'),
-      smicTag: document.getElementById('smicTag'),
-      smicMultiple: document.getElementById('smicMultiple'),
-      // Budget module elements
-      toggleBudget: document.getElementById('toggleBudget'),
-      budgetSection: document.getElementById('budgetSection'),
-      expenseRent: document.getElementById('expenseRent'),
-      expenseBills: document.getElementById('expenseBills'),
-      expenseFood: document.getElementById('expenseFood'),
-      expenseTransport: document.getElementById('expenseTransport'),
-      expenseLeisure: document.getElementById('expenseLeisure'),
-      expenseSavings: document.getElementById('expenseSavings'),
-      expenseOther: document.getElementById('expenseOther'),
-      resultRemaining: document.getElementById('resultRemaining')
-    };
-
+    // Global variable for elements, populated on DOMContentLoaded
+    let el = {};
     let adSeoInitialized = false;
     let initialised = false;
 
+    // --- CRITICAL FIX: DYNAMIC ADSENSE LOADING TO PREVENT PAGE FREEZE ---
+    function loadAdSense() {
+        const script = document.createElement('script');
+        script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5275018762590702";
+        script.async = true;
+        script.crossOrigin = "anonymous";
+        document.body.appendChild(script);
+    }
+    // Load Ads 2 seconds AFTER the page is interactive
+    setTimeout(loadAdSense, 2000);
+
     // Helper: Push AdSense safely with retry limit
     function safePushAd(id, attempts = 0) {
-       if (attempts > 5) return; // Stop trying after 5 seconds
+       if (attempts > 20) return; // Increase attempts/duration
        const wrapper = document.getElementById(id);
-       if (wrapper && wrapper.offsetWidth > 0) {
-          try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
-       } else {
-          setTimeout(() => safePushAd(id, attempts + 1), 500);
+       const ins = wrapper ? wrapper.querySelector('ins.adsbygoogle') : null;
+
+       if (wrapper && ins) {
+          const rect = wrapper.getBoundingClientRect();
+          const style = window.getComputedStyle(wrapper);
+          
+          if (rect.width > 0 && rect.height > 0 && style.display !== 'none' && style.visibility !== 'hidden') {
+              try {
+                  (window.adsbygoogle = window.adsbygoogle || []).push({});
+              } catch (e) {
+                  // Squelch
+              }
+              return;
+          }
        }
+       // Retry
+       setTimeout(() => safePushAd(id, attempts + 1), 500);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Secure local storage access
+      // 1. Initialize DOM elements securely
+      el = {
+          brutMensuel: document.getElementById('brutMensuel'),
+          brutAnnuel: document.getElementById('brutAnnuel'),
+          netMensuel: document.getElementById('netMensuel'),
+          netAnnuel: document.getElementById('netAnnuel'), 
+          statut: document.getElementById('statut'),
+          mois13: document.getElementById('mois13'),
+          tauxImpot: document.getElementById('tauxImpot'),
+          result: document.getElementById('result'),
+          netApresImpot: document.getElementById('netApresImpot'),
+          netImposable: document.getElementById('netImposable'),
+          coutCharges: document.getElementById('coutCharges'),
+          coutEmployeur: document.getElementById('coutEmployeur'),
+          badgeStatut: document.getElementById('badgeStatut'),
+          blocImpot: document.getElementById('blocImpot'),
+          chartPie: document.getElementById('chartPie'),
+          percentNet: document.getElementById('percentNet'),
+          percentCharges: document.getElementById('percentCharges'),
+          salaryTableBody: document.getElementById('salaryTableBody'),
+          gridStatut: document.getElementById('gridStatut'),
+          smicTag: document.getElementById('smicTag'),
+          smicMultiple: document.getElementById('smicMultiple'),
+          // Budget module elements
+          toggleBudget: document.getElementById('toggleBudget'),
+          budgetSection: document.getElementById('budgetSection'),
+          expenseRent: document.getElementById('expenseRent'),
+          expenseBills: document.getElementById('expenseBills'),
+          expenseFood: document.getElementById('expenseFood'),
+          expenseTransport: document.getElementById('expenseTransport'),
+          expenseLeisure: document.getElementById('expenseLeisure'),
+          expenseSavings: document.getElementById('expenseSavings'),
+          expenseOther: document.getElementById('expenseOther'),
+          resultRemaining: document.getElementById('resultRemaining'),
+          // Hourly rate elements
+          tauxHoraireNet: document.getElementById('tauxHoraireNet'),
+          tauxHoraireBrut: document.getElementById('tauxHoraireBrut')
+      };
+
+      // 2. INPUT PROTECTION (NO CHARACTERS)
+      const numericInputs = ['brutMensuel','brutAnnuel','tauxImpot', 'netMensuel', 'netAnnuel', 'expenseRent', 'expenseBills', 'expenseFood', 'expenseTransport', 'expenseLeisure', 'expenseSavings', 'expenseOther'];
+      
+      numericInputs.forEach(id => {
+          const element = document.getElementById(id);
+          if(element) {
+              // Block non-numeric keys
+              element.addEventListener('keydown', (e) => {
+                  const allowedKeys = ['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '.', ','];
+                  if (allowedKeys.includes(e.key) || (e.ctrlKey === true || e.metaKey === true) || /^[0-9]$/.test(e.key)) {
+                      return;
+                  }
+                  e.preventDefault();
+              });
+              // Clean on input (paste)
+              element.addEventListener('input', (e) => {
+                  e.target.value = e.target.value.replace(/[^0-9.,]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/(,.*?)\,/g, '$1');
+              });
+          }
+      });
+
+      // 3. Secure local storage access
       try {
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
           document.documentElement.classList.add('dark');
@@ -658,11 +1443,15 @@
       loadFromUrl();
       if(!initialised) generateGrid();
       initialised = true;
-      setTimeout(() => safePushAd('ad-top-container'), 1000);
+      
+      // Initialize Ads safely with slightly increased delay to ensure layout stability
+      setTimeout(() => safePushAd('ad-top-container'), 1500);
+      setTimeout(() => safePushAd('ad-sidebar-container'), 2000);
 
       // ADD listeners for all input fields including net values
       ['brutMensuel','brutAnnuel','tauxImpot', 'netMensuel', 'netAnnuel'].forEach(id => {
-         document.getElementById(id).addEventListener('input', () => compute(id));
+         const element = document.getElementById(id);
+         if(element) element.addEventListener('input', () => compute(id));
       });
       el.statut?.addEventListener('change', () => compute('option'));
       el.mois13?.addEventListener('change', () => compute('option'));
@@ -673,7 +1462,8 @@
           compute('budget'); // Recalculate layout/data
       });
       ['expenseRent', 'expenseBills', 'expenseFood', 'expenseTransport', 'expenseLeisure', 'expenseSavings', 'expenseOther'].forEach(id => {
-          document.getElementById(id).addEventListener('input', () => compute('budget'));
+          const element = document.getElementById(id);
+          if(element) element.addEventListener('input', () => compute('budget'));
       });
     });
 
@@ -685,6 +1475,9 @@
     };
 
     const compute = (source) => {
+      // Safety check: ensure 'el' is populated
+      if(!el.brutMensuel) return;
+
       const nbMois = el.mois13.checked ? 13 : 12;
       const tS = RATES[el.statut.value] || 0.22;
       const tP = EMPLOYER_RATES[el.statut.value] || 0;
@@ -742,8 +1535,8 @@
       el.coutEmployeur.textContent = Math.round(cT).toLocaleString('fr-FR');
       
       // Hourly Rates UI
-      document.getElementById('tauxHoraireNet').textContent = hN.toFixed(2).replace('.', ',');
-      document.getElementById('tauxHoraireBrut').textContent = hB.toFixed(2).replace('.', ',');
+      if(el.tauxHoraireNet) el.tauxHoraireNet.textContent = hN.toFixed(2).replace('.', ',');
+      if(el.tauxHoraireBrut) el.tauxHoraireBrut.textContent = hB.toFixed(2).replace('.', ',');
       
       const nP = ((1 - tS) * 100).toFixed(0);
       el.percentNet.textContent = `${nP}%`;
@@ -768,7 +1561,7 @@
       document.getElementById('fpCoutEmployeur').textContent = Math.round(cT).toLocaleString('fr-FR') + ' €';
 
       // BUDGET MODULE UPDATE
-      if(el.toggleBudget.checked) {
+      if(el.toggleBudget && el.toggleBudget.checked) {
           const rent = safeParseFloat(el.expenseRent.value);
           const bills = safeParseFloat(el.expenseBills.value);
           const food = safeParseFloat(el.expenseFood.value);
@@ -791,17 +1584,19 @@
           const healthBar = document.getElementById('budgetBar');
           const healthText = document.getElementById('healthPercentage');
           
-          healthBar.style.width = Math.min(ratio, 100) + '%';
-          healthText.textContent = ratio.toFixed(0) + '%';
-          
-          // Color logic
-          healthBar.className = "h-2.5 rounded-full transition-all duration-500 ease-out"; // Reset base classes
-          if(ratio < 33) {
-             healthBar.classList.add('bg-emerald-500'); // Green
-          } else if(ratio < 50) {
-             healthBar.classList.add('bg-amber-500'); // Orange
-          } else {
-             healthBar.classList.add('bg-red-500'); // Red
+          if(healthBar && healthText) {
+              healthBar.style.width = Math.min(ratio, 100) + '%';
+              healthText.textContent = ratio.toFixed(0) + '%';
+              
+              // Color logic
+              healthBar.className = "h-2.5 rounded-full transition-all duration-500 ease-out"; // Reset base classes
+              if(ratio < 33) {
+                 healthBar.classList.add('bg-emerald-500'); // Green
+              } else if(ratio < 50) {
+                 healthBar.classList.add('bg-amber-500'); // Orange
+              } else {
+                 healthBar.classList.add('bg-red-500'); // Red
+              }
           }
       }
 
@@ -839,7 +1634,8 @@
         const i = n + (b * 0.9825 * CSG_NON_DED_RATE);
         h += `<tr><td class="p-3 border-b">${(b*12).toLocaleString('fr-FR')} €</td><td class="p-3 border-b">${b.toLocaleString('fr-FR')} €</td><td class="p-3 border-b font-black text-blue-600">${Math.round(n).toLocaleString('fr-FR')} €</td><td class="p-3 border-b italic">${Math.round(i).toLocaleString('fr-FR')} €</td></tr>`;
       }
-      el.salaryTableBody.innerHTML = h;
+      if(el.salaryTableBody) el.salaryTableBody.innerHTML = h;
+      if(el.gridStatut && el.statut) el.gridStatut.textContent = el.statut.options[el.statut.selectedIndex].text;
     };
 
     const updateUrl = (g, s, m, t) => {
@@ -874,7 +1670,7 @@
                 savings: el.expenseSavings.value,
                 other: el.expenseOther.value
             };
-            localStorage.setItem('paienet_last_sim', JSON.stringify(data));
+            sessionStorage.setItem('paienet_last_sim', JSON.stringify(data));
         } catch(e) { /* silent fail for iframes */ }
     };
 
@@ -890,10 +1686,10 @@
         if(p.get('t')) el.tauxImpot.value = Math.round(parseFloat(p.get('t')));
         compute('option');
       } 
-      // 2. Fallback to LocalStorage (Auto-Save)
+      // 2. Fallback to SessionStorage (Auto-Save during session only)
       else {
           try {
-              const saved = localStorage.getItem('paienet_last_sim');
+              const saved = sessionStorage.getItem('paienet_last_sim');
               if (saved) {
                   const data = JSON.parse(saved);
                   if (data.brut) {
@@ -906,13 +1702,13 @@
                       if(data.budget) {
                           el.toggleBudget.checked = true;
                           el.budgetSection.classList.remove('hidden');
-                          el.expenseRent.value = data.rent || '';
-                          el.expenseBills.value = data.bills || '';
-                          el.expenseFood.value = data.food || '';
-                          el.expenseTransport.value = data.trans || '';
-                          el.expenseLeisure.value = data.leisure || '';
-                          el.expenseSavings.value = data.savings || '';
-                          el.expenseOther.value = data.other || '';
+                          if(el.expenseRent) el.expenseRent.value = data.rent || '';
+                          if(el.expenseBills) el.expenseBills.value = data.bills || '';
+                          if(el.expenseFood) el.expenseFood.value = data.food || '';
+                          if(el.expenseTransport) el.expenseTransport.value = data.trans || '';
+                          if(el.expenseLeisure) el.expenseLeisure.value = data.leisure || '';
+                          if(el.expenseSavings) el.expenseSavings.value = data.savings || '';
+                          if(el.expenseOther) el.expenseOther.value = data.other || '';
                       }
                       compute('option');
                   }
@@ -956,7 +1752,7 @@
       el.netMensuel.value = '';
       el.netAnnuel.value = '';
       el.result.classList.add('hidden');
-      try { localStorage.removeItem('paienet_last_sim'); } catch(e){}
+      try { sessionStorage.removeItem('paienet_last_sim'); } catch(e){}
       updateUrl();
     };
 
