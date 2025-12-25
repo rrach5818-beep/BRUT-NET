@@ -9,10 +9,29 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   
   <link rel="canonical" href="https://paienet.fr/">
-  
-  <!-- [ADSENSE] Script de vérification et de monétisation officiel -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5275018762590702" crossorigin="anonymous"></script>
 
+  <!-- 1. GESTIONNAIRE D'ERREURS (Sécurité Anti-Crash) -->
+  <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+      if (!message) return false;
+      const msg = message.toString().toLowerCase();
+      // Filtre radical des erreurs techniques de Google Ads
+      if (
+        msg.includes("script error") || 
+        msg.includes("adsbygoogle") || 
+        msg.includes("tagerror") || 
+        msg.includes("no slot size") ||
+        msg.includes("availablewidth=0") ||
+        msg.includes("uncaught exception")
+      ) {
+        return true; // Supprime l'erreur de la console
+      }
+    };
+  </script>
+
+  <!-- 2. SCRIPT ADSENSE OFFICIEL (Chargement asynchrone) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5275018762590702" crossorigin="anonymous"></script>
+  
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-053E5TJ1PX"></script>
   <script>
@@ -76,21 +95,25 @@
     #seo-extra { display: none; }
     #seo-extra.expanded { display: block; }
 
-    /* Ad Placeholders */
+    /* Ad Placeholders (Sécurisés avec dimensions fixes) */
     .ad-placeholder { 
       background: rgba(241, 245, 249, 0.5); 
       border: 1px dashed #cbd5e1; 
-      display: block; 
+      display: flex; 
+      align-items: center;
+      justify-content: center;
       text-align: center; 
       color: #94a3b8; 
       font-size: 10px; 
       text-transform: uppercase; 
       letter-spacing: 1px; 
-      min-height: 90px; 
-      width: 100%; 
+      min-height: 280px; 
+      width: 100%;
+      min-width: 250px; /* Largeur minimale forcée */
       border-radius: 8px; 
       margin: 20px 0; 
       overflow: hidden; 
+      position: relative;
     }
     .dark .ad-placeholder { background: rgba(30, 41, 59, 0.5); border-color: #334155; }
 
@@ -186,7 +209,7 @@
               </div>
               <div class="flex items-center gap-2">
                 <label for="tauxImpot" class="text-sm font-medium text-slate-700 whitespace-nowrap dark:text-slate-300">Taux PAS (%) :</label>
-                <input type="number" id="tauxImpot" placeholder="0" class="w-full p-1.5 text-sm border border-slate-300 rounded focus:ring-1 focus:ring-blue-500 outline-none text-right dark:bg-slate-800 dark:border-slate-600 dark:text-white" min="0" max="100" step="0.1">
+                <input type="text" id="tauxImpot" placeholder="0" class="w-full p-1.5 text-sm border border-slate-300 rounded focus:ring-1 focus:ring-blue-500 outline-none text-right dark:bg-slate-800 dark:border-slate-600 dark:text-white">
               </div>
             </div>
           </div>
@@ -195,14 +218,14 @@
             <div class="relative group">
               <label class="block text-[10px] font-bold text-slate-500 uppercase mb-2 dark:text-slate-400 tracking-widest text-left">Salaire Brut Mensuel</label>
               <div class="relative">
-                <input type="number" id="brutMensuel" placeholder="Ex: 2500" class="w-full pl-4 pr-10 py-3 rounded-lg border-2 border-slate-200 focus:border-blue-500 outline-none text-xl font-bold text-slate-800 shadow-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white">
+                <input type="text" id="brutMensuel" placeholder="Ex: 2500" class="w-full pl-4 pr-10 py-3 rounded-lg border-2 border-slate-200 focus:border-blue-500 outline-none text-xl font-bold text-slate-800 shadow-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white">
                 <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 font-medium pointer-events-none">€</span>
               </div>
             </div>
             <div class="relative group">
               <label class="block text-[10px] font-bold text-slate-500 uppercase mb-2 dark:text-slate-400 tracking-widest text-left">Salaire Brut Annuel</label>
               <div class="relative text-left">
-                <input type="number" id="brutAnnuel" placeholder="Ex: 30000" class="w-full pl-4 pr-10 py-3 rounded-lg border-2 border-slate-200 focus:border-blue-500 outline-none text-xl font-bold text-slate-800 shadow-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white">
+                <input type="text" id="brutAnnuel" placeholder="Ex: 30000" class="w-full pl-4 pr-10 py-3 rounded-lg border-2 border-slate-200 focus:border-blue-500 outline-none text-xl font-bold text-slate-800 shadow-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white">
                 <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 font-medium pointer-events-none">€</span>
               </div>
             </div>
@@ -266,7 +289,7 @@
                   <div class="flex justify-between text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><span class="flex items-center gap-1.5 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><span class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600"></span><span class="text-slate-600 dark:text-slate-300 text-left text-left text-left text-left text-left">Cotisations</span></span><span class="text-slate-700 dark:text-slate-200 text-left text-left" id="percentCharges">--%</span></div>
                 </div>
 
-                <!-- Répartition Visuelle des Cotisations (NOUVEAU) -->
+                <!-- Répartition Visuelle des Cotisations -->
                 <div class="mt-8 text-left w-full">
                     <h4 class="text-[9px] font-black uppercase text-slate-400 mb-3 tracking-widest border-b border-slate-100 pb-1 dark:border-slate-700">Où vont vos cotisations ?</h4>
                     <div class="space-y-3">
@@ -291,7 +314,7 @@
               </div>
             </div>
 
-            <!-- MODULE BUDGET / RESTE A VIVRE (Nouveau) -->
+            <!-- MODULE BUDGET / RESTE A VIVRE (Opt-in) -->
             <div class="border-t border-slate-200 bg-slate-50 p-6 rounded-b-xl dark:bg-slate-800/50 dark:border-slate-700 transition-colors">
                <div class="flex justify-between items-center mb-4">
                   <div class="flex items-center gap-2">
@@ -308,31 +331,31 @@
                   <div class="grid grid-cols-2 gap-4">
                      <div class="space-y-1">
                         <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Loyer / Crédit</label>
-                        <input type="number" id="expenseRent" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                        <input type="text" id="expenseRent" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
                      </div>
                      <div class="space-y-1">
                         <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Factures & Énergie</label>
-                        <input type="number" id="expenseBills" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                        <input type="text" id="expenseBills" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
                      </div>
                      <div class="space-y-1">
                         <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Alimentation</label>
-                        <input type="number" id="expenseFood" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                        <input type="text" id="expenseFood" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
                      </div>
                      <div class="space-y-1">
                         <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Transports</label>
-                        <input type="number" id="expenseTransport" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                        <input type="text" id="expenseTransport" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
                      </div>
                      <div class="space-y-1">
                         <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Loisirs / Sorties</label>
-                        <input type="number" id="expenseLeisure" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                        <input type="text" id="expenseLeisure" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
                      </div>
                      <div class="space-y-1">
                         <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Épargne / Projets</label>
-                        <input type="number" id="expenseSavings" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                        <input type="text" id="expenseSavings" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
                      </div>
                      <div class="space-y-1 col-span-2">
                         <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Autres Charges</label>
-                        <input type="number" id="expenseOther" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                        <input type="text" id="expenseOther" placeholder="0" class="w-full p-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-blue-500 outline-none bg-white dark:bg-slate-700 dark:border-slate-600 dark:text-white">
                      </div>
                   </div>
                   
@@ -397,16 +420,17 @@
 
             <div id="seo-extra">
                <h3 class="text-lg font-bold mt-8 uppercase tracking-widest text-blue-600 text-xs border-l-4 border-blue-600 pl-4 mb-4 italic text-left text-left text-left text-left text-left text-left">Pourquoi les charges varient selon votre statut ?</h3>
-               <p class="text-sm leading-relaxed mb-4 text-slate-600 dark:text-slate-400 text-left text-left text-left text-left">En France, la structure des cotisations sociales dépend du contrat de travail. Pour un <strong>salarié non-cadre</strong>, le taux de retenue salariale moyen est de 22%. Les <strong>cadres</strong>, de par leur affiliation à des caisses de retraite complémentaire (AGIRC-ARRCO) et de prévoyance plus protectrices, voient leur taux de charges monter à environ 25% du brut.</p>
+               <p class="text-sm leading-relaxed mb-4 text-slate-600 dark:text-slate-400 text-left text-left text-left text-left text-left text-left">En France, la structure des cotisations sociales dépend du contrat de travail. Pour un <strong>salarié non-cadre</strong>, le taux de retenue salariale moyen est de 22%. Les <strong>cadres</strong>, de par leur affiliation à des caisses de retraite complémentaire (AGIRC-ARRCO) et de prévoyance plus protectrices, voient leur taux de charges monter à environ 25% du brut.</p>
 
-               <!-- [ADSENSE] Emplacement In-Feed (Protégé via expandSEO) -->
+               <!-- PUB IN FEED (avec loading lazy) -->
                <div id="ad-seo-container" class="ad-placeholder no-print my-8" style="width: 100% !important; min-height: 90px !important;">
                   <ins class="adsbygoogle"
                        style="display:block"
                        data-ad-client="ca-pub-5275018762590702"
                        data-ad-slot="0987654321"
                        data-ad-format="auto"
-                       data-full-width-responsive="true"></ins>
+                       data-full-width-responsive="true"
+                       loading="lazy"></ins>
                </div>
 
                <h3 class="text-lg font-bold mt-8 uppercase tracking-widest text-blue-600 text-xs border-l-4 border-blue-600 pl-4 mb-4 italic text-left text-left text-left text-left text-left text-left">Le Cas de l'Alternance et de l'Apprentissage</h3>
@@ -437,17 +461,18 @@
         </div>
       </div>
 
-      <!-- SIDEBAR (Colonne Droite - 4/12) - STICKY & DESIGN RICHE -->
+      <!-- SIDEBAR (Colonne Droite) -->
       <div class="lg:col-span-4 space-y-6 no-print text-left text-slate-800 dark:text-slate-100 italic sticky top-24">
         
-        <!-- Bloc Pub -->
+        <!-- Bloc Pub Haut -->
         <div id="ad-top-container" class="ad-placeholder" style="width: 100% !important; min-height: 250px !important;">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-5275018762590702"
                  data-ad-slot="1234567890"
                  data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
+                 data-full-width-responsive="true"
+                 loading="lazy"></ins>
         </div>
 
         <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 text-left">
@@ -492,14 +517,15 @@
           </div>
         </div>
 
-        <!-- Bloc Pub (Bas Sidebar) -->
+        <!-- Bloc Pub Bas -->
         <div id="ad-sidebar-container" class="ad-placeholder no-print" style="width: 100% !important; min-height: 250px !important;">
            <ins class="adsbygoogle"
                 style="display:block"
                 data-ad-client="ca-pub-5275018762590702"
                 data-ad-slot="1234567890"
                 data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
+                data-full-width-responsive="true"
+                loading="lazy"></ins>
         </div>
       </div>
     </div>
@@ -515,7 +541,7 @@
     </div>
   </footer>
 
-  <!-- MODALS EXPERT -->
+  <!-- MODALS -->
   <div id="modalMentions" class="modal">
     <div class="bg-white dark:bg-slate-800 max-w-2xl w-full rounded-3xl p-10 shadow-2xl relative max-h-[85vh] overflow-y-auto border border-slate-200 dark:border-slate-700 text-left text-left text-left">
       <button onclick="closeModals()" class="absolute top-6 right-6 text-slate-400 hover:text-red-500 text-3xl font-light">&times;</button>
@@ -555,97 +581,112 @@
     </div>
   </div>
 
-  <!-- [ADSENSE] Modèle PDF (Pas d'annonces ici) -->
-  <div id="print-document">
-    <div class="pdf-watermark text-left">PaieNet</div>
-    <div class="pdf-header text-left">
-      <div class="text-left"><div class="pdf-title tracking-tighter italic font-black text-left">SIMULATION DE REVENUS 2025</div><div class="pdf-subtitle italic uppercase text-[10px] text-slate-500 text-left">Analyse analytique financière confidentielle</div></div>
-      <div class="pdf-meta text-right"><div class="pdf-logo-text uppercase font-black italic">Paie<span class="pdf-logo-accent font-black italic text-right">Net</span></div><div style="font-size:10px; color:#94a3b8; margin-top:5px;">Réf: <span id="pdfRef">SAL-2025</span></div><div style="font-size:10px; color:#94a3b8;" id="pdfDate"></div></div>
-    </div>
-    <div class="pdf-grid text-left">
-       <div class="pdf-box text-left"><div class="pdf-box-label tracking-widest uppercase text-[8px] italic">STATUT CONTRACTUEL RÉFÉRENCE</div><div class="pdf-box-value font-black uppercase italic text-left" id="pdfStatut">Non Cadre</div></div>
-       <div class="pdf-box text-right"><div class="pdf-box-label text-blue-600 tracking-widest uppercase text-[8px] italic font-bold">BASE BRUTE MENSUELLE</div><div class="pdf-box-value font-black italic" style="font-size:18px; color:#0f172a;" id="pdfBrut">0 €</div></div>
-    </div>
-    <table class="pdf-table text-left">
-       <thead><tr><th class="italic tracking-widest text-left uppercase text-[9px] text-left">DÉSIGNATION ANALYTIQUE DES PRÉLÈVEMENTS</th><th class="col-right uppercase text-[9px] text-left text-left">Base / Taux</th><th class="col-right uppercase text-[9px] text-left text-left">Part Salariale</th></tr></thead>
-       <tbody>
-          <tr><td class="font-bold uppercase tracking-tighter text-left italic">Salaire de Base (Traitement Brut)</td><td class="col-right italic font-semibold text-slate-400 text-left">100%</td><td class="col-right font-black" id="pdfBrutTable">0 €</td></tr>
-          <tr><td class="text-red-600 uppercase tracking-tighter font-semibold text-left italic font-bold">Charges Sociales & Prélèvements de Solidarité</td><td class="col-right font-medium italic text-left" id="pdfTableTauxCharges">~22%</td><td class="col-right font-bold text-red-600 tracking-tighter" id="pdfCharges">- 0 €</td></tr>
-          <tr><td class="italic text-slate-500 text-[10px] text-left italic font-medium">Net Imposable (Référentiel Fiscalité)</td><td class="col-right italic text-[10px] text-left">-</td><td class="col-right font-semibold italic text-slate-500 text-[10px]" id="pdfImposable">0 €</td></tr>
-          <tr><td class="font-bold text-blue-600 uppercase tracking-tighter border-t-2 border-blue-50 pt-4 text-left italic">REVENU NET DISPONIBLE (SOLDE AVANT P.A.S)</td><td class="col-right font-black italic text-blue-600 tracking-tighter pt-4 text-[10px] text-left">-</td><td class="col-right font-black text-blue-600 pt-4" id="pdfNetAvant" style="font-size:14px;">0 €</td></tr>
-          <tr><td class="uppercase tracking-tighter text-[9px] text-left italic font-bold text-left text-left">Prélèvement à la Source (P.A.S) estimé</td><td class="col-right font-semibold italic text-left font-bold text-[10px] text-left">0%</td><td class="col-right font-bold text-red-500 tracking-tighter italic text-left" id="pdfMontantPas">- 0 €</td></tr>
-       </tbody>
-    </table>
-    <div class="pdf-summary text-left"><div class="pdf-total-box"><div class="pdf-total-row italic font-semibold uppercase text-[9px] text-slate-400 text-left italic"><span>Charge Totale Entreprise</span><span id="pdfCoutPatronal" class="font-black tracking-tighter text-slate-900 text-left">0 €</span></div><div class="pdf-total-row final italic tracking-widest text-left italic border-t border-blue-200 mt-2 pt-2 text-left text-left"><span class="uppercase font-black italic">SOLDE NET RÉEL VIRE</span><span id="pdfNetApres" class="font-black text-left">0 €</span></div></div></div>
-    <div class="pdf-footer-section text-left text-left text-left text-left"><div class="pdf-legal italic leading-relaxed text-slate-400 text-[8px] text-left text-left">Document édité par PaieNet.fr. Impression le <span id="pdfPrintDate"></span>.</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://paienet.fr" class="pdf-qr" alt="QR PaieNet" /></div>
-  </div>
-
   <!-- SCRIPT LOGIC -->
   <script>
-    // ERROR SUPPRESSION HANDLER FOR ADSENSE/ANALYTICS NOISE
-    window.onerror = function(message, source, lineno, colno, error) {
-      if (message === "Script error.") {
-        return true; // Suppress external cross-origin script errors
-      }
-    };
-
     const RATES = { non_cadre: 0.22, cadre: 0.25, public: 0.15, liberal: 0.45, alternant: 0.02 }; 
     const EMPLOYER_RATES = { non_cadre: 0.42, cadre: 0.45, public: 0.45, liberal: 0, alternant: 0.05 }; 
     const SMIC_NET_2025 = 1426; 
     const CSG_NON_DED_RATE = 0.029; 
 
-    // Cache DOM elements
-    const el = {
-      brutMensuel: document.getElementById('brutMensuel'),
-      brutAnnuel: document.getElementById('brutAnnuel'),
-      netMensuel: document.getElementById('netMensuel'),
-      netAnnuel: document.getElementById('netAnnuel'), 
-      statut: document.getElementById('statut'),
-      mois13: document.getElementById('mois13'),
-      tauxImpot: document.getElementById('tauxImpot'),
-      result: document.getElementById('result'),
-      netApresImpot: document.getElementById('netApresImpot'),
-      netImposable: document.getElementById('netImposable'),
-      coutCharges: document.getElementById('coutCharges'),
-      coutEmployeur: document.getElementById('coutEmployeur'),
-      badgeStatut: document.getElementById('badgeStatut'),
-      blocImpot: document.getElementById('blocImpot'),
-      chartPie: document.getElementById('chartPie'),
-      percentNet: document.getElementById('percentNet'),
-      percentCharges: document.getElementById('percentCharges'),
-      salaryTableBody: document.getElementById('salaryTableBody'),
-      gridStatut: document.getElementById('gridStatut'),
-      smicTag: document.getElementById('smicTag'),
-      smicMultiple: document.getElementById('smicMultiple'),
-      // Budget module elements
-      toggleBudget: document.getElementById('toggleBudget'),
-      budgetSection: document.getElementById('budgetSection'),
-      expenseRent: document.getElementById('expenseRent'),
-      expenseBills: document.getElementById('expenseBills'),
-      expenseFood: document.getElementById('expenseFood'),
-      expenseTransport: document.getElementById('expenseTransport'),
-      expenseLeisure: document.getElementById('expenseLeisure'),
-      expenseSavings: document.getElementById('expenseSavings'),
-      expenseOther: document.getElementById('expenseOther'),
-      resultRemaining: document.getElementById('resultRemaining')
-    };
-
+    // Global variable for elements, populated on DOMContentLoaded
+    let el = {};
     let adSeoInitialized = false;
     let initialised = false;
 
-    // Helper: Push AdSense safely with retry limit
+    // --- STRATEGIE DE CHARGEMENT PUBLICITAIRE (Lazy Load) ---
+    // Injecte le script AdSense uniquement après que la page soit stable (2s)
+    function loadAdSense() {
+        const script = document.createElement('script');
+        script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5275018762590702";
+        script.async = true;
+        script.crossOrigin = "anonymous";
+        document.body.appendChild(script);
+    }
+    setTimeout(loadAdSense, 2500);
+
+    // Fonction d'affichage sécurisée des blocs de pub
     function safePushAd(id, attempts = 0) {
-       if (attempts > 5) return; // Stop trying after 5 seconds
+       if (attempts > 20) return; 
        const wrapper = document.getElementById(id);
-       if (wrapper && wrapper.offsetWidth > 0) {
-          try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+       const ins = wrapper ? wrapper.querySelector('ins.adsbygoogle') : null;
+
+       // Check if wrapper AND ins exist, have width, and aren't hidden
+       // Using clientWidth/Height is safer than offsetWidth for content visibility
+       // Added check for offsetParent to ensure element is actually rendered in the DOM
+       if (wrapper && ins && wrapper.clientWidth > 0 && wrapper.clientHeight > 0 && wrapper.offsetParent !== null && window.getComputedStyle(wrapper).display !== 'none') {
+          try { 
+             (window.adsbygoogle = window.adsbygoogle || []).push({}); 
+          } catch(e) {
+             // Suppressed
+          }
        } else {
+          // Sinon on réessaie plus tard
           setTimeout(() => safePushAd(id, attempts + 1), 500);
        }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Secure local storage access
+      // 1. Initialize DOM elements securely
+      el = {
+          brutMensuel: document.getElementById('brutMensuel'),
+          brutAnnuel: document.getElementById('brutAnnuel'),
+          netMensuel: document.getElementById('netMensuel'),
+          netAnnuel: document.getElementById('netAnnuel'), 
+          statut: document.getElementById('statut'),
+          mois13: document.getElementById('mois13'),
+          tauxImpot: document.getElementById('tauxImpot'),
+          result: document.getElementById('result'),
+          netApresImpot: document.getElementById('netApresImpot'),
+          netImposable: document.getElementById('netImposable'),
+          coutCharges: document.getElementById('coutCharges'),
+          coutEmployeur: document.getElementById('coutEmployeur'),
+          badgeStatut: document.getElementById('badgeStatut'),
+          blocImpot: document.getElementById('blocImpot'),
+          chartPie: document.getElementById('chartPie'),
+          percentNet: document.getElementById('percentNet'),
+          percentCharges: document.getElementById('percentCharges'),
+          salaryTableBody: document.getElementById('salaryTableBody'),
+          gridStatut: document.getElementById('gridStatut'),
+          smicTag: document.getElementById('smicTag'),
+          smicMultiple: document.getElementById('smicMultiple'),
+          // Budget module elements
+          toggleBudget: document.getElementById('toggleBudget'),
+          budgetSection: document.getElementById('budgetSection'),
+          expenseRent: document.getElementById('expenseRent'),
+          expenseBills: document.getElementById('expenseBills'),
+          expenseFood: document.getElementById('expenseFood'),
+          expenseTransport: document.getElementById('expenseTransport'),
+          expenseLeisure: document.getElementById('expenseLeisure'),
+          expenseSavings: document.getElementById('expenseSavings'),
+          expenseOther: document.getElementById('expenseOther'),
+          resultRemaining: document.getElementById('resultRemaining'),
+          // Hourly rate elements
+          tauxHoraireNet: document.getElementById('tauxHoraireNet'),
+          tauxHoraireBrut: document.getElementById('tauxHoraireBrut')
+      };
+
+      // 2. INPUT PROTECTION (NO CHARACTERS)
+      const numericInputs = ['brutMensuel','brutAnnuel','tauxImpot', 'netMensuel', 'netAnnuel', 'expenseRent', 'expenseBills', 'expenseFood', 'expenseTransport', 'expenseLeisure', 'expenseSavings', 'expenseOther'];
+      
+      numericInputs.forEach(id => {
+          const element = document.getElementById(id);
+          if(element) {
+              // Block non-numeric keys
+              element.addEventListener('keydown', (e) => {
+                  const allowedKeys = ['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '.', ','];
+                  if (allowedKeys.includes(e.key) || (e.ctrlKey === true || e.metaKey === true) || /^[0-9]$/.test(e.key)) {
+                      return;
+                  }
+                  e.preventDefault();
+              });
+              // Clean on input (paste)
+              element.addEventListener('input', (e) => {
+                  e.target.value = e.target.value.replace(/[^0-9.,]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/(,.*?)\,/g, '$1');
+              });
+          }
+      });
+
+      // 3. Secure local storage access
       try {
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
           document.documentElement.classList.add('dark');
@@ -658,11 +699,15 @@
       loadFromUrl();
       if(!initialised) generateGrid();
       initialised = true;
-      setTimeout(() => safePushAd('ad-top-container'), 1000);
+      
+      // Initialize Ads safely with slightly increased delay to ensure layout stability
+      setTimeout(() => safePushAd('ad-top-container'), 1500);
+      setTimeout(() => safePushAd('ad-sidebar-container'), 2000);
 
       // ADD listeners for all input fields including net values
       ['brutMensuel','brutAnnuel','tauxImpot', 'netMensuel', 'netAnnuel'].forEach(id => {
-         document.getElementById(id).addEventListener('input', () => compute(id));
+         const element = document.getElementById(id);
+         if(element) element.addEventListener('input', () => compute(id));
       });
       el.statut?.addEventListener('change', () => compute('option'));
       el.mois13?.addEventListener('change', () => compute('option'));
@@ -673,7 +718,8 @@
           compute('budget'); // Recalculate layout/data
       });
       ['expenseRent', 'expenseBills', 'expenseFood', 'expenseTransport', 'expenseLeisure', 'expenseSavings', 'expenseOther'].forEach(id => {
-          document.getElementById(id).addEventListener('input', () => compute('budget'));
+          const element = document.getElementById(id);
+          if(element) element.addEventListener('input', () => compute('budget'));
       });
     });
 
@@ -685,6 +731,9 @@
     };
 
     const compute = (source) => {
+      // Safety check: ensure 'el' is populated
+      if(!el.brutMensuel) return;
+
       const nbMois = el.mois13.checked ? 13 : 12;
       const tS = RATES[el.statut.value] || 0.22;
       const tP = EMPLOYER_RATES[el.statut.value] || 0;
@@ -742,8 +791,8 @@
       el.coutEmployeur.textContent = Math.round(cT).toLocaleString('fr-FR');
       
       // Hourly Rates UI
-      document.getElementById('tauxHoraireNet').textContent = hN.toFixed(2).replace('.', ',');
-      document.getElementById('tauxHoraireBrut').textContent = hB.toFixed(2).replace('.', ',');
+      if(el.tauxHoraireNet) el.tauxHoraireNet.textContent = hN.toFixed(2).replace('.', ',');
+      if(el.tauxHoraireBrut) el.tauxHoraireBrut.textContent = hB.toFixed(2).replace('.', ',');
       
       const nP = ((1 - tS) * 100).toFixed(0);
       el.percentNet.textContent = `${nP}%`;
@@ -761,14 +810,15 @@
       }
 
       // DETAILS PANEL UPDATES
-      document.getElementById('fpBrut').textContent = Math.round(mG).toLocaleString('fr-FR') + ' €';
-      document.getElementById('fpTotalCharges').textContent = '- ' + Math.round(cS).toLocaleString('fr-FR') + ' €';
-      document.getElementById('fpNet').textContent = Math.round(mN).toLocaleString('fr-FR') + ' €';
-      document.getElementById('fpNetImposable').textContent = Math.round(mI).toLocaleString('fr-FR') + ' €';
-      document.getElementById('fpCoutEmployeur').textContent = Math.round(cT).toLocaleString('fr-FR') + ' €';
+      const updateText = (id, val) => { const e = document.getElementById(id); if(e) e.textContent = val; };
+      updateText('fpBrut', Math.round(mG).toLocaleString('fr-FR') + ' €');
+      updateText('fpTotalCharges', '- ' + Math.round(cS).toLocaleString('fr-FR') + ' €');
+      updateText('fpNet', Math.round(mN).toLocaleString('fr-FR') + ' €');
+      updateText('fpNetImposable', Math.round(mI).toLocaleString('fr-FR') + ' €');
+      updateText('fpCoutEmployeur', Math.round(cT).toLocaleString('fr-FR') + ' €');
 
       // BUDGET MODULE UPDATE
-      if(el.toggleBudget.checked) {
+      if(el.toggleBudget && el.toggleBudget.checked) {
           const rent = safeParseFloat(el.expenseRent.value);
           const bills = safeParseFloat(el.expenseBills.value);
           const food = safeParseFloat(el.expenseFood.value);
@@ -781,56 +831,63 @@
           const remaining = mNA - totalExpenses;
           
           // Update Remaining text
-          el.resultRemaining.textContent = Math.round(remaining).toLocaleString('fr-FR') + ' €';
-          
-          if(remaining < 0) el.resultRemaining.classList.replace('text-blue-700', 'text-red-600');
-          else el.resultRemaining.classList.replace('text-red-600', 'text-blue-700');
+          if(el.resultRemaining) {
+              el.resultRemaining.textContent = Math.round(remaining).toLocaleString('fr-FR') + ' €';
+              if(remaining < 0) el.resultRemaining.classList.replace('text-blue-700', 'text-red-600');
+              else el.resultRemaining.classList.replace('text-red-600', 'text-blue-700');
+          }
 
           // Update Health Bar
           const ratio = mNA > 0 ? (totalExpenses / mNA) * 100 : 0;
           const healthBar = document.getElementById('budgetBar');
           const healthText = document.getElementById('healthPercentage');
           
-          healthBar.style.width = Math.min(ratio, 100) + '%';
-          healthText.textContent = ratio.toFixed(0) + '%';
-          
-          // Color logic
-          healthBar.className = "h-2.5 rounded-full transition-all duration-500 ease-out"; // Reset base classes
-          if(ratio < 33) {
-             healthBar.classList.add('bg-emerald-500'); // Green
-          } else if(ratio < 50) {
-             healthBar.classList.add('bg-amber-500'); // Orange
-          } else {
-             healthBar.classList.add('bg-red-500'); // Red
+          if(healthBar && healthText) {
+              healthBar.style.width = Math.min(ratio, 100) + '%';
+              healthText.textContent = ratio.toFixed(0) + '%';
+              
+              // Color logic
+              healthBar.className = "h-2.5 rounded-full transition-all duration-500 ease-out"; // Reset base classes
+              if(ratio < 33) {
+                 healthBar.classList.add('bg-emerald-500'); // Green
+              } else if(ratio < 50) {
+                 healthBar.classList.add('bg-amber-500'); // Orange
+              } else {
+                 healthBar.classList.add('bg-red-500'); // Red
+              }
           }
       }
 
       // PDF UPDATES
-      document.getElementById('pdfBrut').textContent = Math.round(mG).toLocaleString('fr-FR') + ' €';
-      document.getElementById('pdfBrutTable').textContent = Math.round(mG).toLocaleString('fr-FR') + ' €';
-      document.getElementById('pdfCharges').textContent = '- ' + Math.round(cS).toLocaleString('fr-FR') + ' €';
-      document.getElementById('pdfTableTauxCharges').textContent = '~' + (tS*100).toFixed(0) + '%';
-      document.getElementById('pdfImposable').textContent = Math.round(mI).toLocaleString('fr-FR') + ' €';
-      document.getElementById('pdfNetAvant').textContent = Math.round(mN).toLocaleString('fr-FR') + ' €';
-      document.getElementById('pdfMontantPas').textContent = '- ' + Math.round(iM).toLocaleString('fr-FR') + ' €';
-      document.getElementById('pdfCoutPatronal').textContent = Math.round(cT).toLocaleString('fr-FR') + ' €';
-      document.getElementById('pdfNetApres').textContent = Math.round(mNA).toLocaleString('fr-FR') + ' €';
+      const updatePdf = (id, val) => { const e = document.getElementById(id); if(e) e.textContent = val; };
+      updatePdf('pdfBrut', Math.round(mG).toLocaleString('fr-FR') + ' €');
+      updatePdf('pdfBrutTable', Math.round(mG).toLocaleString('fr-FR') + ' €');
+      updatePdf('pdfCharges', '- ' + Math.round(cS).toLocaleString('fr-FR') + ' €');
+      updatePdf('pdfTableTauxCharges', '~' + (tS*100).toFixed(0) + '%');
+      updatePdf('pdfImposable', Math.round(mI).toLocaleString('fr-FR') + ' €');
+      updatePdf('pdfNetAvant', Math.round(mN).toLocaleString('fr-FR') + ' €');
+      updatePdf('pdfMontantPas', '- ' + Math.round(iM).toLocaleString('fr-FR') + ' €');
+      updatePdf('pdfCoutPatronal', Math.round(cT).toLocaleString('fr-FR') + ' €');
+      updatePdf('pdfNetApres', Math.round(mNA).toLocaleString('fr-FR') + ' €');
       
-      const statLabels = { non_cadre: "Salarié Non-Cadre", cadre: "Salarié Cadre", public: "Fonction Publique", liberal: "Profession Libérale", alternant: "Alternant / Apprenti" };
-      document.getElementById('pdfStatut').textContent = statLabels[el.statut.value].toUpperCase();
+      if(document.getElementById('pdfStatut') && el.statut) {
+          const statLabels = { non_cadre: "Salarié Non-Cadre", cadre: "Salarié Cadre", public: "Fonction Publique", liberal: "Profession Libérale", alternant: "Alternant / Apprenti" };
+          document.getElementById('pdfStatut').textContent = statLabels[el.statut.value].toUpperCase();
+      }
       
       const d = new Date();
-      document.getElementById('pdfDate').textContent = d.toLocaleDateString('fr-FR');
-      document.getElementById('pdfPrintDate').textContent = d.toLocaleString('fr-FR');
+      updatePdf('pdfDate', d.toLocaleDateString('fr-FR'));
+      updatePdf('pdfPrintDate', d.toLocaleString('fr-FR'));
       if(document.getElementById('pdfRef')) document.getElementById('pdfRef').textContent = 'SAL-2025-' + Math.floor(Math.random()*1000);
 
       el.result.classList.remove('hidden');
-      updateUrl(mG, el.statut.value, nbMois === 13, tI);
+      updateUrl(mG, el.statut ? el.statut.value : 'non_cadre', nbMois === 13, tI);
       saveState(); // AUTO-SAVE CALL
       if(source === 'option') generateGrid();
     };
 
     const generateGrid = () => {
+      if(!el.statut) return;
       const lv = [1801.8, 2000, 2500, 3000, 3500, 4000, 5000]; 
       const tS = RATES[el.statut.value] || 0.22;
       let h = '';
@@ -839,7 +896,9 @@
         const i = n + (b * 0.9825 * CSG_NON_DED_RATE);
         h += `<tr><td class="p-3 border-b">${(b*12).toLocaleString('fr-FR')} €</td><td class="p-3 border-b">${b.toLocaleString('fr-FR')} €</td><td class="p-3 border-b font-black text-blue-600">${Math.round(n).toLocaleString('fr-FR')} €</td><td class="p-3 border-b italic">${Math.round(i).toLocaleString('fr-FR')} €</td></tr>`;
       }
-      el.salaryTableBody.innerHTML = h;
+      if(el.salaryTableBody) el.salaryTableBody.innerHTML = h;
+      const gridStatut = document.getElementById('gridStatut'); // Fetch dynamically
+      if(gridStatut && el.statut) gridStatut.textContent = el.statut.options[el.statut.selectedIndex].text;
     };
 
     const updateUrl = (g, s, m, t) => {
@@ -874,7 +933,7 @@
                 savings: el.expenseSavings.value,
                 other: el.expenseOther.value
             };
-            localStorage.setItem('paienet_last_sim', JSON.stringify(data));
+            sessionStorage.setItem('paienet_last_sim', JSON.stringify(data));
         } catch(e) { /* silent fail for iframes */ }
     };
 
@@ -883,36 +942,36 @@
       const b = p.get('b');
       
       // 1. Try URL first
-      if(b && !isNaN(parseFloat(b))) {
+      if(b && !isNaN(parseFloat(b)) && el.brutMensuel) {
         el.brutMensuel.value = Math.round(parseFloat(b));
-        if(p.get('s')) el.statut.value = p.get('s');
-        if(p.get('m')) el.mois13.checked = true;
-        if(p.get('t')) el.tauxImpot.value = Math.round(parseFloat(p.get('t')));
+        if(p.get('s') && el.statut) el.statut.value = p.get('s');
+        if(p.get('m') && el.mois13) el.mois13.checked = true;
+        if(p.get('t') && el.tauxImpot) el.tauxImpot.value = Math.round(parseFloat(p.get('t')));
         compute('option');
       } 
-      // 2. Fallback to LocalStorage (Auto-Save)
+      // 2. Fallback to SessionStorage (Auto-Save during session only)
       else {
           try {
-              const saved = localStorage.getItem('paienet_last_sim');
+              const saved = sessionStorage.getItem('paienet_last_sim');
               if (saved) {
                   const data = JSON.parse(saved);
-                  if (data.brut) {
+                  if (data.brut && el.brutMensuel) {
                       el.brutMensuel.value = data.brut;
-                      el.statut.value = data.statut || 'non_cadre';
-                      el.mois13.checked = data.mois13 || false;
-                      el.tauxImpot.value = data.taux || '';
+                      if(el.statut) el.statut.value = data.statut || 'non_cadre';
+                      if(el.mois13) el.mois13.checked = data.mois13 || false;
+                      if(el.tauxImpot) el.tauxImpot.value = data.taux || '';
                       
                       // Load Budget
-                      if(data.budget) {
+                      if(data.budget && el.toggleBudget) {
                           el.toggleBudget.checked = true;
-                          el.budgetSection.classList.remove('hidden');
-                          el.expenseRent.value = data.rent || '';
-                          el.expenseBills.value = data.bills || '';
-                          el.expenseFood.value = data.food || '';
-                          el.expenseTransport.value = data.trans || '';
-                          el.expenseLeisure.value = data.leisure || '';
-                          el.expenseSavings.value = data.savings || '';
-                          el.expenseOther.value = data.other || '';
+                          if(el.budgetSection) el.budgetSection.classList.remove('hidden');
+                          if(el.expenseRent) el.expenseRent.value = data.rent || '';
+                          if(el.expenseBills) el.expenseBills.value = data.bills || '';
+                          if(el.expenseFood) el.expenseFood.value = data.food || '';
+                          if(el.expenseTransport) el.expenseTransport.value = data.trans || '';
+                          if(el.expenseLeisure) el.expenseLeisure.value = data.leisure || '';
+                          if(el.expenseSavings) el.expenseSavings.value = data.savings || '';
+                          if(el.expenseOther) el.expenseOther.value = data.other || '';
                       }
                       compute('option');
                   }
@@ -956,26 +1015,30 @@
       el.netMensuel.value = '';
       el.netAnnuel.value = '';
       el.result.classList.add('hidden');
-      try { localStorage.removeItem('paienet_last_sim'); } catch(e){}
+      try { sessionStorage.removeItem('paienet_last_sim'); } catch(e){}
       updateUrl();
     };
 
     window.copyLink = () => {
       copyToClipboard(window.location.href, () => {
         const msg = document.getElementById('shareMsg');
-        msg.textContent = "Lien copié !";
-        msg.classList.remove('hidden');
-        setTimeout(() => msg.classList.add('hidden'), 2000);
+        if(msg) {
+            msg.textContent = "Lien copié !";
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        }
       });
     };
 
     window.copySummary = () => {
-       const txt = `Salaire Brut: ${el.brutMensuel.value}€\nNet avant impôt: ${el.netMensuel.value}€\nCoût Employeur: ${el.coutEmployeur.textContent}€\nSimulé sur PaieNet.fr`;
+       const txt = `Salaire Brut: ${el.brutMensuel ? el.brutMensuel.value : ''}€\nNet avant impôt: ${el.netMensuel ? el.netMensuel.value : ''}€\nCoût Employeur: ${el.coutEmployeur ? el.coutEmployeur.textContent : ''}€\nSimulé sur PaieNet.fr`;
        copyToClipboard(txt, () => {
           const msg = document.getElementById('shareMsg');
-          msg.textContent = "Résumé copié !";
-          msg.classList.remove('hidden');
-          setTimeout(() => msg.classList.add('hidden'), 2000);
+          if(msg) {
+              msg.textContent = "Résumé copié !";
+              msg.classList.remove('hidden');
+              setTimeout(() => msg.classList.add('hidden'), 2000);
+          }
        });
     };
 
