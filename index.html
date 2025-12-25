@@ -9,30 +9,11 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   
   <link rel="canonical" href="https://paienet.fr/">
-
-  <!-- 1. GESTIONNAIRE D'ERREURS (Sécurité Anti-Crash) -->
-  <script>
-    window.onerror = function(message, source, lineno, colno, error) {
-      if (!message) return false;
-      const msg = message.toString().toLowerCase();
-      // Filtre radical des erreurs techniques de Google Ads
-      if (
-        msg.includes("script error") || 
-        msg.includes("adsbygoogle") || 
-        msg.includes("tagerror") || 
-        msg.includes("no slot size") ||
-        msg.includes("availablewidth=0") ||
-        msg.includes("uncaught exception")
-      ) {
-        return true; // Supprime l'erreur de la console
-      }
-    };
-  </script>
-
-  <!-- 2. SCRIPT ADSENSE OFFICIEL (Chargement asynchrone) -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5275018762590702" crossorigin="anonymous"></script>
   
-  <!-- GA4 -->
+  <!-- Balise de vérification Impact (Sans impact sur les performances) -->
+  <meta name='impact-site-verification' value='f9e0061d-f671-474c-926d-b7a5e6352430'>
+
+  <!-- GA4 (Analytics conservé car léger et utile) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-053E5TJ1PX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -95,7 +76,7 @@
     #seo-extra { display: none; }
     #seo-extra.expanded { display: block; }
 
-    /* Ad Placeholders (Sécurisés avec dimensions fixes) */
+    /* Ad Placeholders (Vides pour l'instant) */
     .ad-placeholder { 
       background: rgba(241, 245, 249, 0.5); 
       border: 1px dashed #cbd5e1; 
@@ -108,12 +89,10 @@
       text-transform: uppercase; 
       letter-spacing: 1px; 
       min-height: 280px; 
-      width: 100%;
-      min-width: 250px; /* Largeur minimale forcée */
+      width: 100%; 
       border-radius: 8px; 
       margin: 20px 0; 
       overflow: hidden; 
-      position: relative;
     }
     .dark .ad-placeholder { background: rgba(30, 41, 59, 0.5); border-color: #334155; }
 
@@ -422,15 +401,9 @@
                <h3 class="text-lg font-bold mt-8 uppercase tracking-widest text-blue-600 text-xs border-l-4 border-blue-600 pl-4 mb-4 italic text-left text-left text-left text-left text-left text-left">Pourquoi les charges varient selon votre statut ?</h3>
                <p class="text-sm leading-relaxed mb-4 text-slate-600 dark:text-slate-400 text-left text-left text-left text-left text-left text-left">En France, la structure des cotisations sociales dépend du contrat de travail. Pour un <strong>salarié non-cadre</strong>, le taux de retenue salariale moyen est de 22%. Les <strong>cadres</strong>, de par leur affiliation à des caisses de retraite complémentaire (AGIRC-ARRCO) et de prévoyance plus protectrices, voient leur taux de charges monter à environ 25% du brut.</p>
 
-               <!-- PUB IN FEED (avec loading lazy) -->
+               <!-- AD PLACEHOLDER IN CONTENT (Vides) -->
                <div id="ad-seo-container" class="ad-placeholder no-print my-8" style="width: 100% !important; min-height: 90px !important;">
-                  <ins class="adsbygoogle"
-                       style="display:block"
-                       data-ad-client="ca-pub-5275018762590702"
-                       data-ad-slot="0987654321"
-                       data-ad-format="auto"
-                       data-full-width-responsive="true"
-                       loading="lazy"></ins>
+                 <!-- PAS DE PUB -->
                </div>
 
                <h3 class="text-lg font-bold mt-8 uppercase tracking-widest text-blue-600 text-xs border-l-4 border-blue-600 pl-4 mb-4 italic text-left text-left text-left text-left text-left text-left">Le Cas de l'Alternance et de l'Apprentissage</h3>
@@ -461,18 +434,12 @@
         </div>
       </div>
 
-      <!-- SIDEBAR (Colonne Droite) -->
+      <!-- SIDEBAR (Colonne Droite - 4/12) - STICKY & DESIGN RICHE -->
       <div class="lg:col-span-4 space-y-6 no-print text-left text-slate-800 dark:text-slate-100 italic sticky top-24">
         
-        <!-- Bloc Pub Haut -->
+        <!-- Bloc Pub (Vides) -->
         <div id="ad-top-container" class="ad-placeholder" style="width: 100% !important; min-height: 250px !important;">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-5275018762590702"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"
-                 loading="lazy"></ins>
+           <!-- PAS DE PUB -->
         </div>
 
         <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-lg dark:bg-slate-800 dark:border-slate-700 text-left">
@@ -517,15 +484,9 @@
           </div>
         </div>
 
-        <!-- Bloc Pub Bas -->
+        <!-- Bloc Pub (Bas Sidebar) - VIDE -->
         <div id="ad-sidebar-container" class="ad-placeholder no-print" style="width: 100% !important; min-height: 250px !important;">
-           <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-5275018762590702"
-                data-ad-slot="1234567890"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-                loading="lazy"></ins>
+           <!-- PAS DE PUB -->
         </div>
       </div>
     </div>
@@ -541,7 +502,7 @@
     </div>
   </footer>
 
-  <!-- MODALS -->
+  <!-- MODALS EXPERT -->
   <div id="modalMentions" class="modal">
     <div class="bg-white dark:bg-slate-800 max-w-2xl w-full rounded-3xl p-10 shadow-2xl relative max-h-[85vh] overflow-y-auto border border-slate-200 dark:border-slate-700 text-left text-left text-left">
       <button onclick="closeModals()" class="absolute top-6 right-6 text-slate-400 hover:text-red-500 text-3xl font-light">&times;</button>
@@ -583,6 +544,8 @@
 
   <!-- SCRIPT LOGIC -->
   <script>
+    // PAS DE SCRIPT ADSENSE = PAS DE RALENTISSEMENT
+
     const RATES = { non_cadre: 0.22, cadre: 0.25, public: 0.15, liberal: 0.45, alternant: 0.02 }; 
     const EMPLOYER_RATES = { non_cadre: 0.42, cadre: 0.45, public: 0.45, liberal: 0, alternant: 0.05 }; 
     const SMIC_NET_2025 = 1426; 
@@ -592,38 +555,6 @@
     let el = {};
     let adSeoInitialized = false;
     let initialised = false;
-
-    // --- STRATEGIE DE CHARGEMENT PUBLICITAIRE (Lazy Load) ---
-    // Injecte le script AdSense uniquement après que la page soit stable (2s)
-    function loadAdSense() {
-        const script = document.createElement('script');
-        script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5275018762590702";
-        script.async = true;
-        script.crossOrigin = "anonymous";
-        document.body.appendChild(script);
-    }
-    setTimeout(loadAdSense, 2500);
-
-    // Fonction d'affichage sécurisée des blocs de pub
-    function safePushAd(id, attempts = 0) {
-       if (attempts > 20) return; 
-       const wrapper = document.getElementById(id);
-       const ins = wrapper ? wrapper.querySelector('ins.adsbygoogle') : null;
-
-       // Check if wrapper AND ins exist, have width, and aren't hidden
-       // Using clientWidth/Height is safer than offsetWidth for content visibility
-       // Added check for offsetParent to ensure element is actually rendered in the DOM
-       if (wrapper && ins && wrapper.clientWidth > 0 && wrapper.clientHeight > 0 && wrapper.offsetParent !== null && window.getComputedStyle(wrapper).display !== 'none') {
-          try { 
-             (window.adsbygoogle = window.adsbygoogle || []).push({}); 
-          } catch(e) {
-             // Suppressed
-          }
-       } else {
-          // Sinon on réessaie plus tard
-          setTimeout(() => safePushAd(id, attempts + 1), 500);
-       }
-    }
 
     document.addEventListener('DOMContentLoaded', () => {
       // 1. Initialize DOM elements securely
@@ -699,10 +630,6 @@
       loadFromUrl();
       if(!initialised) generateGrid();
       initialised = true;
-      
-      // Initialize Ads safely with slightly increased delay to ensure layout stability
-      setTimeout(() => safePushAd('ad-top-container'), 1500);
-      setTimeout(() => safePushAd('ad-sidebar-container'), 2000);
 
       // ADD listeners for all input fields including net values
       ['brutMensuel','brutAnnuel','tauxImpot', 'netMensuel', 'netAnnuel'].forEach(id => {
@@ -778,35 +705,37 @@
       // Update fields ONLY if they are NOT the active element to prevent cursor jumping
       const activeId = document.activeElement ? document.activeElement.id : null;
 
-      if (activeId !== 'brutMensuel') el.brutMensuel.value = Math.round(mG);
-      if (activeId !== 'brutAnnuel') el.brutAnnuel.value = Math.round(mG * nbMois);
+      if (activeId !== 'brutMensuel' && el.brutMensuel) el.brutMensuel.value = Math.round(mG);
+      if (activeId !== 'brutAnnuel' && el.brutAnnuel) el.brutAnnuel.value = Math.round(mG * nbMois);
       
       // For text inputs (Net), use locale string for display
-      if (activeId !== 'netMensuel') el.netMensuel.value = Math.round(mN).toLocaleString('fr-FR');
-      if (activeId !== 'netAnnuel') el.netAnnuel.value = Math.round(mN * nbMois).toLocaleString('fr-FR');
+      if (activeId !== 'netMensuel' && el.netMensuel) el.netMensuel.value = Math.round(mN).toLocaleString('fr-FR');
+      if (activeId !== 'netAnnuel' && el.netAnnuel) el.netAnnuel.value = Math.round(mN * nbMois).toLocaleString('fr-FR');
 
       // MAIN UI UPDATES
-      el.netImposable.textContent = Math.round(mI).toLocaleString('fr-FR');
-      el.coutCharges.textContent = Math.round(cS).toLocaleString('fr-FR');
-      el.coutEmployeur.textContent = Math.round(cT).toLocaleString('fr-FR');
+      if(el.netImposable) el.netImposable.textContent = Math.round(mI).toLocaleString('fr-FR');
+      if(el.coutCharges) el.coutCharges.textContent = Math.round(cS).toLocaleString('fr-FR');
+      if(el.coutEmployeur) el.coutEmployeur.textContent = Math.round(cT).toLocaleString('fr-FR');
       
       // Hourly Rates UI
       if(el.tauxHoraireNet) el.tauxHoraireNet.textContent = hN.toFixed(2).replace('.', ',');
       if(el.tauxHoraireBrut) el.tauxHoraireBrut.textContent = hB.toFixed(2).replace('.', ',');
       
       const nP = ((1 - tS) * 100).toFixed(0);
-      el.percentNet.textContent = `${nP}%`;
-      el.percentCharges.textContent = `${100 - nP}%`;
-      el.chartPie.style.background = `conic-gradient(#2563eb 0% ${nP}%, #e2e8f0 ${nP}% 100%)`;
+      if(el.percentNet) el.percentNet.textContent = `${nP}%`;
+      if(el.percentCharges) el.percentCharges.textContent = `${100 - nP}%`;
+      if(el.chartPie) el.chartPie.style.background = `conic-gradient(#2563eb 0% ${nP}%, #e2e8f0 ${nP}% 100%)`;
 
       if (tI > 0) {
-        el.blocImpot?.classList.remove('hidden');
-        el.netApresImpot.textContent = Math.round(mNA).toLocaleString('fr-FR');
-      } else { el.blocImpot?.classList.add('hidden'); }
+        if(el.blocImpot) el.blocImpot.classList.remove('hidden');
+        if(el.netApresImpot) el.netApresImpot.textContent = Math.round(mNA).toLocaleString('fr-FR');
+      } else { 
+        if(el.blocImpot) el.blocImpot.classList.add('hidden'); 
+      }
 
       if(mN > 0) {
-        el.smicMultiple.textContent = (mN / SMIC_NET_2025).toFixed(1);
-        el.smicTag.classList.remove('hidden');
+        if(el.smicMultiple) el.smicMultiple.textContent = (mN / SMIC_NET_2025).toFixed(1);
+        if(el.smicTag) el.smicTag.classList.remove('hidden');
       }
 
       // DETAILS PANEL UPDATES
@@ -819,13 +748,13 @@
 
       // BUDGET MODULE UPDATE
       if(el.toggleBudget && el.toggleBudget.checked) {
-          const rent = safeParseFloat(el.expenseRent.value);
-          const bills = safeParseFloat(el.expenseBills.value);
-          const food = safeParseFloat(el.expenseFood.value);
-          const trans = safeParseFloat(el.expenseTransport.value);
-          const leisure = safeParseFloat(el.expenseLeisure.value);
-          const savings = safeParseFloat(el.expenseSavings.value);
-          const other = safeParseFloat(el.expenseOther.value);
+          const rent = safeParseFloat(el.expenseRent ? el.expenseRent.value : 0);
+          const bills = safeParseFloat(el.expenseBills ? el.expenseBills.value : 0);
+          const food = safeParseFloat(el.expenseFood ? el.expenseFood.value : 0);
+          const trans = safeParseFloat(el.expenseTransport ? el.expenseTransport.value : 0);
+          const leisure = safeParseFloat(el.expenseLeisure ? el.expenseLeisure.value : 0);
+          const savings = safeParseFloat(el.expenseSavings ? el.expenseSavings.value : 0);
+          const other = safeParseFloat(el.expenseOther ? el.expenseOther.value : 0);
           
           const totalExpenses = rent + bills + food + trans + leisure + savings + other;
           const remaining = mNA - totalExpenses;
@@ -833,6 +762,7 @@
           // Update Remaining text
           if(el.resultRemaining) {
               el.resultRemaining.textContent = Math.round(remaining).toLocaleString('fr-FR') + ' €';
+              
               if(remaining < 0) el.resultRemaining.classList.replace('text-blue-700', 'text-red-600');
               else el.resultRemaining.classList.replace('text-red-600', 'text-blue-700');
           }
@@ -880,9 +810,9 @@
       updatePdf('pdfPrintDate', d.toLocaleString('fr-FR'));
       if(document.getElementById('pdfRef')) document.getElementById('pdfRef').textContent = 'SAL-2025-' + Math.floor(Math.random()*1000);
 
-      el.result.classList.remove('hidden');
+      if(el.result) el.result.classList.remove('hidden');
       updateUrl(mG, el.statut ? el.statut.value : 'non_cadre', nbMois === 13, tI);
-      saveState(); // AUTO-SAVE CALL
+      // saveState(); // DÉSACTIVÉ POUR CONFIDENTIALITÉ TOTALE
       if(source === 'option') generateGrid();
     };
 
@@ -897,7 +827,7 @@
         h += `<tr><td class="p-3 border-b">${(b*12).toLocaleString('fr-FR')} €</td><td class="p-3 border-b">${b.toLocaleString('fr-FR')} €</td><td class="p-3 border-b font-black text-blue-600">${Math.round(n).toLocaleString('fr-FR')} €</td><td class="p-3 border-b italic">${Math.round(i).toLocaleString('fr-FR')} €</td></tr>`;
       }
       if(el.salaryTableBody) el.salaryTableBody.innerHTML = h;
-      const gridStatut = document.getElementById('gridStatut'); // Fetch dynamically
+      const gridStatut = document.getElementById('gridStatut'); 
       if(gridStatut && el.statut) gridStatut.textContent = el.statut.options[el.statut.selectedIndex].text;
     };
 
@@ -916,25 +846,12 @@
       }
     };
 
+    // FONCTION DE SAUVEGARDE (DÉSACTIVÉE)
     const saveState = () => {
-        try {
-            const data = {
-                brut: el.brutMensuel.value,
-                statut: el.statut.value,
-                mois13: el.mois13.checked,
-                taux: el.tauxImpot.value,
-                // Save budget state too
-                budget: el.toggleBudget.checked,
-                rent: el.expenseRent.value,
-                bills: el.expenseBills.value,
-                food: el.expenseFood.value,
-                trans: el.expenseTransport.value,
-                leisure: el.expenseLeisure.value,
-                savings: el.expenseSavings.value,
-                other: el.expenseOther.value
-            };
-            sessionStorage.setItem('paienet_last_sim', JSON.stringify(data));
-        } catch(e) { /* silent fail for iframes */ }
+        // try {
+        //     const data = { ... };
+        //     sessionStorage.setItem('paienet_last_sim', JSON.stringify(data));
+        // } catch(e) { /* silent fail for iframes */ }
     };
 
     const loadFromUrl = () => {
@@ -949,35 +866,15 @@
         if(p.get('t') && el.tauxImpot) el.tauxImpot.value = Math.round(parseFloat(p.get('t')));
         compute('option');
       } 
-      // 2. Fallback to SessionStorage (Auto-Save during session only)
+      // 2. SessionStorage (DÉSACTIVÉ AUSSI POUR ETRE SUR)
+      /*
       else {
           try {
               const saved = sessionStorage.getItem('paienet_last_sim');
-              if (saved) {
-                  const data = JSON.parse(saved);
-                  if (data.brut && el.brutMensuel) {
-                      el.brutMensuel.value = data.brut;
-                      if(el.statut) el.statut.value = data.statut || 'non_cadre';
-                      if(el.mois13) el.mois13.checked = data.mois13 || false;
-                      if(el.tauxImpot) el.tauxImpot.value = data.taux || '';
-                      
-                      // Load Budget
-                      if(data.budget && el.toggleBudget) {
-                          el.toggleBudget.checked = true;
-                          if(el.budgetSection) el.budgetSection.classList.remove('hidden');
-                          if(el.expenseRent) el.expenseRent.value = data.rent || '';
-                          if(el.expenseBills) el.expenseBills.value = data.bills || '';
-                          if(el.expenseFood) el.expenseFood.value = data.food || '';
-                          if(el.expenseTransport) el.expenseTransport.value = data.trans || '';
-                          if(el.expenseLeisure) el.expenseLeisure.value = data.leisure || '';
-                          if(el.expenseSavings) el.expenseSavings.value = data.savings || '';
-                          if(el.expenseOther) el.expenseOther.value = data.other || '';
-                      }
-                      compute('option');
-                  }
-              }
+              // ... code de chargement supprimé pour garantir le nettoyage
           } catch(e) {}
       }
+      */
     };
 
     // --- Helper Copier-Coller Sécurisé ---
@@ -1010,11 +907,11 @@
 
     // --- Fonctions d'Interface ---
     window.resetCalc = () => {
-      el.brutMensuel.value = '';
-      el.brutAnnuel.value = '';
-      el.netMensuel.value = '';
-      el.netAnnuel.value = '';
-      el.result.classList.add('hidden');
+      if(el.brutMensuel) el.brutMensuel.value = '';
+      if(el.brutAnnuel) el.brutAnnuel.value = '';
+      if(el.netMensuel) el.netMensuel.value = '';
+      if(el.netAnnuel) el.netAnnuel.value = '';
+      if(el.result) el.result.classList.add('hidden');
       try { sessionStorage.removeItem('paienet_last_sim'); } catch(e){}
       updateUrl();
     };
@@ -1044,14 +941,17 @@
 
     // CSV EXPORT FUNCTION
     window.exportCSV = () => {
+        const safeVal = (e) => e ? e.value : '';
+        const safeText = (id) => { const e = document.getElementById(id); return e ? e.textContent : ''; };
+        
         const rows = [
             ["Libelle", "Montant"],
-            ["Salaire Brut Mensuel", el.brutMensuel.value + " €"],
-            ["Salaire Net Mensuel", el.netMensuel.value + " €"],
-            ["Net Imposable", el.netImposable.textContent + " €"],
-            ["Cout Total Employeur", el.coutEmployeur.textContent + " €"],
-            ["Taux Horaire Net", document.getElementById('tauxHoraireNet').textContent + " €/h"],
-            ["Reste a Vivre", document.getElementById('resultRemaining').textContent],
+            ["Salaire Brut Mensuel", safeVal(el.brutMensuel) + " €"],
+            ["Salaire Net Mensuel", safeVal(el.netMensuel) + " €"],
+            ["Net Imposable", safeText('netImposable')],
+            ["Cout Total Employeur", safeText('coutEmployeur')],
+            ["Taux Horaire Net", safeText('tauxHoraireNet')],
+            ["Reste a Vivre", safeText('resultRemaining')],
             ["Date Simulation", new Date().toLocaleDateString()]
         ];
         
@@ -1073,8 +973,10 @@
       toggleIcons(isDark);
     };
     function toggleIcons(isD) {
-      document.getElementById('iconSun').classList.toggle('hidden', !isD);
-      document.getElementById('iconMoon').classList.toggle('hidden', isD);
+      const sun = document.getElementById('iconSun');
+      const moon = document.getElementById('iconMoon');
+      if(sun) sun.classList.toggle('hidden', !isD);
+      if(moon) moon.classList.toggle('hidden', isD);
     }
 
     window.openModal = (id) => { document.getElementById(id).classList.add('active'); document.body.style.overflow = 'hidden'; };
@@ -1085,10 +987,6 @@
        const btn = document.getElementById('toggleSEO');
        const expanded = extra.classList.toggle('expanded');
        btn.textContent = expanded ? "Réduire le guide ↑" : "Lire l'intégralité du guide expert ↓";
-       if(expanded && !adSeoInitialized) {
-          setTimeout(() => safePushAd('ad-seo-container'), 500);
-          adSeoInitialized = true;
-       }
     };
   </script>
 </body>
